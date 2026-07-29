@@ -1,5 +1,5 @@
 ---
-title: Celes Wiki
+title: Documentación de producto
 audience: [Clientes, Usuarios]
 summary: >
   Documentación de producto de Celes: qué hace cada pantalla, qué significa cada
