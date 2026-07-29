@@ -101,6 +101,11 @@ markdown_extensions:
       permalink_title: Enlace a esta sección
       toc_depth: 3
   - pymdownx.details
+  # Habilita los iconos `:material-*:` que usa el contenido para referirse a
+  # botones de la aplicación.
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
