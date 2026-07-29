@@ -1,0 +1,64 @@
+name: Construir y publicar la wiki
+
+on:
+  push:
+    branches: [main]
+  # En PR solo se construye: es el status check que protege `main`.
+  pull_request:
+    branches: [main]
+  # Permite republicar sin un commit (p. ej. tras cambiar la configuración de Pages).
+  workflow_dispatch:
+
+concurrency:
+  group: wiki-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # git-revision-date-localized necesita el historial completo para
+          # mostrar la fecha real de último cambio de cada página.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Construir el sitio
+        # --strict: un enlace roto o una página fuera del nav falla el build.
+        run: mkdocs build --strict
+
+      - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: site
+
+  deploy:
+    name: deploy
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,46 @@
+/*
+ * Tokens de marca portados del mock de referencia (eliana-a11y/celes-wiki).
+ * Aquí solo viven los colores: el porte del layout (sidebar por grupos, bloque
+ * de resumen, etiqueta de audiencia, pager) es el issue 0.3.
+ */
+
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #2f5dff;
+  --md-primary-fg-color--light: #6c87ff;
+  --md-primary-fg-color--dark: #1e42e0;
+  --md-accent-fg-color: #1e42e0;
+  --md-accent-fg-color--transparent: #eef1ff;
+
+  --md-default-bg-color: #ffffff;
+  --md-default-fg-color: #12142e;
+  --md-default-fg-color--light: #565c82;
+  --md-default-fg-color--lighter: #9498b8;
+  --md-typeset-a-color: #1e42e0;
+
+  --celes-bg: #f6f7fc;
+  --celes-border: #e6e9f5;
+  --celes-border-strong: #d6daee;
+  --celes-warn: #b9760a;
+  --celes-warn-soft: #fff6e8;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #6c87ff;
+  --md-primary-fg-color--light: #8ca1ff;
+  --md-primary-fg-color--dark: #2f5dff;
+  --md-accent-fg-color: #8ca1ff;
+  --md-accent-fg-color--transparent: #181f45;
+
+  --md-default-bg-color: #0a0c1e;
+  --md-default-fg-color: #eef0fc;
+  --md-default-fg-color--light: #a8add4;
+  --md-default-fg-color--lighter: #6c7299;
+  --md-typeset-a-color: #8ca1ff;
+
+  --celes-bg: #0a0c1e;
+  --celes-border: #242a54;
+  --celes-border-strong: #2f3566;
+  --celes-warn: #f0b429;
+  --celes-warn-soft: #241c0b;
+}

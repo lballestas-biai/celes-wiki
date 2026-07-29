@@ -1,0 +1,24 @@
+# El historial de git es permanente: una captura sin sanear que entre aquí no se
+# borra con un commit siguiente. Solo se commitean los PNG ya saneados de
+# docs/assets/screenshots/.
+tools/screenshots/raw/
+tools/screenshots/.cache/
+*.raw.png
+
+# Build
+site/
+.cache/
+
+# Entorno local
+.venv/
+venv/
+__pycache__/
+*.pyc
+node_modules/
+
+# Nunca
+.env
+*.pem
+*.key
+*-key.json
+service-account*.json

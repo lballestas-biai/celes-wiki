@@ -1,0 +1,15 @@
+# Esta wiki es pública y cliente-facing: todo cambio pasa por review.
+# Al incorporarse más revisores (o un equipo), sumarlos aquí — la regla de
+# protección de `main` exige la aprobación de los code owners.
+
+*                       @lballestas-biai
+
+# El contenido que ve el cliente y las capturas son lo más sensible del repo.
+/docs/                  @lballestas-biai
+/docs/assets/screenshots/ @lballestas-biai
+
+# Configuración del sitio y automatización.
+/mkdocs.yml             @lballestas-biai
+/overrides/             @lballestas-biai
+/.github/               @lballestas-biai
+/requirements.txt       @lballestas-biai

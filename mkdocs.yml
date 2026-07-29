@@ -1,0 +1,118 @@
+site_name: Celes Wiki
+site_description: Documentación de producto de Celes, derivada de la realidad verificable.
+site_url: https://lballestas-biai.github.io/celes-wiki/
+site_author: Celes
+copyright: © Celes
+
+repo_url: https://github.com/lballestas-biai/celes-wiki
+repo_name: lballestas-biai/celes-wiki
+edit_uri: edit/main/docs/
+
+docs_dir: docs
+site_dir: site
+
+# El build falla ante cualquier enlace roto o página fuera del nav.
+# La wiki es cliente-facing: un 404 en el nav es un defecto, no un aviso.
+strict: true
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: warn
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: warn
+    unrecognized_links: warn
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: es
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.action.edit
+    - content.code.copy
+    - content.tooltips
+
+extra_css:
+  - assets/stylesheets/brand.css
+
+extra:
+  # Sin analítica de terceros: la wiki es pública y no rastrea a los clientes.
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/lballestas-biai/celes-wiki
+      name: Repositorio de la wiki
+
+plugins:
+  - search:
+      lang: es
+  # Expone la fecha real del último cambio de cada página en lugar de inventarla.
+  # Requiere historial completo en CI (fetch-depth: 0).
+  - git-revision-date-localized:
+      type: date
+      locale: es
+      enable_creation_date: true
+      fallback_to_build_date: false
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Enlace a esta sección
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+# El nav es explícito a propósito: el inventario canónico de pantallas (0.2)
+# lo llena a partir de routes.json, y nav-audit.mjs falla si queda un hueco.
+nav:
+  - Inicio: index.md
