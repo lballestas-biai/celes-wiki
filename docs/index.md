@@ -38,9 +38,11 @@ Tres reglas gobiernan el contenido:
 
 !!! warning "En construcción"
 
-    Estás viendo el sitio recién montado. El esqueleto de navegación y los
-    contenidos por módulo se están escribiendo; hasta que una página aparezca en
-    el menú lateral, no existe todavía.
+    El menú lateral ya lista **todas** las pantallas de la aplicación: se derivó del
+    código, no de una lista escrita a mano, y una revisión automática falla si aparece
+    una pantalla sin página. Los contenidos, en cambio, se están escribiendo. Cada
+    página que todavía no describe su pantalla lo dice arriba, y de momento solo
+    afirma su ficha: dónde está en el menú, su dirección y quién puede verla.
 
 ## Cómo corregir algo { #como-corregir }
 

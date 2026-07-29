@@ -1,0 +1,4242 @@
+{
+  "_": "Generado por tools/build-inventory.mjs a partir de tools/data/app-routes.json y tools/decisions.json. No editar a mano.",
+  "source": {
+    "repo": "celes-app/celes-platform",
+    "ref": "981f61942",
+    "ref_full": "981f619429de9ca1eb89e91175f2b6684159e042",
+    "ref_date": "2026-07-29",
+    "files": {
+      "apps/web-client/src/routeTree.gen.ts": "96031001bb6880cf",
+      "apps/web-client/public/locales/es/routes.json": "368731fea178e4a7",
+      "apps/web-client/public/locales/en/routes.json": "24db126b469dea3b",
+      "apps/web-client/src/components/Layout/NavMenu/navigationItems.ts": "65d5c58f291d1585",
+      "apps/web-client/src/providers/AuthProvider/checkModuleAccess.ts": "89809e9be543196c",
+      "apps/web-client/src/providers/AuthProvider/helpers.ts": "abbdf33e7635a878",
+      "apps/web-client/src/utils/routeMigrations.ts": "362d30858a049bf2"
+    }
+  },
+  "blocks": {
+    "primeros-pasos": "Primeros pasos",
+    "vista-general": "Vista general",
+    "reabastecimiento": "Reabastecimiento",
+    "pronostico": "Pronóstico",
+    "promociones": "Promociones",
+    "surtido": "Surtido",
+    "activacion": "Activación",
+    "reportes": "Reportes",
+    "administracion": "Administración",
+    "conceptos": "Conceptos",
+    "recursos": "Recursos"
+  },
+  "totals": {
+    "routes": 153,
+    "pages": 81,
+    "pages_de_pantalla": 65,
+    "pages_sin_pantalla": 16,
+    "alias": 23,
+    "secciones": 9,
+    "dinamicas": 41,
+    "excluidas": 3,
+    "obsoletas": 12
+  },
+  "pages": [
+    {
+      "block": "primeros-pasos",
+      "page": "primeros-pasos/index.md",
+      "title": "Bienvenida",
+      "nav_title": "Bienvenida",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "primeros-pasos",
+      "page": "primeros-pasos/roles-y-permisos.md",
+      "title": "Roles y permisos",
+      "nav_title": "Roles y permisos",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "primeros-pasos",
+      "page": "primeros-pasos/requisitos-de-datos.md",
+      "title": "Requisitos de datos",
+      "nav_title": "Requisitos de datos",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "page": "vista-general/panel-de-inicio.md",
+      "title": "Inicio",
+      "nav_title": "Panel de inicio",
+      "block": "vista-general",
+      "route": "/dashboard",
+      "menu_path": "Inicio",
+      "label_es": "Inicio",
+      "label_en": "Dashboard",
+      "permission": {
+        "kind": "module",
+        "code": "dashboard",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": "La etiqueta de la aplicación es «Inicio», igual que la de la raíz. En el nav de la wiki se titula «Panel de inicio» para distinguirla de la portada."
+    },
+    {
+      "page": "vista-general/detalle-de-producto.md",
+      "title": "Detalle de Producto",
+      "nav_title": "Detalle de Producto",
+      "block": "vista-general",
+      "route": "/work-area/product-dashboard",
+      "menu_path": null,
+      "label_es": "Detalle de Producto",
+      "label_en": "Product details",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.product-dashboard"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/product-detail"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/index.md",
+      "title": "Reabastecimiento",
+      "nav_title": "Reabastecimiento",
+      "block": "reabastecimiento",
+      "route": "/work-area",
+      "menu_path": "Reabastecimiento",
+      "label_es": "Reabastecimiento",
+      "label_en": "Replenishment",
+      "permission": {
+        "kind": "module",
+        "code": "work-area",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/comprar.md",
+      "title": "Comprar",
+      "nav_title": "Comprar",
+      "block": "reabastecimiento",
+      "route": "/work-area/procurement",
+      "menu_path": "Reabastecimiento › Comprar",
+      "label_es": "Comprar",
+      "label_en": "Buy",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/creacion-de-orden-de-compra.md",
+      "title": "Creación de Orden de Compra",
+      "nav_title": "Creación de Orden de Compra",
+      "block": "reabastecimiento",
+      "route": "/work-area/procurement/order",
+      "menu_path": null,
+      "label_es": "Creación de Orden de Compra",
+      "label_en": "Procurement order",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/historial-de-ordenes-de-compra.md",
+      "title": "Historial de Órdenes de Compra",
+      "nav_title": "Historial de Órdenes de Compra",
+      "block": "reabastecimiento",
+      "route": "/work-area/procurement/order-history",
+      "menu_path": null,
+      "label_es": "Historial de Órdenes de Compra",
+      "label_en": "Procurement orders sent",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/calendario-de-oc.md",
+      "title": "Calendario de OC",
+      "nav_title": "Calendario de OC",
+      "block": "reabastecimiento",
+      "route": "/work-area/procurement-calendar",
+      "menu_path": "Reabastecimiento › Calendario de OC",
+      "label_es": "Calendario de OC",
+      "label_en": "PO Calendar",
+      "permission": {
+        "kind": "unrestricted",
+        "code": null,
+        "note": "checkModuleAccess la deja pasar antes de mirar permisos: la ve cualquier usuario autenticado"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [
+        {
+          "path": "/work-area/procurement-calendar/order",
+          "label_es": "Creación de Órden de Compra"
+        }
+      ],
+      "note": "Pantalla distinta de «Calendario de Compras» (/planning/procurement-calendar), pese al parecido del nombre."
+    },
+    {
+      "page": "reabastecimiento/distribuir.md",
+      "title": "Distribuir",
+      "nav_title": "Distribuir",
+      "block": "reabastecimiento",
+      "route": "/work-area/replenishment",
+      "menu_path": "Reabastecimiento › Distribuir",
+      "label_es": "Distribuir",
+      "label_en": "Distribute",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/solicitud-de-distribucion.md",
+      "title": "Solicitud de Distribución",
+      "nav_title": "Solicitud de Distribución",
+      "block": "reabastecimiento",
+      "route": "/work-area/replenishment/order",
+      "menu_path": null,
+      "label_es": "Solicitud de Distribución",
+      "label_en": "Replenishment request",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/historial-de-ordenes-de-distribucion.md",
+      "title": "Historial de Órdenes de Distribución",
+      "nav_title": "Historial de Órdenes de Distribución",
+      "block": "reabastecimiento",
+      "route": "/work-area/replenishment/order-history",
+      "menu_path": null,
+      "label_es": "Historial de Órdenes de Distribución",
+      "label_en": "Replenishment requests sent",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/solicitudes-de-tiendas.md",
+      "title": "Solicitudes de Tiendas",
+      "nav_title": "Solicitudes de Tiendas",
+      "block": "reabastecimiento",
+      "route": "/work-area/replenishment-suggestions",
+      "menu_path": "Reabastecimiento › Solicitudes de Tiendas",
+      "label_es": "Solicitudes de Tiendas",
+      "label_en": "Store Requests",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment-suggestions"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/automatizacion-y-operacion.md",
+      "title": "Automatización & Operación",
+      "nav_title": "Automatización & Operación",
+      "block": "reabastecimiento",
+      "route": "/work-area/automation",
+      "menu_path": "Reabastecimiento › Automatización & Operación",
+      "label_es": "Automatización & Operación",
+      "label_en": "Automation & Operation",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "alternatives": [],
+        "legacy": [
+          "administration.operation.automatic-replenishment",
+          "administration.operation.automatic-procurement",
+          "administration.operation.pipeline-configuration",
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/administration/operation"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/distribucion-automatica.md",
+      "title": "Distribución Automática",
+      "nav_title": "Distribución Automática",
+      "block": "reabastecimiento",
+      "route": "/work-area/automation/automatic-replenishment",
+      "menu_path": null,
+      "label_es": "Distribución Automática",
+      "label_en": "Automatic Replenishment",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/administration/operation/automatic-replenishment"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/compra-automatica.md",
+      "title": "Compra Automática",
+      "nav_title": "Compra Automática",
+      "block": "reabastecimiento",
+      "route": "/work-area/automation/automatic-procurement",
+      "menu_path": null,
+      "label_es": "Compra Automática",
+      "label_en": "Automatic Purchase Order",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/administration/operation/automatic-procurement"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/configuracion-de-pipeline.md",
+      "title": "Configuración de Pipeline",
+      "nav_title": "Configuración de Pipeline",
+      "block": "reabastecimiento",
+      "route": "/work-area/automation/pipeline-configuration",
+      "menu_path": null,
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/administration/operation/pipeline-configuration"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reabastecimiento/trazabilidad-de-entregas.md",
+      "title": "Trazabilidad de entregas",
+      "nav_title": "Trazabilidad de entregas",
+      "block": "reabastecimiento",
+      "route": "/work-area/automation/dispatches",
+      "menu_path": null,
+      "label_es": "Trazabilidad de entregas",
+      "label_en": "Delivery traceability",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/administration/operation/dispatches"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "pronostico/index.md",
+      "title": "Pronóstico",
+      "nav_title": "Pronóstico",
+      "block": "pronostico",
+      "route": "/planning",
+      "menu_path": "Pronóstico",
+      "label_es": "Pronóstico",
+      "label_en": "Forecast",
+      "permission": {
+        "kind": "module",
+        "code": "planning",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "pronostico/resumen.md",
+      "title": "Resumen",
+      "nav_title": "Resumen del forecast",
+      "block": "pronostico",
+      "route": "/planning/forecast-summary",
+      "menu_path": "Pronóstico › Resumen",
+      "label_es": "Resumen",
+      "label_en": "Summary",
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-summary",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/reports-and-analytics/forecast"
+      ],
+      "sections": [],
+      "note": "La etiqueta suelta es «Resumen»; en el nav de la wiki se titula «Resumen del forecast» para que se entienda fuera del menú."
+    },
+    {
+      "page": "pronostico/alertas-de-forecast.md",
+      "title": "Alertas de Forecast",
+      "nav_title": "Alertas de Forecast",
+      "block": "pronostico",
+      "route": "/planning/forecast-alerts",
+      "menu_path": "Pronóstico › Alertas de Forecast",
+      "label_es": "Alertas de Forecast",
+      "label_en": "Forecast Alerts",
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-alerts",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast-analysis"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/reports-and-analytics/forecast-analysis"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "pronostico/escenarios.md",
+      "title": "Escenarios",
+      "nav_title": "Escenarios",
+      "block": "pronostico",
+      "route": "/planning/scenarios",
+      "menu_path": "Pronóstico › Escenarios",
+      "label_es": "Escenarios",
+      "label_en": "Scenarios",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "pronostico/calendario-de-eventos.md",
+      "title": "Calendario de Eventos",
+      "nav_title": "Calendario de Eventos",
+      "block": "pronostico",
+      "route": "/planning/events-calendar",
+      "menu_path": "Pronóstico › Calendario de Eventos",
+      "label_es": "Calendario de Eventos",
+      "label_en": "Events Calendar",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.events-calendar"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "pronostico/demanda-y-promociones.md",
+      "title": "Demanda y Promociones",
+      "nav_title": "Demanda y Promociones",
+      "block": "pronostico",
+      "route": "/planning/demand-and-promotions",
+      "menu_path": "Pronóstico › Demanda y Promociones",
+      "label_es": "Demanda y Promociones",
+      "label_en": "Demand and Promotions",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.demand-and-promotions"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [
+        {
+          "path": "/planning/demand-and-promotions/details",
+          "label_es": "Demanda y Promociones"
+        }
+      ],
+      "note": null
+    },
+    {
+      "page": "pronostico/calendario-de-compras.md",
+      "title": "Calendario de Compras",
+      "nav_title": "Calendario de Compras",
+      "block": "pronostico",
+      "route": "/planning/procurement-calendar",
+      "menu_path": "Pronóstico › Calendario de Compras",
+      "label_es": "Calendario de Compras",
+      "label_en": "Procurement Calendar",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.procurement-calendar"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "promociones/index.md",
+      "title": "Promociones",
+      "nav_title": "Promociones",
+      "block": "promociones",
+      "route": "/promotions",
+      "menu_path": "Promociones",
+      "label_es": "Promociones",
+      "label_en": "Promotions",
+      "permission": {
+        "kind": "module",
+        "code": "promotions",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "promociones/campanas.md",
+      "title": "Campañas",
+      "nav_title": "Campañas",
+      "block": "promociones",
+      "route": "/promotions/campaigns",
+      "menu_path": "Promociones › Campañas",
+      "label_es": "Campañas",
+      "label_en": "Campaigns",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/planning/promotional-campaigns"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "promociones/calendario-de-promociones.md",
+      "title": "Calendario de Promociones",
+      "nav_title": "Calendario de Promociones",
+      "block": "promociones",
+      "route": "/promotions/calendar",
+      "menu_path": "Promociones › Calendario de Promociones",
+      "label_es": "Calendario de Promociones",
+      "label_en": "Promotional Calendar",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.calendar",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-calendar"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/planning/promotional-calendar"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "surtido/index.md",
+      "title": "Surtido",
+      "nav_title": "Surtido",
+      "block": "surtido",
+      "route": "/assortment",
+      "menu_path": "Surtido",
+      "label_es": "Surtido",
+      "label_en": "Assortment",
+      "permission": {
+        "kind": "module",
+        "code": "assortment",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "surtido/trade-marketing.md",
+      "title": "Trade Marketing",
+      "nav_title": "Trade Marketing",
+      "block": "surtido",
+      "route": "/assortment/trade-marketing",
+      "menu_path": "Surtido › Trade Marketing",
+      "label_es": "Trade Marketing",
+      "label_en": "Trade Marketing",
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/planning/trade-marketing-campaigns"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "surtido/promociones-de-exhibicion.md",
+      "title": "Promociones de Exhibición",
+      "nav_title": "Promociones de Exhibición",
+      "block": "surtido",
+      "route": "/assortment/trade-marketing/exhibitions-promotions",
+      "menu_path": null,
+      "label_es": "Promociones de Exhibición",
+      "label_en": "Exhibition Promotions",
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/planning/trade-marketing-campaigns/exhibitions-promotions"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "activacion/index.md",
+      "title": "Activación",
+      "nav_title": "Activación",
+      "block": "activacion",
+      "route": "/activation",
+      "menu_path": "Activación",
+      "label_es": "Activación",
+      "label_en": "Activation",
+      "permission": {
+        "kind": "module",
+        "code": "activation",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "activacion/reglas-de-negocio.md",
+      "title": "Reglas de Negocio",
+      "nav_title": "Reglas de Negocio",
+      "block": "activacion",
+      "route": "/activation/business-rules",
+      "menu_path": "Activación › Reglas de Negocio",
+      "label_es": "Reglas de Negocio",
+      "label_en": "Business Rules",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/administration/configuration/business-rules"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "activacion/productos-de-agrupacion.md",
+      "title": "Productos de Agrupación",
+      "nav_title": "Productos de Agrupación",
+      "block": "activacion",
+      "route": "/activation/grouping-products",
+      "menu_path": "Activación › Productos de Agrupación",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/administration/configuration/grouping-products",
+        "/administration/configuration/synthetic-products"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "activacion/sustitutos.md",
+      "title": "Sustitutos",
+      "nav_title": "Sustitutos",
+      "block": "activacion",
+      "route": "/activation/substitute-products",
+      "menu_path": "Activación › Sustitutos",
+      "label_es": "Sustitutos",
+      "label_en": "Substitutes",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/administration/configuration/substitute-products"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reportes/index.md",
+      "title": "Reportes",
+      "nav_title": "Reportes",
+      "block": "reportes",
+      "route": "/reports-and-analytics",
+      "menu_path": "Reportes",
+      "label_es": "Reportes",
+      "label_en": "Reports",
+      "permission": {
+        "kind": "module",
+        "code": "reports-and-analytics",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reportes/historico.md",
+      "title": "Histórico",
+      "nav_title": "Histórico",
+      "block": "reportes",
+      "route": "/reports-and-analytics/history",
+      "menu_path": "Reportes › Histórico",
+      "label_es": "Histórico",
+      "label_en": "History",
+      "permission": {
+        "kind": "migrated",
+        "code": "reports-and-analytics.history",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.overall"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/reports-and-analytics/overall"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reportes/desempeno-comercial.md",
+      "title": "Desempeño Comercial",
+      "nav_title": "Desempeño Comercial",
+      "block": "reportes",
+      "route": "/reports-and-analytics/commercial-performance",
+      "menu_path": "Reportes › Desempeño Comercial",
+      "label_es": "Desempeño Comercial",
+      "label_en": "Commercial Performance",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.commercial-performance"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reportes/adherencia.md",
+      "title": "Adherencia",
+      "nav_title": "Adherencia",
+      "block": "reportes",
+      "route": "/reports-and-analytics/adherence",
+      "menu_path": "Reportes › Adherencia",
+      "label_es": "Adherencia",
+      "label_en": "Adherence",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [
+        {
+          "path": "/reports-and-analytics/adherence/orders",
+          "label_es": "Adherencia a Órdenes"
+        },
+        {
+          "path": "/reports-and-analytics/adherence/procurement",
+          "label_es": "Adherencia a Compras"
+        },
+        {
+          "path": "/reports-and-analytics/adherence/replenishment",
+          "label_es": "Adherencia a Distribución"
+        }
+      ],
+      "note": null
+    },
+    {
+      "page": "reportes/distribuciones-estimadas.md",
+      "title": "Distribuciones Estimadas",
+      "nav_title": "Distribuciones Estimadas",
+      "block": "reportes",
+      "route": "/reports-and-analytics/replenishment-report",
+      "menu_path": "Reportes › Distribuciones Estimadas",
+      "label_es": "Distribuciones Estimadas",
+      "label_en": "Estimated Distributions",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.replenishment-report"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "reportes/balanceo-de-inventario.md",
+      "title": "Balanceo de Inventario",
+      "nav_title": "Balanceo de Inventario",
+      "block": "reportes",
+      "route": "/reports-and-analytics/inventory-balancing",
+      "menu_path": "Reportes › Balanceo de Inventario",
+      "label_es": "Balanceo de Inventario",
+      "label_en": "Inventory Balancing",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.inventory-balancing"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/work-area/inventory-balancing",
+        "/work-area/inventory-balancing/details"
+      ],
+      "sections": [
+        {
+          "path": "/reports-and-analytics/inventory-balancing/details",
+          "label_es": "Balanceo de Inventario - Detalles"
+        }
+      ],
+      "note": null
+    },
+    {
+      "page": "administracion/index.md",
+      "title": "Administración",
+      "nav_title": "Administración",
+      "block": "administracion",
+      "route": "/administration",
+      "menu_path": "Administración",
+      "label_es": "Administración",
+      "label_en": "Administration",
+      "permission": {
+        "kind": "module",
+        "code": "administration",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/configuracion-general.md",
+      "title": "Configuración General",
+      "nav_title": "Configuración General",
+      "block": "administracion",
+      "route": "/administration/configuration",
+      "menu_path": "Administración › Configuración General",
+      "label_es": "Configuración General",
+      "label_en": "General Settings",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/filtros.md",
+      "title": "Filtros",
+      "nav_title": "Filtros",
+      "block": "administracion",
+      "route": "/administration/configuration/app-filters",
+      "menu_path": null,
+      "label_es": "Filtros",
+      "label_en": "Filters",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.app-filters",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/asignacion-de-datos.md",
+      "title": "Asignación de Datos",
+      "nav_title": "Asignación de Datos",
+      "block": "administracion",
+      "route": "/administration/configuration/data-allocation",
+      "menu_path": null,
+      "label_es": "Asignación de Datos",
+      "label_en": "Data Allocation",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.data-allocation",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/parametros-generales.md",
+      "title": "Parámetros Generales",
+      "nav_title": "Parámetros Generales",
+      "block": "administracion",
+      "route": "/administration/configuration/general-parameters",
+      "menu_path": null,
+      "label_es": "Parámetros Generales",
+      "label_en": "General Parameters",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.general-parameters",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/configuracion-de-parametros.md",
+      "title": "Configuración de Parámetros",
+      "nav_title": "Configuración de Parámetros",
+      "block": "administracion",
+      "route": "/administration/configuration/parameters-manager",
+      "menu_path": null,
+      "label_es": "Configuración de Parámetros",
+      "label_en": "Parameters Manager",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.parameters-manager",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/configuraciones-de-cubicaje.md",
+      "title": "Configuraciones de Cubicaje",
+      "nav_title": "Configuraciones de Cubicaje",
+      "block": "administracion",
+      "route": "/administration/configuration/cubing-configurations",
+      "menu_path": null,
+      "label_es": "Configuraciones de Cubicaje",
+      "label_en": "Cubing Configurations",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.cubing-configurations",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/columnas.md",
+      "title": "Columnas",
+      "nav_title": "Columnas",
+      "block": "administracion",
+      "route": "/administration/configuration/config-columns",
+      "menu_path": null,
+      "label_es": "Columnas",
+      "label_en": "Columns",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.config-columns",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/consultas.md",
+      "title": "Consultas",
+      "nav_title": "Consultas",
+      "block": "administracion",
+      "route": "/administration/configuration/query-builder",
+      "menu_path": null,
+      "label_es": "Consultas",
+      "label_en": "Queries",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.query-builder",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/productos-de-referencia.md",
+      "title": "Productos de Referencia",
+      "nav_title": "Productos de Referencia",
+      "block": "administracion",
+      "route": "/administration/configuration/reference-products",
+      "menu_path": null,
+      "label_es": "Productos de Referencia",
+      "label_en": "Reference Products",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/motor-de-integracion.md",
+      "title": "Motor de Integración",
+      "nav_title": "Motor de Integración",
+      "block": "administracion",
+      "route": "/administration/configuration/integration-engine",
+      "menu_path": null,
+      "label_es": "Motor de Integración",
+      "label_en": "Integration Engine",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.integration-engine",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/variables-de-entorno.md",
+      "title": "Variables de entorno",
+      "nav_title": "Variables de entorno",
+      "block": "administracion",
+      "route": "/administration/configuration/environment-variables",
+      "menu_path": null,
+      "label_es": "Variables de entorno",
+      "label_en": "Environment variables",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.environment-variables",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/otras-configuraciones.md",
+      "title": "Otras configuraciones",
+      "nav_title": "Otras configuraciones",
+      "block": "administracion",
+      "route": "/administration/configuration/other",
+      "menu_path": null,
+      "label_es": "Otras configuraciones",
+      "label_en": "Other configurations",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.other",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/control-de-acceso.md",
+      "title": "Control de Acceso",
+      "nav_title": "Control de Acceso",
+      "block": "administracion",
+      "route": "/administration/access-control",
+      "menu_path": "Administración › Control de Acceso",
+      "label_es": "Control de Acceso",
+      "label_en": "Access Control",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/usuarios.md",
+      "title": "Usuarios",
+      "nav_title": "Usuarios",
+      "block": "administracion",
+      "route": "/administration/access-control/users",
+      "menu_path": null,
+      "label_es": "Usuarios",
+      "label_en": "Users",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.users",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/roles-y-permisos.md",
+      "title": "Roles y Permisos",
+      "nav_title": "Roles y Permisos",
+      "block": "administracion",
+      "route": "/administration/access-control/roles-and-permissions",
+      "menu_path": null,
+      "label_es": "Roles y Permisos",
+      "label_en": "Roles and Permissions",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.roles-and-permissions",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/permiso-de-datos.md",
+      "title": "Permiso de datos",
+      "nav_title": "Permiso de datos",
+      "block": "administracion",
+      "route": "/administration/access-control/data-permission",
+      "menu_path": null,
+      "label_es": "Permiso de datos",
+      "label_en": "Data Permission",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.data-permission",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/datos-maestros.md",
+      "title": "Datos Maestros",
+      "nav_title": "Datos Maestros",
+      "block": "administracion",
+      "route": "/administration/master-data",
+      "menu_path": "Administración › Datos Maestros",
+      "label_es": "Datos Maestros",
+      "label_en": "Master Data",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "alternatives": [
+          "administration.master-data.data-quality"
+        ],
+        "legacy": [
+          "administration.data-manager.mapping",
+          "administration.data-manager.data-quality",
+          "administration.data-manager.data-upload"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/administration/data-manager"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/homologacion.md",
+      "title": "Homologación",
+      "nav_title": "Homologación",
+      "block": "administracion",
+      "route": "/administration/master-data/mapping",
+      "menu_path": null,
+      "label_es": "Homologación",
+      "label_en": "Mapping",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "legacy": [
+          "administration.data-manager.mapping"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/administration/data-manager/mapping"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/calidad-de-datos.md",
+      "title": "Calidad de Datos",
+      "nav_title": "Calidad de Datos",
+      "block": "administracion",
+      "route": "/administration/master-data/data-quality",
+      "menu_path": null,
+      "label_es": "Calidad de Datos",
+      "label_en": "Data Quality",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.data-quality",
+        "legacy": [
+          "administration.data-manager.data-quality"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "aliases": [
+        "/administration/data-manager/data-quality"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/carga-de-datos.md",
+      "title": "Carga de Datos",
+      "nav_title": "Carga de Datos",
+      "block": "administracion",
+      "route": "/administration/data-manager/data-upload",
+      "menu_path": null,
+      "label_es": "Carga de Datos",
+      "label_en": "Data Upload",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.data-manager.data-upload",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [],
+      "note": "Única pantalla de Gestión de Datos que NO se migró a Datos Maestros: routeMigrations la marca `unmigratedNestedSegments`, así que su URL canónica sigue colgando de /administration/data-manager aunque su pantalla madre ya sea un alias."
+    },
+    {
+      "page": "administracion/colaboradores-externos.md",
+      "title": "Colaboradores Externos",
+      "nav_title": "Colaboradores Externos",
+      "block": "administracion",
+      "route": "/administration/external-collaborators",
+      "menu_path": "Administración › Colaboradores Externos",
+      "label_es": "Colaboradores Externos",
+      "label_en": "External collaborators",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.external-collaborators",
+        "alternatives": [],
+        "legacy": [
+          "planning.external-collaborators"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "aliases": [
+        "/planning/external-collaborators"
+      ],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/historial-de-jobs.md",
+      "title": "Historial de Jobs",
+      "nav_title": "Historial de Jobs",
+      "block": "administracion",
+      "route": "/administration/job-history",
+      "menu_path": "Administración › Historial de Jobs",
+      "label_es": "Historial de Jobs",
+      "label_en": "Job History",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.job-history",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/logs-de-usuarios.md",
+      "title": "Logs de Usuarios",
+      "nav_title": "Logs de Usuarios",
+      "block": "administracion",
+      "route": "/administration/users-logs",
+      "menu_path": "Administración › Logs de Usuarios",
+      "label_es": "Logs de Usuarios",
+      "label_en": "Users Logs",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.users-logs",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [],
+      "note": null
+    },
+    {
+      "page": "administracion/dashboard-ans.md",
+      "title": "Dashboard ANS",
+      "nav_title": "Dashboard ANS",
+      "block": "administracion",
+      "route": "/administration/sla-dashboard",
+      "menu_path": "Administración › Dashboard ANS",
+      "label_es": "Dashboard ANS",
+      "label_en": "SLA Dashboard",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "aliases": [],
+      "sections": [
+        {
+          "path": "/administration/sla-dashboard/configuration",
+          "label_es": "Configuración"
+        },
+        {
+          "path": "/administration/sla-dashboard/dashboard",
+          "label_es": "Dashboard"
+        }
+      ],
+      "note": null
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/index.md",
+      "title": "Conceptos",
+      "nav_title": "Conceptos",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/sugerido-compra-vs-distribucion.md",
+      "title": "Sugerido de compra vs. de distribución",
+      "nav_title": "Sugerido de compra vs. de distribución",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/filosofia-del-forecast.md",
+      "title": "Filosofía del forecast",
+      "nav_title": "Filosofía del forecast",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/sustitutos-y-agrupaciones.md",
+      "title": "Sustitutos y agrupaciones",
+      "nav_title": "Sustitutos y agrupaciones",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/reglas-de-negocio-y-plugins.md",
+      "title": "Reglas de negocio y plugins",
+      "nav_title": "Reglas de negocio y plugins",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/jerarquia-de-parametros.md",
+      "title": "Jerarquía de parámetros",
+      "nav_title": "Jerarquía de parámetros",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/ciclo-diario-de-datos.md",
+      "title": "El ciclo diario de datos",
+      "nav_title": "El ciclo diario de datos",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/automatizacion-y-sus-condiciones.md",
+      "title": "La automatización y sus condiciones",
+      "nav_title": "La automatización y sus condiciones",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/como-se-construyen-los-reportes.md",
+      "title": "Cómo se construyen los reportes",
+      "nav_title": "Cómo se construyen los reportes",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "conceptos",
+      "page": "conceptos/por-que-tu-instancia-difiere.md",
+      "title": "Por qué tu instancia puede diferir",
+      "nav_title": "Por qué tu instancia puede diferir",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "page": "recursos/soporte.md",
+      "title": "Soporte",
+      "nav_title": "Soporte",
+      "block": "recursos",
+      "route": "/support",
+      "menu_path": null,
+      "label_es": "Soporte",
+      "label_en": "Support",
+      "permission": {
+        "kind": "module",
+        "code": "support",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": false,
+      "aliases": [],
+      "sections": [
+        {
+          "path": "/support/tickets",
+          "label_es": "Tickets de Soporte"
+        }
+      ],
+      "note": "El issue pedía decidir su destino: es una pantalla viva y de cara al cliente, así que entra en Recursos con su sub-pantalla «Tickets de Soporte» como sección."
+    },
+    {
+      "block": "recursos",
+      "page": "recursos/glosario.md",
+      "title": "Glosario",
+      "nav_title": "Glosario",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "recursos",
+      "page": "recursos/academy.md",
+      "title": "Academy",
+      "nav_title": "Academy",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    },
+    {
+      "block": "recursos",
+      "page": "recursos/novedades.md",
+      "title": "Novedades de producto",
+      "nav_title": "Novedades de producto",
+      "route": null,
+      "aliases": [],
+      "sections": []
+    }
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "label_es": "Inicio",
+      "label_en": "Home",
+      "permission": {
+        "kind": "module",
+        "code": null
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "excluded",
+      "note": "No es una pantalla: redirige a la pantalla de inicio del tenant (`tenantDefaultLandingUrl`) o a la de acceso. Se explica en Primeros pasos."
+    },
+    {
+      "path": "/activation",
+      "label_es": "Activación",
+      "label_en": "Activation",
+      "permission": {
+        "kind": "module",
+        "code": "activation",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "activacion/index.md",
+      "block": "activacion",
+      "title": "Activación",
+      "note": null
+    },
+    {
+      "path": "/activation/business-rules",
+      "label_es": "Reglas de Negocio",
+      "label_en": "Business Rules",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "activacion/reglas-de-negocio.md",
+      "block": "activacion",
+      "title": "Reglas de Negocio",
+      "note": null
+    },
+    {
+      "path": "/activation/business-rules/$id",
+      "label_es": "Detalle de Regla de Negocio",
+      "label_en": "Business Rule Detail",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/activation/business-rules/create",
+      "label_es": "Crear Regla de Negocio",
+      "label_en": "Create Business Rule",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/activation/grouping-products",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "activacion/productos-de-agrupacion.md",
+      "block": "activacion",
+      "title": "Productos de Agrupación",
+      "note": null
+    },
+    {
+      "path": "/activation/grouping-products/$id",
+      "label_es": "Detalle de Producto de Agrupación",
+      "label_en": "Grouping Product Detail",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/activation/grouping-products/create",
+      "label_es": "Crear Producto de Agrupación",
+      "label_en": "Create Grouping Product",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/activation/substitute-products",
+      "label_es": "Sustitutos",
+      "label_en": "Substitutes",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "activacion/sustitutos.md",
+      "block": "activacion",
+      "title": "Sustitutos",
+      "note": null
+    },
+    {
+      "path": "/activation/substitute-products/$id",
+      "label_es": "Detalle de Sustituto",
+      "label_en": "Substitute Detail",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/activation/substitute-products/create",
+      "label_es": "Crear Sustituto",
+      "label_en": "Create Substitute",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration",
+      "label_es": "Administración",
+      "label_en": "Administration",
+      "permission": {
+        "kind": "module",
+        "code": "administration",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/index.md",
+      "block": "administracion",
+      "title": "Administración",
+      "note": null
+    },
+    {
+      "path": "/administration/access-control",
+      "label_es": "Control de Acceso",
+      "label_en": "Access Control",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/control-de-acceso.md",
+      "block": "administracion",
+      "title": "Control de Acceso",
+      "note": null
+    },
+    {
+      "path": "/administration/access-control/data-permission",
+      "label_es": "Permiso de datos",
+      "label_en": "Data Permission",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.data-permission",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/permiso-de-datos.md",
+      "block": "administracion",
+      "title": "Permiso de datos",
+      "note": null
+    },
+    {
+      "path": "/administration/access-control/roles-and-permissions",
+      "label_es": "Roles y Permisos",
+      "label_en": "Roles and Permissions",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.roles-and-permissions",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/roles-y-permisos.md",
+      "block": "administracion",
+      "title": "Roles y Permisos",
+      "note": null
+    },
+    {
+      "path": "/administration/access-control/users",
+      "label_es": "Usuarios",
+      "label_en": "Users",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.users",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/usuarios.md",
+      "block": "administracion",
+      "title": "Usuarios",
+      "note": null
+    },
+    {
+      "path": "/administration/access-control/users/$userId",
+      "label_es": "Detalle de Usuario",
+      "label_en": "User Detail",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.users",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration",
+      "label_es": "Configuración General",
+      "label_en": "General Settings",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/configuracion-general.md",
+      "block": "administracion",
+      "title": "Configuración General",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/app-filters",
+      "label_es": "Filtros",
+      "label_en": "Filters",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.app-filters",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/filtros.md",
+      "block": "administracion",
+      "title": "Filtros",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/business-rules",
+      "label_es": "Reglas de Negocio",
+      "label_en": "Business Rules",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/activation/business-rules",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/activation/business-rules",
+      "page": "activacion/reglas-de-negocio.md"
+    },
+    {
+      "path": "/administration/configuration/business-rules/$id",
+      "label_es": "Detalle de Regla de Negocio",
+      "label_en": "Business Rule Detail",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration/business-rules/create",
+      "label_es": "Crear Regla de Negocio",
+      "label_en": "Create Business Rule",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/configuration/column-groups",
+      "label_es": "Grupos de columnas",
+      "label_en": "Column Groups",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.column-groups",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "«Grupos de columnas» no existe en el router; la pantalla viva de columnas es /administration/configuration/config-columns."
+    },
+    {
+      "path": "/administration/configuration/column-groups/$columnGroupId",
+      "label_es": "Detalle de grupo de columnas",
+      "label_en": "Detail Column Group",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.column-groups",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Etiqueta en routes.json sin ruta en el router: la pantalla no existe."
+    },
+    {
+      "path": "/administration/configuration/config-columns",
+      "label_es": "Columnas",
+      "label_en": "Columns",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.config-columns",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/columnas.md",
+      "block": "administracion",
+      "title": "Columnas",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/cubing-configurations",
+      "label_es": "Configuraciones de Cubicaje",
+      "label_en": "Cubing Configurations",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.cubing-configurations",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/configuraciones-de-cubicaje.md",
+      "block": "administracion",
+      "title": "Configuraciones de Cubicaje",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/data-allocation",
+      "label_es": "Asignación de Datos",
+      "label_en": "Data Allocation",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.data-allocation",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/asignacion-de-datos.md",
+      "block": "administracion",
+      "title": "Asignación de Datos",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/environment-variables",
+      "label_es": "Variables de entorno",
+      "label_en": "Environment variables",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.environment-variables",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/variables-de-entorno.md",
+      "block": "administracion",
+      "title": "Variables de entorno",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/general-parameters",
+      "label_es": "Parámetros Generales",
+      "label_en": "General Parameters",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.general-parameters",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/parametros-generales.md",
+      "block": "administracion",
+      "title": "Parámetros Generales",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/grouping-products",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/activation/grouping-products",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/activation/grouping-products",
+      "page": "activacion/productos-de-agrupacion.md"
+    },
+    {
+      "path": "/administration/configuration/grouping-products/$id",
+      "label_es": "Detalle de Producto de Agrupación",
+      "label_en": "Grouping Product Detail",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration/grouping-products/create",
+      "label_es": "Crear Producto de Agrupación",
+      "label_en": "Create Grouping Product",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/configuration/integration-engine",
+      "label_es": "Motor de Integración",
+      "label_en": "Integration Engine",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.integration-engine",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/motor-de-integracion.md",
+      "block": "administracion",
+      "title": "Motor de Integración",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/other",
+      "label_es": "Otras configuraciones",
+      "label_en": "Other configurations",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.other",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/otras-configuraciones.md",
+      "block": "administracion",
+      "title": "Otras configuraciones",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/parameters-manager",
+      "label_es": "Configuración de Parámetros",
+      "label_en": "Parameters Manager",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.parameters-manager",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/configuracion-de-parametros.md",
+      "block": "administracion",
+      "title": "Configuración de Parámetros",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/query-builder",
+      "label_es": "Consultas",
+      "label_en": "Queries",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.query-builder",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/consultas.md",
+      "block": "administracion",
+      "title": "Consultas",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/query-builder/$slug",
+      "label_es": "Detalle de consulta",
+      "label_en": "Query Detail",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.query-builder",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration/reference-products",
+      "label_es": "Productos de Referencia",
+      "label_en": "Reference Products",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/productos-de-referencia.md",
+      "block": "administracion",
+      "title": "Productos de Referencia",
+      "note": null
+    },
+    {
+      "path": "/administration/configuration/reference-products/$id",
+      "label_es": "Detalle de Producto de Referencia",
+      "label_en": "Reference Product Detail",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration/reference-products/create",
+      "label_es": "Crear Producto de Referencia",
+      "label_en": "Create Reference Product",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/configuration/substitute-products",
+      "label_es": "Productos Sustitutos",
+      "label_en": "Substitute Products",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/activation/substitute-products",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/activation/substitute-products",
+      "page": "activacion/sustitutos.md"
+    },
+    {
+      "path": "/administration/configuration/substitute-products/$id",
+      "label_es": "Detalle de Producto Sustituto",
+      "label_en": "Substitute Product Detail",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration/substitute-products/create",
+      "label_es": "Crear Producto Sustituto",
+      "label_en": "Create Substitute Product",
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/configuration/synthetic-products",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.synthetic-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/activation/grouping-products",
+      "source": "decisión",
+      "note": "redirect en routes/_layout.administration.configuration.synthetic-products.index.tsx: la funcionalidad se renombró a grouping-products (#2420)",
+      "resolves_to": "/activation/grouping-products",
+      "page": "activacion/productos-de-agrupacion.md"
+    },
+    {
+      "path": "/administration/configuration/synthetic-products/$id",
+      "label_es": "Detalle de Producto de Agrupación",
+      "label_en": "Grouping Product Detail",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.synthetic-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/configuration/synthetic-products/create",
+      "label_es": "Crear Producto de Agrupación",
+      "label_en": "Create Grouping Product",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.synthetic-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/data-manager",
+      "label_es": "Gestión de Datos",
+      "label_en": "Data Management",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "alternatives": [
+          "administration.master-data.data-quality"
+        ],
+        "legacy": [
+          "administration.data-manager.mapping",
+          "administration.data-manager.data-quality",
+          "administration.data-manager.data-upload"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/administration/master-data",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/administration/master-data",
+      "page": "administracion/datos-maestros.md"
+    },
+    {
+      "path": "/administration/data-manager/data-quality",
+      "label_es": "Calidad de Datos",
+      "label_en": "Data Quality",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.data-quality",
+        "legacy": [
+          "administration.data-manager.data-quality"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/administration/master-data/data-quality",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/administration/master-data/data-quality",
+      "page": "administracion/calidad-de-datos.md"
+    },
+    {
+      "path": "/administration/data-manager/data-upload",
+      "label_es": "Carga de Datos",
+      "label_en": "Data Upload",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.data-manager.data-upload",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/carga-de-datos.md",
+      "block": "administracion",
+      "title": "Carga de Datos",
+      "note": "Única pantalla de Gestión de Datos que NO se migró a Datos Maestros: routeMigrations la marca `unmigratedNestedSegments`, así que su URL canónica sigue colgando de /administration/data-manager aunque su pantalla madre ya sea un alias."
+    },
+    {
+      "path": "/administration/data-manager/data-upload/$folderKey/files",
+      "label_es": "Archivos de la Carpeta",
+      "label_en": "Folder Files",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.data-manager.data-upload",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/data-manager/mapping",
+      "label_es": "Homologación",
+      "label_en": "Mapping",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "legacy": [
+          "administration.data-manager.mapping"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/administration/master-data/mapping",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/administration/master-data/mapping",
+      "page": "administracion/homologacion.md"
+    },
+    {
+      "path": "/administration/external-collaborators",
+      "label_es": "Colaboradores Externos",
+      "label_en": "External collaborators",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.external-collaborators",
+        "alternatives": [],
+        "legacy": [
+          "planning.external-collaborators"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/colaboradores-externos.md",
+      "block": "administracion",
+      "title": "Colaboradores Externos",
+      "note": null
+    },
+    {
+      "path": "/administration/job-history",
+      "label_es": "Historial de Jobs",
+      "label_en": "Job History",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.job-history",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/historial-de-jobs.md",
+      "block": "administracion",
+      "title": "Historial de Jobs",
+      "note": null
+    },
+    {
+      "path": "/administration/master-data",
+      "label_es": "Datos Maestros",
+      "label_en": "Master Data",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "alternatives": [
+          "administration.master-data.data-quality"
+        ],
+        "legacy": [
+          "administration.data-manager.mapping",
+          "administration.data-manager.data-quality",
+          "administration.data-manager.data-upload"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/datos-maestros.md",
+      "block": "administracion",
+      "title": "Datos Maestros",
+      "note": null
+    },
+    {
+      "path": "/administration/master-data/data-quality",
+      "label_es": "Calidad de Datos",
+      "label_en": "Data Quality",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.data-quality",
+        "legacy": [
+          "administration.data-manager.data-quality"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/calidad-de-datos.md",
+      "block": "administracion",
+      "title": "Calidad de Datos",
+      "note": null
+    },
+    {
+      "path": "/administration/master-data/mapping",
+      "label_es": "Homologación",
+      "label_en": "Mapping",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "legacy": [
+          "administration.data-manager.mapping"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/homologacion.md",
+      "block": "administracion",
+      "title": "Homologación",
+      "note": null
+    },
+    {
+      "path": "/administration/operation",
+      "label_es": "Operación",
+      "label_en": "Operation",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "alternatives": [],
+        "legacy": [
+          "administration.operation.automatic-replenishment",
+          "administration.operation.automatic-procurement",
+          "administration.operation.pipeline-configuration",
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/work-area/automation",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/work-area/automation",
+      "page": "reabastecimiento/automatizacion-y-operacion.md"
+    },
+    {
+      "path": "/administration/operation/automatic-procurement",
+      "label_es": "Compra Automática",
+      "label_en": "Automatic Purchase Order",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/work-area/automation/automatic-procurement",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/work-area/automation/automatic-procurement",
+      "page": "reabastecimiento/compra-automatica.md"
+    },
+    {
+      "path": "/administration/operation/automatic-procurement/$id",
+      "label_es": "Compra Automática - Detalles",
+      "label_en": "Automatic Purchase Order - Details",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/operation/automatic-procurement/create",
+      "label_es": "Crear compra automática",
+      "label_en": "Create Automatic Purchase Order",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/operation/automatic-replenishment",
+      "label_es": "Distribución Automática",
+      "label_en": "Automatic Replenishment",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/work-area/automation/automatic-replenishment",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/work-area/automation/automatic-replenishment",
+      "page": "reabastecimiento/distribucion-automatica.md"
+    },
+    {
+      "path": "/administration/operation/automatic-replenishment/$id",
+      "label_es": "Distribución Automática - Detalles",
+      "label_en": "Automatic Replenishment - Details",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/operation/automatic-replenishment/create",
+      "label_es": "Crear distribución automática",
+      "label_en": "Create Automatic Replenishment",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/operation/dispatches",
+      "label_es": "Trazabilidad de entregas",
+      "label_en": "Delivery traceability",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/work-area/automation/dispatches",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/work-area/automation/dispatches",
+      "page": "reabastecimiento/trazabilidad-de-entregas.md"
+    },
+    {
+      "path": "/administration/operation/pipeline-configuration",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/work-area/automation/pipeline-configuration",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/work-area/automation/pipeline-configuration",
+      "page": "reabastecimiento/configuracion-de-pipeline.md"
+    },
+    {
+      "path": "/administration/operation/pipeline-configuration/$id",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/administration/operation/pipeline-configuration/create",
+      "label_es": "Crear Configuración de Pipeline",
+      "label_en": "Create Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/administration/sla-dashboard",
+      "label_es": "Dashboard ANS",
+      "label_en": "SLA Dashboard",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/dashboard-ans.md",
+      "block": "administracion",
+      "title": "Dashboard ANS",
+      "note": null
+    },
+    {
+      "path": "/administration/sla-dashboard/configuration",
+      "label_es": "Configuración",
+      "label_en": "Configuration",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard.configuration",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/administration/sla-dashboard",
+      "resolves_to": "/administration/sla-dashboard",
+      "page": "administracion/dashboard-ans.md"
+    },
+    {
+      "path": "/administration/sla-dashboard/dashboard",
+      "label_es": "Dashboard",
+      "label_en": "Dashboard",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard.dashboard",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/administration/sla-dashboard",
+      "resolves_to": "/administration/sla-dashboard",
+      "page": "administracion/dashboard-ans.md"
+    },
+    {
+      "path": "/administration/users-logs",
+      "label_es": "Logs de Usuarios",
+      "label_en": "Users Logs",
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.users-logs",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "administracion/logs-de-usuarios.md",
+      "block": "administracion",
+      "title": "Logs de Usuarios",
+      "note": null
+    },
+    {
+      "path": "/assortment",
+      "label_es": "Surtido",
+      "label_en": "Assortment",
+      "permission": {
+        "kind": "module",
+        "code": "assortment",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "surtido/index.md",
+      "block": "surtido",
+      "title": "Surtido",
+      "note": null
+    },
+    {
+      "path": "/assortment/trade-marketing",
+      "label_es": "Trade Marketing",
+      "label_en": "Trade Marketing",
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "surtido/trade-marketing.md",
+      "block": "surtido",
+      "title": "Trade Marketing",
+      "note": null
+    },
+    {
+      "path": "/assortment/trade-marketing/exhibitions-promotions",
+      "label_es": "Promociones de Exhibición",
+      "label_en": "Exhibition Promotions",
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "surtido/promociones-de-exhibicion.md",
+      "block": "surtido",
+      "title": "Promociones de Exhibición",
+      "note": null
+    },
+    {
+      "path": "/dashboard",
+      "label_es": "Inicio",
+      "label_en": "Dashboard",
+      "permission": {
+        "kind": "module",
+        "code": "dashboard",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "vista-general/panel-de-inicio.md",
+      "block": "vista-general",
+      "title": "Inicio",
+      "note": "La etiqueta de la aplicación es «Inicio», igual que la de la raíz. En el nav de la wiki se titula «Panel de inicio» para distinguirla de la portada."
+    },
+    {
+      "path": "/login",
+      "label_es": "Inicio de sesión",
+      "label_en": "Login",
+      "permission": {
+        "kind": "module",
+        "code": "login",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "excluded",
+      "note": "Pantalla de acceso, no de producto. Se cubre en Primeros pasos."
+    },
+    {
+      "path": "/logout",
+      "label_es": "Cierre de sesión",
+      "label_en": "Logout",
+      "permission": {
+        "kind": "module",
+        "code": "logout",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "excluded",
+      "note": "Cierre de sesión: no tiene interfaz que documentar."
+    },
+    {
+      "path": "/planning",
+      "label_es": "Pronóstico",
+      "label_en": "Forecast",
+      "permission": {
+        "kind": "module",
+        "code": "planning",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/index.md",
+      "block": "pronostico",
+      "title": "Pronóstico",
+      "note": null
+    },
+    {
+      "path": "/planning/demand-and-promotions",
+      "label_es": "Demanda y Promociones",
+      "label_en": "Demand and Promotions",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.demand-and-promotions"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/demanda-y-promociones.md",
+      "block": "pronostico",
+      "title": "Demanda y Promociones",
+      "note": null
+    },
+    {
+      "path": "/planning/demand-and-promotions/details",
+      "label_es": "Demanda y Promociones",
+      "label_en": "Demand and Promotions",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.demand-and-promotions"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/planning/demand-and-promotions",
+      "resolves_to": "/planning/demand-and-promotions",
+      "page": "pronostico/demanda-y-promociones.md"
+    },
+    {
+      "path": "/planning/events-calendar",
+      "label_es": "Calendario de Eventos",
+      "label_en": "Events Calendar",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.events-calendar"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/calendario-de-eventos.md",
+      "block": "pronostico",
+      "title": "Calendario de Eventos",
+      "note": null
+    },
+    {
+      "path": "/planning/external-collaborators",
+      "label_es": "Colaboradores externos",
+      "label_en": "External collaborators",
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.external-collaborators",
+        "alternatives": [],
+        "legacy": [
+          "planning.external-collaborators"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/administration/external-collaborators",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/administration/external-collaborators",
+      "page": "administracion/colaboradores-externos.md"
+    },
+    {
+      "path": "/planning/forecast-alerts",
+      "label_es": "Alertas de Forecast",
+      "label_en": "Forecast Alerts",
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-alerts",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast-analysis"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/alertas-de-forecast.md",
+      "block": "pronostico",
+      "title": "Alertas de Forecast",
+      "note": null
+    },
+    {
+      "path": "/planning/forecast-summary",
+      "label_es": "Resumen",
+      "label_en": "Summary",
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-summary",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/resumen.md",
+      "block": "pronostico",
+      "title": "Resumen",
+      "note": "La etiqueta suelta es «Resumen»; en el nav de la wiki se titula «Resumen del forecast» para que se entienda fuera del menú."
+    },
+    {
+      "path": "/planning/procurement-calendar",
+      "label_es": "Calendario de Compras",
+      "label_en": "Procurement Calendar",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.procurement-calendar"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/calendario-de-compras.md",
+      "block": "pronostico",
+      "title": "Calendario de Compras",
+      "note": null
+    },
+    {
+      "path": "/planning/promotional-calendar",
+      "label_es": "Calendario de Promociones",
+      "label_en": "Promotional Calendar",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.calendar",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-calendar"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/promotions/calendar",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/promotions/calendar",
+      "page": "promociones/calendario-de-promociones.md"
+    },
+    {
+      "path": "/planning/promotional-campaigns",
+      "label_es": "Campañas Promocionales",
+      "label_en": "Promotional Campaigns",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/promotions/campaigns",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/promotions/campaigns",
+      "page": "promociones/campanas.md"
+    },
+    {
+      "path": "/planning/promotional-campaigns/$campaignId",
+      "label_es": "Campaña Promocional",
+      "label_en": "Campaign",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/planning/promotional-campaigns/$campaignId/promotion/$promotionId",
+      "label_es": "Promoción",
+      "label_en": "Promotion Campaign",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/planning/promotional-campaigns/$campaignId/promotion/$promotionId/details",
+      "label_es": "Detalle de Promoción",
+      "label_en": "Promotion Details",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/planning/scenarios",
+      "label_es": "Escenarios",
+      "label_en": "Scenarios",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "pronostico/escenarios.md",
+      "block": "pronostico",
+      "title": "Escenarios",
+      "note": null
+    },
+    {
+      "path": "/planning/scenarios/$scenarioId",
+      "label_es": "Escenario",
+      "label_en": "Scenario",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/planning/scenarios/create",
+      "label_es": "Crear escenario",
+      "label_en": "Create Scenario",
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/planning/trade-marketing-campaigns",
+      "label_es": "Campañas de Marketing Comercial",
+      "label_en": "Trade Marketing Campaigns",
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/assortment/trade-marketing",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/assortment/trade-marketing",
+      "page": "surtido/trade-marketing.md"
+    },
+    {
+      "path": "/planning/trade-marketing-campaigns/exhibitions-promotions",
+      "label_es": "Promociones de Exhibición",
+      "label_en": "Exhibition Promotions",
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/assortment/trade-marketing/exhibitions-promotions",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/assortment/trade-marketing/exhibitions-promotions",
+      "page": "surtido/promociones-de-exhibicion.md"
+    },
+    {
+      "path": "/product-detail",
+      "label_es": "Detalle de Producto",
+      "label_en": "Product Detail",
+      "permission": {
+        "kind": "module",
+        "code": "product-detail",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/work-area/product-dashboard",
+      "source": "decisión",
+      "note": "las dos rutas montan el mismo componente WorkAreaProductDetailsPage, pero la aplicación solo enlaza a /work-area/product-dashboard (ProductPreview.tsx) y solo esa ruta se consulta con checkModuleAccess",
+      "resolves_to": "/work-area/product-dashboard",
+      "page": "vista-general/detalle-de-producto.md"
+    },
+    {
+      "path": "/promotions",
+      "label_es": "Promociones",
+      "label_en": "Promotions",
+      "permission": {
+        "kind": "module",
+        "code": "promotions",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "promociones/index.md",
+      "block": "promociones",
+      "title": "Promociones",
+      "note": null
+    },
+    {
+      "path": "/promotions/calendar",
+      "label_es": "Calendario de Promociones",
+      "label_en": "Promotional Calendar",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.calendar",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-calendar"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "promociones/calendario-de-promociones.md",
+      "block": "promociones",
+      "title": "Calendario de Promociones",
+      "note": null
+    },
+    {
+      "path": "/promotions/campaigns",
+      "label_es": "Campañas",
+      "label_en": "Campaigns",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "promociones/campanas.md",
+      "block": "promociones",
+      "title": "Campañas",
+      "note": null
+    },
+    {
+      "path": "/promotions/campaigns/$campaignId",
+      "label_es": "Campaña Promocional",
+      "label_en": "Campaign",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/promotions/campaigns/$campaignId/promotion/$promotionId",
+      "label_es": "Promoción",
+      "label_en": "Promotion Campaign",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/promotions/campaigns/$campaignId/promotion/$promotionId/details",
+      "label_es": "Detalle de Promoción",
+      "label_en": "Promotion Details",
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/reports-and-analytics",
+      "label_es": "Reportes",
+      "label_en": "Reports",
+      "permission": {
+        "kind": "module",
+        "code": "reports-and-analytics",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reportes/index.md",
+      "block": "reportes",
+      "title": "Reportes",
+      "note": null
+    },
+    {
+      "path": "/reports-and-analytics/adherence",
+      "label_es": "Adherencia",
+      "label_en": "Adherence",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reportes/adherencia.md",
+      "block": "reportes",
+      "title": "Adherencia",
+      "note": null
+    },
+    {
+      "path": "/reports-and-analytics/adherence/orders",
+      "label_es": "Adherencia a Órdenes",
+      "label_en": "Adherence to Orders",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/reports-and-analytics/adherence",
+      "resolves_to": "/reports-and-analytics/adherence",
+      "page": "reportes/adherencia.md"
+    },
+    {
+      "path": "/reports-and-analytics/adherence/procurement",
+      "label_es": "Adherencia a Compras",
+      "label_en": "Adherence to Procurement",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/reports-and-analytics/adherence",
+      "resolves_to": "/reports-and-analytics/adherence",
+      "page": "reportes/adherencia.md"
+    },
+    {
+      "path": "/reports-and-analytics/adherence/replenishment",
+      "label_es": "Adherencia a Distribución",
+      "label_en": "Adherence to Replenishment",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/reports-and-analytics/adherence",
+      "resolves_to": "/reports-and-analytics/adherence",
+      "page": "reportes/adherencia.md"
+    },
+    {
+      "path": "/reports-and-analytics/commercial-performance",
+      "label_es": "Desempeño Comercial",
+      "label_en": "Commercial Performance",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.commercial-performance"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reportes/desempeno-comercial.md",
+      "block": "reportes",
+      "title": "Desempeño Comercial",
+      "note": null
+    },
+    {
+      "path": "/reports-and-analytics/forecast",
+      "label_es": "Forecast",
+      "label_en": "Forecast Performance",
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-summary",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/planning/forecast-summary",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/planning/forecast-summary",
+      "page": "pronostico/resumen.md"
+    },
+    {
+      "path": "/reports-and-analytics/forecast-analysis",
+      "label_es": "Alertas del Forecast",
+      "label_en": "Forecast Alerts",
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-alerts",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast-analysis"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/planning/forecast-alerts",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/planning/forecast-alerts",
+      "page": "pronostico/alertas-de-forecast.md"
+    },
+    {
+      "path": "/reports-and-analytics/history",
+      "label_es": "Histórico",
+      "label_en": "History",
+      "permission": {
+        "kind": "migrated",
+        "code": "reports-and-analytics.history",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.overall"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reportes/historico.md",
+      "block": "reportes",
+      "title": "Histórico",
+      "note": null
+    },
+    {
+      "path": "/reports-and-analytics/inventory-balancing",
+      "label_es": "Balanceo de Inventario",
+      "label_en": "Inventory Balancing",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.inventory-balancing"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reportes/balanceo-de-inventario.md",
+      "block": "reportes",
+      "title": "Balanceo de Inventario",
+      "note": null
+    },
+    {
+      "path": "/reports-and-analytics/inventory-balancing/details",
+      "label_es": "Balanceo de Inventario - Detalles",
+      "label_en": "Inventory Balancing - Details",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.inventory-balancing"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/reports-and-analytics/inventory-balancing",
+      "resolves_to": "/reports-and-analytics/inventory-balancing",
+      "page": "reportes/balanceo-de-inventario.md"
+    },
+    {
+      "path": "/reports-and-analytics/overall",
+      "label_es": "Desempeño General",
+      "label_en": "Overall Performance",
+      "permission": {
+        "kind": "migrated",
+        "code": "reports-and-analytics.history",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.overall"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/reports-and-analytics/history",
+      "source": "ROUTE_MIGRATIONS",
+      "note": "URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido.",
+      "resolves_to": "/reports-and-analytics/history",
+      "page": "reportes/historico.md"
+    },
+    {
+      "path": "/reports-and-analytics/replenishment-report",
+      "label_es": "Distribuciones Estimadas",
+      "label_en": "Estimated Distributions",
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.replenishment-report"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reportes/distribuciones-estimadas.md",
+      "block": "reportes",
+      "title": "Distribuciones Estimadas",
+      "note": null
+    },
+    {
+      "path": "/settings/lang",
+      "label_es": "Settings (language)",
+      "label_en": "Settings (language)",
+      "permission": {
+        "kind": "exact",
+        "code": "settings.lang"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Las seis rutas /settings/* que el issue mandaba resolver no existen en el router y sus etiquetas están sin traducir. Son restos de una versión anterior: se excluyen enteras."
+    },
+    {
+      "path": "/settings/parameters",
+      "label_es": "Settings - Parameters",
+      "label_en": "Settings - Parameters",
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Ver /settings/lang."
+    },
+    {
+      "path": "/settings/parameters/exhibitions",
+      "label_es": "Settings - Parameters - Exhibitions",
+      "label_en": "Settings - Parameters - Exhibitions",
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Ver /settings/lang."
+    },
+    {
+      "path": "/settings/parameters/general",
+      "label_es": "Settings - Parameters - General",
+      "label_en": "Settings - Parameters - General",
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Ver /settings/lang."
+    },
+    {
+      "path": "/settings/parameters/lead-time",
+      "label_es": "Settings - Parameters - Leadtime",
+      "label_en": "Settings - Parameters - Leadtime",
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Ver /settings/lang."
+    },
+    {
+      "path": "/settings/parameters/perishables",
+      "label_es": "Settings - Parameters - Perishables",
+      "label_en": "Settings - Parameters - Perishables",
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Ver /settings/lang."
+    },
+    {
+      "path": "/support",
+      "label_es": "Soporte",
+      "label_en": "Support",
+      "permission": {
+        "kind": "module",
+        "code": "support",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "recursos/soporte.md",
+      "block": "recursos",
+      "title": "Soporte",
+      "note": "El issue pedía decidir su destino: es una pantalla viva y de cara al cliente, así que entra en Recursos con su sub-pantalla «Tickets de Soporte» como sección."
+    },
+    {
+      "path": "/support/tickets",
+      "label_es": "Tickets de Soporte",
+      "label_en": "Support Tickets",
+      "permission": {
+        "kind": "exact",
+        "code": "support.tickets"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/support",
+      "resolves_to": "/support",
+      "page": "recursos/soporte.md"
+    },
+    {
+      "path": "/work-area",
+      "label_es": "Reabastecimiento",
+      "label_en": "Replenishment",
+      "permission": {
+        "kind": "module",
+        "code": "work-area",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/index.md",
+      "block": "reabastecimiento",
+      "title": "Reabastecimiento",
+      "note": null
+    },
+    {
+      "path": "/work-area/automation",
+      "label_es": "Automatización & Operación",
+      "label_en": "Automation & Operation",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "alternatives": [],
+        "legacy": [
+          "administration.operation.automatic-replenishment",
+          "administration.operation.automatic-procurement",
+          "administration.operation.pipeline-configuration",
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/automatizacion-y-operacion.md",
+      "block": "reabastecimiento",
+      "title": "Automatización & Operación",
+      "note": null
+    },
+    {
+      "path": "/work-area/automation/automatic-procurement",
+      "label_es": "Compra Automática",
+      "label_en": "Automatic Purchase Order",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/compra-automatica.md",
+      "block": "reabastecimiento",
+      "title": "Compra Automática",
+      "note": null
+    },
+    {
+      "path": "/work-area/automation/automatic-procurement/$id",
+      "label_es": "Compra Automática - Detalles",
+      "label_en": "Automatic Purchase Order - Details",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/work-area/automation/automatic-procurement/create",
+      "label_es": "Crear compra automática",
+      "label_en": "Create Automatic Purchase Order",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/work-area/automation/automatic-replenishment",
+      "label_es": "Distribución Automática",
+      "label_en": "Automatic Replenishment",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/distribucion-automatica.md",
+      "block": "reabastecimiento",
+      "title": "Distribución Automática",
+      "note": null
+    },
+    {
+      "path": "/work-area/automation/automatic-replenishment/$id",
+      "label_es": "Distribución Automática - Detalles",
+      "label_en": "Automatic Replenishment - Details",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/work-area/automation/automatic-replenishment/create",
+      "label_es": "Crear distribución automática",
+      "label_en": "Create Automatic Replenishment",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/work-area/automation/dispatches",
+      "label_es": "Trazabilidad de entregas",
+      "label_en": "Delivery traceability",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/trazabilidad-de-entregas.md",
+      "block": "reabastecimiento",
+      "title": "Trazabilidad de entregas",
+      "note": null
+    },
+    {
+      "path": "/work-area/automation/pipeline-configuration",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/configuracion-de-pipeline.md",
+      "block": "reabastecimiento",
+      "title": "Configuración de Pipeline",
+      "note": null
+    },
+    {
+      "path": "/work-area/automation/pipeline-configuration/$id",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/work-area/automation/pipeline-configuration/create",
+      "label_es": "Crear Configuración de Pipeline",
+      "label_en": "Create Pipeline Configuration",
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Formulario de creación de la pantalla madre; se documenta dentro de ella."
+    },
+    {
+      "path": "/work-area/inventory-balancing",
+      "label_es": "Balanceo de Inventario",
+      "label_en": "Inventory Balancing",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.inventory-balancing"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/reports-and-analytics/inventory-balancing",
+      "source": "decisión",
+      "note": "redirect permanente en routes/_layout.work-area.inventory-balancing.index.tsx: la sección se movió a Reportes (#2693)",
+      "resolves_to": "/reports-and-analytics/inventory-balancing",
+      "page": "reportes/balanceo-de-inventario.md"
+    },
+    {
+      "path": "/work-area/inventory-balancing/details",
+      "label_es": "Balanceo de Inventario - Detalles",
+      "label_en": "Inventory Balancing - Details",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.inventory-balancing"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "alias",
+      "canonical": "/reports-and-analytics/inventory-balancing/details",
+      "source": "decisión",
+      "note": "redirect permanente en routes/_layout.work-area.inventory-balancing.details.index.tsx (#2693)",
+      "resolves_to": "/reports-and-analytics/inventory-balancing",
+      "page": "reportes/balanceo-de-inventario.md"
+    },
+    {
+      "path": "/work-area/price-definition",
+      "label_es": "Definición de Precios",
+      "label_en": "Price Definition",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.price-definition"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "«Definición de Precios» aparece en el alcance de la épica, pero la pantalla no existe en el router: la etiqueta quedó huérfana en routes.json. No se escribe página."
+    },
+    {
+      "path": "/work-area/procurement",
+      "label_es": "Comprar",
+      "label_en": "Buy",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/comprar.md",
+      "block": "reabastecimiento",
+      "title": "Comprar",
+      "note": null
+    },
+    {
+      "path": "/work-area/procurement-calendar",
+      "label_es": "Calendario de OC",
+      "label_en": "PO Calendar",
+      "permission": {
+        "kind": "unrestricted",
+        "code": null,
+        "note": "checkModuleAccess la deja pasar antes de mirar permisos: la ve cualquier usuario autenticado"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/calendario-de-oc.md",
+      "block": "reabastecimiento",
+      "title": "Calendario de OC",
+      "note": "Pantalla distinta de «Calendario de Compras» (/planning/procurement-calendar), pese al parecido del nombre."
+    },
+    {
+      "path": "/work-area/procurement-calendar/order",
+      "label_es": "Creación de Órden de Compra",
+      "label_en": "Procurement order",
+      "permission": {
+        "kind": "unrestricted",
+        "code": null,
+        "note": "checkModuleAccess la deja pasar antes de mirar permisos: la ve cualquier usuario autenticado"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "section",
+      "part_of": "/work-area/procurement-calendar",
+      "resolves_to": "/work-area/procurement-calendar",
+      "page": "reabastecimiento/calendario-de-oc.md"
+    },
+    {
+      "path": "/work-area/procurement/calendar",
+      "label_es": "Calendario de Órdenes de Compra",
+      "label_en": "Procurement calendar",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Tercer candidato del trío de calendarios de compra que planteaba el issue: no existe. Los calendarios reales son /work-area/procurement-calendar y /planning/procurement-calendar, que son pantallas distintas."
+    },
+    {
+      "path": "/work-area/procurement/order",
+      "label_es": "Creación de Orden de Compra",
+      "label_en": "Procurement order",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/creacion-de-orden-de-compra.md",
+      "block": "reabastecimiento",
+      "title": "Creación de Orden de Compra",
+      "note": null
+    },
+    {
+      "path": "/work-area/procurement/order-history",
+      "label_es": "Historial de Órdenes de Compra",
+      "label_en": "Procurement orders sent",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/historial-de-ordenes-de-compra.md",
+      "block": "reabastecimiento",
+      "title": "Historial de Órdenes de Compra",
+      "note": null
+    },
+    {
+      "path": "/work-area/procurement/order-history/products/$orderId",
+      "label_es": "Productos de la orden de compra",
+      "label_en": "Procurement order products",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/work-area/product-dashboard",
+      "label_es": "Detalle de Producto",
+      "label_en": "Product details",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.product-dashboard"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "vista-general/detalle-de-producto.md",
+      "block": "vista-general",
+      "title": "Detalle de Producto",
+      "note": null
+    },
+    {
+      "path": "/work-area/replenishment",
+      "label_es": "Distribuir",
+      "label_en": "Distribute",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/distribuir.md",
+      "block": "reabastecimiento",
+      "title": "Distribuir",
+      "note": null
+    },
+    {
+      "path": "/work-area/replenishment-suggestions",
+      "label_es": "Solicitudes de Tiendas",
+      "label_en": "Store Requests",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment-suggestions"
+      },
+      "in_nav": true,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/solicitudes-de-tiendas.md",
+      "block": "reabastecimiento",
+      "title": "Solicitudes de Tiendas",
+      "note": null
+    },
+    {
+      "path": "/work-area/replenishment/order",
+      "label_es": "Solicitud de Distribución",
+      "label_en": "Replenishment request",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/solicitud-de-distribucion.md",
+      "block": "reabastecimiento",
+      "title": "Solicitud de Distribución",
+      "note": null
+    },
+    {
+      "path": "/work-area/replenishment/order-history",
+      "label_es": "Historial de Órdenes de Distribución",
+      "label_en": "Replenishment requests sent",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "page",
+      "page": "reabastecimiento/historial-de-ordenes-de-distribucion.md",
+      "block": "reabastecimiento",
+      "title": "Historial de Órdenes de Distribución",
+      "note": null
+    },
+    {
+      "path": "/work-area/replenishment/order-history/products/$orderId",
+      "label_es": "Productos de la orden de distribución",
+      "label_en": "Replenishment order products",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": false,
+      "in_router": true,
+      "disposition": "dynamic",
+      "note": "Ruta con parámetro (detalle de un registro); se documenta dentro de su pantalla madre."
+    },
+    {
+      "path": "/work-area/replenishment/suggestions",
+      "label_es": "Distribución Sugerida",
+      "label_en": "Suggested Replenishment",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "«Distribución Sugerida» no existe; la pantalla viva de solicitudes es /work-area/replenishment-suggestions («Solicitudes de Tiendas»)."
+    },
+    {
+      "path": "/work-area/surplurs-management",
+      "label_es": "Gestión de Excedentes",
+      "label_en": "Surplurs Management",
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.surplurs-management"
+      },
+      "in_nav": false,
+      "in_router": false,
+      "disposition": "stale",
+      "note": "Igual que Definición de Precios: etiqueta huérfana, sin pantalla. (El propio identificador tiene el error de escritura «surplurs».)"
+    }
+  ]
+}

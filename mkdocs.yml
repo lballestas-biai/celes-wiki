@@ -55,6 +55,8 @@ theme:
     - navigation.instant.progress
     - navigation.tracking
     - navigation.sections
+    # La portada de cada sección es su propia página (docs/<bloque>/index.md).
+    - navigation.indexes
     - navigation.top
     - navigation.footer
     - toc.follow
@@ -117,7 +119,101 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
-# El nav es explícito a propósito: el inventario canónico de pantallas (0.2)
-# lo llena a partir de routes.json, y nav-audit.mjs falla si queda un hueco.
+# --- nav generado por tools/scaffold-pages.mjs — no editar a mano ---
+# El inventario canónico de pantallas (tools/inventory.json) es quien manda:
+# `node tools/nav-audit.mjs` falla si una pantalla de la aplicación no tiene página aquí.
 nav:
   - Inicio: index.md
+  - Primeros pasos:
+      - primeros-pasos/index.md
+      - Roles y permisos: primeros-pasos/roles-y-permisos.md
+      - Requisitos de datos: primeros-pasos/requisitos-de-datos.md
+  - Vista general:
+      - Panel de inicio: vista-general/panel-de-inicio.md
+      - Detalle de Producto: vista-general/detalle-de-producto.md
+  - Reabastecimiento:
+      - reabastecimiento/index.md
+      - Comprar: reabastecimiento/comprar.md
+      - Creación de Orden de Compra: reabastecimiento/creacion-de-orden-de-compra.md
+      - Historial de Órdenes de Compra: reabastecimiento/historial-de-ordenes-de-compra.md
+      - Calendario de OC: reabastecimiento/calendario-de-oc.md
+      - Distribuir: reabastecimiento/distribuir.md
+      - Solicitud de Distribución: reabastecimiento/solicitud-de-distribucion.md
+      - Historial de Órdenes de Distribución: reabastecimiento/historial-de-ordenes-de-distribucion.md
+      - Solicitudes de Tiendas: reabastecimiento/solicitudes-de-tiendas.md
+      - Automatización & Operación: reabastecimiento/automatizacion-y-operacion.md
+      - Distribución Automática: reabastecimiento/distribucion-automatica.md
+      - Compra Automática: reabastecimiento/compra-automatica.md
+      - Configuración de Pipeline: reabastecimiento/configuracion-de-pipeline.md
+      - Trazabilidad de entregas: reabastecimiento/trazabilidad-de-entregas.md
+  - Pronóstico:
+      - pronostico/index.md
+      - Resumen del forecast: pronostico/resumen.md
+      - Alertas de Forecast: pronostico/alertas-de-forecast.md
+      - Escenarios: pronostico/escenarios.md
+      - Calendario de Eventos: pronostico/calendario-de-eventos.md
+      - Demanda y Promociones: pronostico/demanda-y-promociones.md
+      - Calendario de Compras: pronostico/calendario-de-compras.md
+  - Promociones:
+      - promociones/index.md
+      - Campañas: promociones/campanas.md
+      - Calendario de Promociones: promociones/calendario-de-promociones.md
+  - Surtido:
+      - surtido/index.md
+      - Trade Marketing: surtido/trade-marketing.md
+      - Promociones de Exhibición: surtido/promociones-de-exhibicion.md
+  - Activación:
+      - activacion/index.md
+      - Reglas de Negocio: activacion/reglas-de-negocio.md
+      - Productos de Agrupación: activacion/productos-de-agrupacion.md
+      - Sustitutos: activacion/sustitutos.md
+  - Reportes:
+      - reportes/index.md
+      - Histórico: reportes/historico.md
+      - Desempeño Comercial: reportes/desempeno-comercial.md
+      - Adherencia: reportes/adherencia.md
+      - Distribuciones Estimadas: reportes/distribuciones-estimadas.md
+      - Balanceo de Inventario: reportes/balanceo-de-inventario.md
+  - Administración:
+      - administracion/index.md
+      - Configuración General: administracion/configuracion-general.md
+      - Filtros: administracion/filtros.md
+      - Asignación de Datos: administracion/asignacion-de-datos.md
+      - Parámetros Generales: administracion/parametros-generales.md
+      - Configuración de Parámetros: administracion/configuracion-de-parametros.md
+      - Configuraciones de Cubicaje: administracion/configuraciones-de-cubicaje.md
+      - Columnas: administracion/columnas.md
+      - Consultas: administracion/consultas.md
+      - Productos de Referencia: administracion/productos-de-referencia.md
+      - Motor de Integración: administracion/motor-de-integracion.md
+      - Variables de entorno: administracion/variables-de-entorno.md
+      - Otras configuraciones: administracion/otras-configuraciones.md
+      - Control de Acceso: administracion/control-de-acceso.md
+      - Usuarios: administracion/usuarios.md
+      - Roles y Permisos: administracion/roles-y-permisos.md
+      - Permiso de datos: administracion/permiso-de-datos.md
+      - Datos Maestros: administracion/datos-maestros.md
+      - Homologación: administracion/homologacion.md
+      - Calidad de Datos: administracion/calidad-de-datos.md
+      - Carga de Datos: administracion/carga-de-datos.md
+      - Colaboradores Externos: administracion/colaboradores-externos.md
+      - Historial de Jobs: administracion/historial-de-jobs.md
+      - Logs de Usuarios: administracion/logs-de-usuarios.md
+      - Dashboard ANS: administracion/dashboard-ans.md
+  - Conceptos:
+      - conceptos/index.md
+      - Sugerido de compra vs. de distribución: conceptos/sugerido-compra-vs-distribucion.md
+      - Filosofía del forecast: conceptos/filosofia-del-forecast.md
+      - Sustitutos y agrupaciones: conceptos/sustitutos-y-agrupaciones.md
+      - Reglas de negocio y plugins: conceptos/reglas-de-negocio-y-plugins.md
+      - Jerarquía de parámetros: conceptos/jerarquia-de-parametros.md
+      - El ciclo diario de datos: conceptos/ciclo-diario-de-datos.md
+      - La automatización y sus condiciones: conceptos/automatizacion-y-sus-condiciones.md
+      - Cómo se construyen los reportes: conceptos/como-se-construyen-los-reportes.md
+      - Por qué tu instancia puede diferir: conceptos/por-que-tu-instancia-difiere.md
+  - Recursos:
+      - Soporte: recursos/soporte.md
+      - Glosario: recursos/glosario.md
+      - Academy: recursos/academy.md
+      - Novedades de producto: recursos/novedades.md
+# --- fin del nav generado ---

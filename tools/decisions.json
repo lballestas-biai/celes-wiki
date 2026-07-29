@@ -1,0 +1,229 @@
+{
+  "_": [
+    "Las decisiones humanas del inventario de pantallas. Se edita a mano; se revisa en PR.",
+    "Lo que el código ya decide (existencia de la ruta, etiqueta, permiso, y los pares",
+    "alias/canónica declarados en ROUTE_MIGRATIONS) NO se repite aquí: sale de",
+    "tools/data/app-routes.json. Aquí va solo lo que el código no dice.",
+    "tools/build-inventory.mjs junta ambos y falla si alguna ruta se queda sin destino."
+  ],
+
+  "_aliases": [
+    "Pares duplicados que ROUTE_MIGRATIONS no declara. Cada uno lleva la evidencia en el",
+    "código que lo sostiene: sin evidencia no se declara alias, se abre la pregunta."
+  ],
+  "aliases": {
+    "/work-area/inventory-balancing": {
+      "canonical": "/reports-and-analytics/inventory-balancing",
+      "evidence": "redirect permanente en routes/_layout.work-area.inventory-balancing.index.tsx: la sección se movió a Reportes (#2693)"
+    },
+    "/work-area/inventory-balancing/details": {
+      "canonical": "/reports-and-analytics/inventory-balancing/details",
+      "evidence": "redirect permanente en routes/_layout.work-area.inventory-balancing.details.index.tsx (#2693)"
+    },
+    "/administration/configuration/synthetic-products": {
+      "canonical": "/activation/grouping-products",
+      "evidence": "redirect en routes/_layout.administration.configuration.synthetic-products.index.tsx: la funcionalidad se renombró a grouping-products (#2420)"
+    },
+    "/product-detail": {
+      "canonical": "/work-area/product-dashboard",
+      "evidence": "las dos rutas montan el mismo componente WorkAreaProductDetailsPage, pero la aplicación solo enlaza a /work-area/product-dashboard (ProductPreview.tsx) y solo esa ruta se consulta con checkModuleAccess"
+    }
+  },
+
+  "_sections": [
+    "Sub-pantallas que no merecen página propia: pestañas y vistas de detalle que se",
+    "documentan dentro de la página de su pantalla madre."
+  ],
+  "sections": {
+    "/work-area/procurement-calendar/order": "/work-area/procurement-calendar",
+    "/planning/demand-and-promotions/details": "/planning/demand-and-promotions",
+    "/reports-and-analytics/adherence/orders": "/reports-and-analytics/adherence",
+    "/reports-and-analytics/adherence/replenishment": "/reports-and-analytics/adherence",
+    "/reports-and-analytics/adherence/procurement": "/reports-and-analytics/adherence",
+    "/reports-and-analytics/inventory-balancing/details": "/reports-and-analytics/inventory-balancing",
+    "/administration/sla-dashboard/dashboard": "/administration/sla-dashboard",
+    "/administration/sla-dashboard/configuration": "/administration/sla-dashboard",
+    "/support/tickets": "/support"
+  },
+
+  "_excluded": [
+    "Rutas que existen pero no son pantallas de producto. Cada exclusión lleva motivo:",
+    "que no se caiga ninguna en silencio es justamente el punto del inventario."
+  ],
+  "excluded": {
+    "/": "No es una pantalla: redirige a la pantalla de inicio del tenant (`tenantDefaultLandingUrl`) o a la de acceso. Se explica en Primeros pasos.",
+    "/login": "Pantalla de acceso, no de producto. Se cubre en Primeros pasos.",
+    "/logout": "Cierre de sesión: no tiene interfaz que documentar."
+  },
+
+  "_stale_notes": [
+    "Rutas con etiqueta en routes.json que ya no existen en el router. build-inventory las",
+    "marca `stale` sola; aquí se anota lo que hay que saber de las que alguien podría buscar."
+  ],
+  "stale_notes": {
+    "/work-area/price-definition": "«Definición de Precios» aparece en el alcance de la épica, pero la pantalla no existe en el router: la etiqueta quedó huérfana en routes.json. No se escribe página.",
+    "/work-area/surplurs-management": "Igual que Definición de Precios: etiqueta huérfana, sin pantalla. (El propio identificador tiene el error de escritura «surplurs».)",
+    "/work-area/procurement/calendar": "Tercer candidato del trío de calendarios de compra que planteaba el issue: no existe. Los calendarios reales son /work-area/procurement-calendar y /planning/procurement-calendar, que son pantallas distintas.",
+    "/work-area/replenishment/suggestions": "«Distribución Sugerida» no existe; la pantalla viva de solicitudes es /work-area/replenishment-suggestions («Solicitudes de Tiendas»).",
+    "/administration/configuration/column-groups": "«Grupos de columnas» no existe en el router; la pantalla viva de columnas es /administration/configuration/config-columns.",
+    "/settings/lang": "Las seis rutas /settings/* que el issue mandaba resolver no existen en el router y sus etiquetas están sin traducir. Son restos de una versión anterior: se excluyen enteras.",
+    "/settings/parameters": "Ver /settings/lang.",
+    "/settings/parameters/general": "Ver /settings/lang.",
+    "/settings/parameters/lead-time": "Ver /settings/lang.",
+    "/settings/parameters/perishables": "Ver /settings/lang.",
+    "/settings/parameters/exhibitions": "Ver /settings/lang."
+  },
+
+  "_blocks": ["El orden de este objeto es el orden del nav de la wiki."],
+  "blocks": {
+    "primeros-pasos": "Primeros pasos",
+    "vista-general": "Vista general",
+    "reabastecimiento": "Reabastecimiento",
+    "pronostico": "Pronóstico",
+    "promociones": "Promociones",
+    "surtido": "Surtido",
+    "activacion": "Activación",
+    "reportes": "Reportes",
+    "administracion": "Administración",
+    "conceptos": "Conceptos",
+    "recursos": "Recursos"
+  },
+
+  "_pages": [
+    "Ruta canónica → página de la wiki. El orden dentro de cada bloque es el orden del nav.",
+    "`title` es la etiqueta de routes.json cuando sirve tal cual; cuando la etiqueta se",
+    "repite entre pantallas distintas se desambigua y se anota por qué."
+  ],
+  "pages": {
+    "/dashboard": {
+      "block": "vista-general",
+      "page": "vista-general/panel-de-inicio.md",
+      "title": "Inicio",
+      "nav_title": "Panel de inicio",
+      "note": "La etiqueta de la aplicación es «Inicio», igual que la de la raíz. En el nav de la wiki se titula «Panel de inicio» para distinguirla de la portada."
+    },
+    "/work-area/product-dashboard": {
+      "block": "vista-general",
+      "page": "vista-general/detalle-de-producto.md",
+      "title": "Detalle de Producto"
+    },
+
+    "/work-area": { "block": "reabastecimiento", "page": "reabastecimiento/index.md", "title": "Reabastecimiento" },
+    "/work-area/procurement": { "block": "reabastecimiento", "page": "reabastecimiento/comprar.md", "title": "Comprar" },
+    "/work-area/procurement/order": { "block": "reabastecimiento", "page": "reabastecimiento/creacion-de-orden-de-compra.md", "title": "Creación de Orden de Compra" },
+    "/work-area/procurement/order-history": { "block": "reabastecimiento", "page": "reabastecimiento/historial-de-ordenes-de-compra.md", "title": "Historial de Órdenes de Compra" },
+    "/work-area/procurement-calendar": {
+      "block": "reabastecimiento",
+      "page": "reabastecimiento/calendario-de-oc.md",
+      "title": "Calendario de OC",
+      "note": "Pantalla distinta de «Calendario de Compras» (/planning/procurement-calendar), pese al parecido del nombre."
+    },
+    "/work-area/replenishment": { "block": "reabastecimiento", "page": "reabastecimiento/distribuir.md", "title": "Distribuir" },
+    "/work-area/replenishment/order": { "block": "reabastecimiento", "page": "reabastecimiento/solicitud-de-distribucion.md", "title": "Solicitud de Distribución" },
+    "/work-area/replenishment/order-history": { "block": "reabastecimiento", "page": "reabastecimiento/historial-de-ordenes-de-distribucion.md", "title": "Historial de Órdenes de Distribución" },
+    "/work-area/replenishment-suggestions": { "block": "reabastecimiento", "page": "reabastecimiento/solicitudes-de-tiendas.md", "title": "Solicitudes de Tiendas" },
+    "/work-area/automation": { "block": "reabastecimiento", "page": "reabastecimiento/automatizacion-y-operacion.md", "title": "Automatización & Operación" },
+    "/work-area/automation/automatic-replenishment": { "block": "reabastecimiento", "page": "reabastecimiento/distribucion-automatica.md", "title": "Distribución Automática" },
+    "/work-area/automation/automatic-procurement": { "block": "reabastecimiento", "page": "reabastecimiento/compra-automatica.md", "title": "Compra Automática" },
+    "/work-area/automation/pipeline-configuration": { "block": "reabastecimiento", "page": "reabastecimiento/configuracion-de-pipeline.md", "title": "Configuración de Pipeline" },
+    "/work-area/automation/dispatches": { "block": "reabastecimiento", "page": "reabastecimiento/trazabilidad-de-entregas.md", "title": "Trazabilidad de entregas" },
+
+    "/planning": { "block": "pronostico", "page": "pronostico/index.md", "title": "Pronóstico" },
+    "/planning/forecast-summary": {
+      "block": "pronostico",
+      "page": "pronostico/resumen.md",
+      "title": "Resumen",
+      "nav_title": "Resumen del forecast",
+      "note": "La etiqueta suelta es «Resumen»; en el nav de la wiki se titula «Resumen del forecast» para que se entienda fuera del menú."
+    },
+    "/planning/forecast-alerts": { "block": "pronostico", "page": "pronostico/alertas-de-forecast.md", "title": "Alertas de Forecast" },
+    "/planning/scenarios": { "block": "pronostico", "page": "pronostico/escenarios.md", "title": "Escenarios" },
+    "/planning/events-calendar": { "block": "pronostico", "page": "pronostico/calendario-de-eventos.md", "title": "Calendario de Eventos" },
+    "/planning/demand-and-promotions": { "block": "pronostico", "page": "pronostico/demanda-y-promociones.md", "title": "Demanda y Promociones" },
+    "/planning/procurement-calendar": { "block": "pronostico", "page": "pronostico/calendario-de-compras.md", "title": "Calendario de Compras" },
+
+    "/promotions": { "block": "promociones", "page": "promociones/index.md", "title": "Promociones" },
+    "/promotions/campaigns": { "block": "promociones", "page": "promociones/campanas.md", "title": "Campañas" },
+    "/promotions/calendar": { "block": "promociones", "page": "promociones/calendario-de-promociones.md", "title": "Calendario de Promociones" },
+
+    "/assortment": { "block": "surtido", "page": "surtido/index.md", "title": "Surtido" },
+    "/assortment/trade-marketing": { "block": "surtido", "page": "surtido/trade-marketing.md", "title": "Trade Marketing" },
+    "/assortment/trade-marketing/exhibitions-promotions": { "block": "surtido", "page": "surtido/promociones-de-exhibicion.md", "title": "Promociones de Exhibición" },
+
+    "/activation": { "block": "activacion", "page": "activacion/index.md", "title": "Activación" },
+    "/activation/business-rules": { "block": "activacion", "page": "activacion/reglas-de-negocio.md", "title": "Reglas de Negocio" },
+    "/activation/grouping-products": { "block": "activacion", "page": "activacion/productos-de-agrupacion.md", "title": "Productos de Agrupación" },
+    "/activation/substitute-products": { "block": "activacion", "page": "activacion/sustitutos.md", "title": "Sustitutos" },
+
+    "/reports-and-analytics": { "block": "reportes", "page": "reportes/index.md", "title": "Reportes" },
+    "/reports-and-analytics/history": { "block": "reportes", "page": "reportes/historico.md", "title": "Histórico" },
+    "/reports-and-analytics/commercial-performance": { "block": "reportes", "page": "reportes/desempeno-comercial.md", "title": "Desempeño Comercial" },
+    "/reports-and-analytics/adherence": { "block": "reportes", "page": "reportes/adherencia.md", "title": "Adherencia" },
+    "/reports-and-analytics/replenishment-report": { "block": "reportes", "page": "reportes/distribuciones-estimadas.md", "title": "Distribuciones Estimadas" },
+    "/reports-and-analytics/inventory-balancing": { "block": "reportes", "page": "reportes/balanceo-de-inventario.md", "title": "Balanceo de Inventario" },
+
+    "/administration": { "block": "administracion", "page": "administracion/index.md", "title": "Administración" },
+    "/administration/configuration": { "block": "administracion", "page": "administracion/configuracion-general.md", "title": "Configuración General" },
+    "/administration/configuration/app-filters": { "block": "administracion", "page": "administracion/filtros.md", "title": "Filtros" },
+    "/administration/configuration/data-allocation": { "block": "administracion", "page": "administracion/asignacion-de-datos.md", "title": "Asignación de Datos" },
+    "/administration/configuration/general-parameters": { "block": "administracion", "page": "administracion/parametros-generales.md", "title": "Parámetros Generales" },
+    "/administration/configuration/parameters-manager": { "block": "administracion", "page": "administracion/configuracion-de-parametros.md", "title": "Configuración de Parámetros" },
+    "/administration/configuration/cubing-configurations": { "block": "administracion", "page": "administracion/configuraciones-de-cubicaje.md", "title": "Configuraciones de Cubicaje" },
+    "/administration/configuration/config-columns": { "block": "administracion", "page": "administracion/columnas.md", "title": "Columnas" },
+    "/administration/configuration/query-builder": { "block": "administracion", "page": "administracion/consultas.md", "title": "Consultas" },
+    "/administration/configuration/reference-products": { "block": "administracion", "page": "administracion/productos-de-referencia.md", "title": "Productos de Referencia" },
+    "/administration/configuration/integration-engine": { "block": "administracion", "page": "administracion/motor-de-integracion.md", "title": "Motor de Integración" },
+    "/administration/configuration/environment-variables": { "block": "administracion", "page": "administracion/variables-de-entorno.md", "title": "Variables de entorno" },
+    "/administration/configuration/other": { "block": "administracion", "page": "administracion/otras-configuraciones.md", "title": "Otras configuraciones" },
+    "/administration/access-control": { "block": "administracion", "page": "administracion/control-de-acceso.md", "title": "Control de Acceso" },
+    "/administration/access-control/users": { "block": "administracion", "page": "administracion/usuarios.md", "title": "Usuarios" },
+    "/administration/access-control/roles-and-permissions": { "block": "administracion", "page": "administracion/roles-y-permisos.md", "title": "Roles y Permisos" },
+    "/administration/access-control/data-permission": { "block": "administracion", "page": "administracion/permiso-de-datos.md", "title": "Permiso de datos" },
+    "/administration/master-data": { "block": "administracion", "page": "administracion/datos-maestros.md", "title": "Datos Maestros" },
+    "/administration/master-data/mapping": { "block": "administracion", "page": "administracion/homologacion.md", "title": "Homologación" },
+    "/administration/master-data/data-quality": { "block": "administracion", "page": "administracion/calidad-de-datos.md", "title": "Calidad de Datos" },
+    "/administration/data-manager/data-upload": {
+      "block": "administracion",
+      "page": "administracion/carga-de-datos.md",
+      "title": "Carga de Datos",
+      "note": "Única pantalla de Gestión de Datos que NO se migró a Datos Maestros: routeMigrations la marca `unmigratedNestedSegments`, así que su URL canónica sigue colgando de /administration/data-manager aunque su pantalla madre ya sea un alias."
+    },
+    "/administration/external-collaborators": { "block": "administracion", "page": "administracion/colaboradores-externos.md", "title": "Colaboradores Externos" },
+    "/administration/job-history": { "block": "administracion", "page": "administracion/historial-de-jobs.md", "title": "Historial de Jobs" },
+    "/administration/users-logs": { "block": "administracion", "page": "administracion/logs-de-usuarios.md", "title": "Logs de Usuarios" },
+    "/administration/sla-dashboard": { "block": "administracion", "page": "administracion/dashboard-ans.md", "title": "Dashboard ANS" },
+
+    "/support": {
+      "block": "recursos",
+      "page": "recursos/soporte.md",
+      "title": "Soporte",
+      "note": "El issue pedía decidir su destino: es una pantalla viva y de cara al cliente, así que entra en Recursos con su sub-pantalla «Tickets de Soporte» como sección."
+    }
+  },
+
+  "_standalone": [
+    "Páginas de la wiki que no corresponden a ninguna pantalla: la bienvenida, los",
+    "conceptos transversales y los recursos. nav-audit las trata como páginas de pleno",
+    "derecho, pero no exige `route` ni `permission` en su frontmatter."
+  ],
+  "standalone": [
+    { "block": "primeros-pasos", "page": "primeros-pasos/index.md", "title": "Bienvenida" },
+    { "block": "primeros-pasos", "page": "primeros-pasos/roles-y-permisos.md", "title": "Roles y permisos" },
+    { "block": "primeros-pasos", "page": "primeros-pasos/requisitos-de-datos.md", "title": "Requisitos de datos" },
+
+    { "block": "conceptos", "page": "conceptos/index.md", "title": "Conceptos" },
+    { "block": "conceptos", "page": "conceptos/sugerido-compra-vs-distribucion.md", "title": "Sugerido de compra vs. de distribución" },
+    { "block": "conceptos", "page": "conceptos/filosofia-del-forecast.md", "title": "Filosofía del forecast" },
+    { "block": "conceptos", "page": "conceptos/sustitutos-y-agrupaciones.md", "title": "Sustitutos y agrupaciones" },
+    { "block": "conceptos", "page": "conceptos/reglas-de-negocio-y-plugins.md", "title": "Reglas de negocio y plugins" },
+    { "block": "conceptos", "page": "conceptos/jerarquia-de-parametros.md", "title": "Jerarquía de parámetros" },
+    { "block": "conceptos", "page": "conceptos/ciclo-diario-de-datos.md", "title": "El ciclo diario de datos" },
+    { "block": "conceptos", "page": "conceptos/automatizacion-y-sus-condiciones.md", "title": "La automatización y sus condiciones" },
+    { "block": "conceptos", "page": "conceptos/como-se-construyen-los-reportes.md", "title": "Cómo se construyen los reportes" },
+    { "block": "conceptos", "page": "conceptos/por-que-tu-instancia-difiere.md", "title": "Por qué tu instancia puede diferir" },
+
+    { "block": "recursos", "page": "recursos/glosario.md", "title": "Glosario" },
+    { "block": "recursos", "page": "recursos/academy.md", "title": "Academy" },
+    { "block": "recursos", "page": "recursos/novedades.md", "title": "Novedades de producto" }
+  ]
+}
