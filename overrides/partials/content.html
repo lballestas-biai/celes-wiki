@@ -1,0 +1,137 @@
+{#-
+  Cabecera de artículo del mock, montada sobre el frontmatter de la página.
+
+  Reemplaza `partials/content.html` del theme para insertar, entre el `<h1>` y el
+  cuerpo, tres cosas que el mock tiene y Markdown no puede expresar:
+
+    · la fila de metadatos  — módulo y estado de verificación
+    · el resumen destacado  — `summary`, que además es la respuesta corta del agente
+    · la ficha de auditoría — `route`, `permission`, `tenant_variance`, `verified_at`
+
+  Esa ficha es lo que hace la wiki auditable: si una página no dice contra qué se
+  verificó y cuándo, el lector no tiene por qué creerle.
+
+  El `<h1>` sigue viniendo del Markdown (`# Título`), así que la página se lee bien
+  en GitHub y en el editor. Para colocar la cabecera *debajo* del título se corta el
+  HTML ya renderizado en el primer `</h1>`; si la página no trae `<h1>`, se emite
+  desde `title:` igual que hace el theme.
+-#}
+
+{% macro chips(values) %}
+  {% for value in values %}
+    <span class="celes-chip">{{ value }}</span>
+  {% endfor %}
+{% endmacro %}
+
+{#- Etiquetas de `tenant_variance`: la wiki describe el comportamiento base, y este
+    campo es la advertencia de cuánto puede diferir la instancia del lector. -#}
+{% set variance_labels = {
+  "none": "Igual para todos los clientes",
+  "low": "Varía poco entre clientes",
+  "high": "Depende de tu configuración",
+  "unknown": "Sin determinar"
+} %}
+
+{#- Fila de módulo y estado. Va *encima* del `<h1>`, como en el mock. -#}
+{% macro page_meta(page) %}
+  {% set meta = page.meta %}
+  {% set module = meta.module or (page.parent.title if page.parent) %}
+  {% set status = meta.status %}
+  {% if module or status %}
+    <p class="celes-head__meta">
+      {% if module %}
+        <span class="celes-module">{{ module }}</span>
+      {% endif %}
+      {% if status == "draft" %}
+        <span class="celes-status celes-status--draft">Borrador</span>
+      {% elif status == "verified" %}
+        <span class="celes-status celes-status--verified">Verificada</span>
+      {% elif status %}
+        <span class="celes-status">{{ status }}</span>
+      {% endif %}
+    </p>
+  {% endif %}
+{% endmacro %}
+
+{#- Resumen, audiencia y ficha de auditoría. Van debajo del `<h1>`. -#}
+{% macro page_head(page) %}
+  {% set meta = page.meta %}
+
+  <div class="celes-head" {% if meta.status %}data-celes-status="{{ meta.status }}"{% endif %}>
+    {% if meta.summary %}
+      <p class="celes-lede">{{ meta.summary }}</p>
+    {% endif %}
+
+    {% if meta.audience %}
+      <p class="celes-audience">
+        <span class="celes-audience__label">Para</span>
+        {{ chips(meta.audience) }}
+      </p>
+    {% endif %}
+
+    {% if meta.route or meta.permission or meta.tenant_variance or meta.verified_at %}
+      <dl class="celes-facts">
+        {% if meta.route %}
+          <div class="celes-facts__item">
+            <dt>Dirección</dt>
+            <dd><code>{{ meta.route }}</code></dd>
+          </div>
+        {% endif %}
+        {% if meta.aliases %}
+          <div class="celes-facts__item">
+            <dt>También responde en</dt>
+            <dd>
+              {% for alias in meta.aliases %}
+                <code>{{ alias }}</code>{% if not loop.last %} {% endif %}
+              {% endfor %}
+            </dd>
+          </div>
+        {% endif %}
+        {% if meta.permission %}
+          <div class="celes-facts__item">
+            <dt>Permiso</dt>
+            <dd>
+              {% if meta.permission == "~" %}
+                <span class="celes-facts__none">No exige un permiso propio</span>
+              {% else %}
+                <code>{{ meta.permission }}</code>
+              {% endif %}
+            </dd>
+          </div>
+        {% endif %}
+        {% if meta.tenant_variance %}
+          <div class="celes-facts__item">
+            <dt>Variación por cliente</dt>
+            <dd>{{ variance_labels.get(meta.tenant_variance | string, meta.tenant_variance) }}</dd>
+          </div>
+        {% endif %}
+        {% if meta.verified_at %}
+          <div class="celes-facts__item">
+            <dt>Verificada el</dt>
+            <dd><time datetime="{{ meta.verified_at }}">{{ meta.verified_at }}</time></dd>
+          </div>
+        {% endif %}
+      </dl>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% include "partials/tags.html" %}
+{% include "partials/actions.html" %}
+
+{{ page_meta(page) }}
+
+{% if "<h1" in page.content %}
+  {% set title_html, body_html = page.content.split("</h1>", 1) %}
+  {{ title_html }}</h1>
+  {{ page_head(page) }}
+  {{ body_html }}
+{% else %}
+  <h1>{{ page.title | d(config.site_name, true) }}</h1>
+  {{ page_head(page) }}
+  {{ page.content }}
+{% endif %}
+
+{% include "partials/source-file.html" %}
+{% include "partials/feedback.html" %}
+{% include "partials/comments.html" %}

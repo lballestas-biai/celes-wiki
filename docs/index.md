@@ -17,9 +17,6 @@ sources:
 
 # Celes Wiki
 
-Esta es la documentación de producto de Celes. Explica **qué hace cada pantalla**,
-**qué significa cada número** y **por qué el sistema decide lo que decide**.
-
 ## Cómo está escrita esta wiki { #como-esta-escrita }
 
 Tres reglas gobiernan el contenido:

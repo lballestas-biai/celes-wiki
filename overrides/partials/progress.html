@@ -1,0 +1,9 @@
+{#-
+  Copia del partial del theme (mkdocs-material 9.7.7) con una sola diferencia: la
+  barra de progreso de `navigation.instant` declara un nombre accesible. Sin él es
+  un `role="progressbar"` anónimo, que es un fallo de accesibilidad real —lo
+  reporta Lighthouse— y esta wiki nació de un mock de accesibilidad.
+
+  Al subir de versión de Material hay que revisar el original y re-sincronizar.
+-#}
+<div class="md-progress" data-md-component="progress" role="progressbar" aria-label="Cargando la página" aria-valuemin="0" aria-valuemax="100"></div>

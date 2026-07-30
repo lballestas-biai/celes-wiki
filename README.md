@@ -44,6 +44,56 @@ fecha real de último cambio de cada página, así que CI clona con `fetch-depth
 Cada push a `main` dispara `.github/workflows/deploy.yml`, que construye el sitio y
 lo publica en GitHub Pages. No hay paso manual.
 
+## El tema
+
+El look viene del mock de referencia (`eliana-a11y/celes-wiki`, un `index.html` con
+las páginas embebidas en un objeto JS). Se portó el CSS y la estructura, no el JS:
+cada pieza del mock se mapea a una que el theme ya trae.
+
+```
+docs/assets/stylesheets/brand.css   # tokens: color, sombras, iconos de estado
+docs/assets/stylesheets/layout.css  # el porte del layout (aquí no hay literales de color)
+overrides/partials/content.html     # cabecera del artículo desde el frontmatter
+overrides/partials/logo.html        # la marca del mock
+overrides/partials/search.html      # copia del theme + nombre accesible del diálogo
+overrides/partials/progress.html    # copia del theme + nombre accesible de la barra
+```
+
+**`search.html` y `progress.html` son copias literales de los partials de
+mkdocs-material 9.7.7** con un `aria-label` añadido cada uno. Al subir de versión hay
+que re-sincronizarlas contra el original; el resto de los overrides son aditivos.
+
+### El frontmatter se ve
+
+`content.html` renderiza la cabecera de cada página a partir de su frontmatter, y de
+ahí sale el bloque de metadatos visible: `module` y `status` sobre el título;
+`summary` como resumen destacado; `audience` como etiquetas; y `route`, `aliases`,
+`permission`, `tenant_variance` y `verified_at` en la ficha de auditoría. Eso es lo
+que hace la wiki auditable: **si una página no dice contra qué se verificó y cuándo,
+el lector no tiene por qué creerle.**
+
+Consecuencias para quien escribe contenido:
+
+- El `<h1>` sigue viniendo del Markdown (`# Título`) y debe ser lo primero del cuerpo.
+- `summary` ya no es solo metadato del agente: **se publica** como primer párrafo.
+  No repetirlo en el cuerpo.
+- La tabla «Ficha de la pantalla» de los stubs quedó redundante en sus filas
+  *Dirección* y *Quién la ve* — el bloque de metadatos ya las muestra. Al escribir
+  una página, quitarlas y quedarse con lo que no está en el frontmatter (dónde está
+  en el menú, qué sub-pantallas incluye).
+- `status: draft` se ve: etiqueta ocre junto al módulo, filo ocre en la ficha y una
+  marca junto al nombre en el menú lateral. Todo valor nuevo de `status` necesita su
+  entrada en `extra.status` (mkdocs.yml) **y** su icono `--md-status--<valor>` en
+  `brand.css`; sin el icono el theme pinta un cuadrado.
+
+### Accesibilidad
+
+El mock viene de un repo `a11y` y esa parte no se porta a medias: `mkdocs build` +
+Lighthouse (escritorio) dan **100 en accesibilidad**, con foco visible en todo lo
+interactivo y en ambos esquemas. Dos colores del mock se oscurecieron porque no
+llegaban a 4.5:1 — están anotados en `brand.css`. Al tocar color o foco, volver a
+correr la auditoría.
+
 ## Qué páginas existen, y por qué
 
 Las páginas de la wiki no se eligen a mano: se derivan de las pantallas que la
@@ -118,8 +168,8 @@ nunca pisa una página existente.
 ```
 mkdocs.yml            # configuración y nav (el bloque `nav` lo genera scaffold-pages)
 docs/                 # el contenido
-  assets/stylesheets/ # tokens de marca
-overrides/            # extensiones del theme
+  assets/stylesheets/ # tokens de marca y porte del layout del mock
+overrides/            # extensiones del theme (ver «El tema»)
 tools/                # inventario de pantallas y auditoría (Node puro, sin dependencias)
   data/               # la foto commiteada del código de la aplicación
 requirements.txt      # versiones pinneadas
