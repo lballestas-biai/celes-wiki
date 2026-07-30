@@ -1,0 +1,59 @@
+{
+  "_": "Contrato de contenido de la wiki. Es la forma legible de lo que exige tools/validate-frontmatter.mjs; la prosa está en CONTRIBUTING.md. Editar aquí antes que en el validador.",
+
+  "campos": {
+    "title": "Nombre de la pantalla o del concepto, tal como lo dice la aplicación.",
+    "module": "Bloque de la wiki al que pertenece. Lo fija el inventario.",
+    "route": "Dirección canónica de la pantalla. Solo en páginas de pantalla.",
+    "aliases": "Otras direcciones que llevan a la misma pantalla. Solo en páginas de pantalla.",
+    "permission": "Permiso derivado de checkModuleAccess. `~` si la pantalla no exige ninguno.",
+    "audience": "Para quién está escrita la página.",
+    "summary": "Qué es y para qué sirve, en ≤3 frases. Se publica como resumen y es la respuesta corta del agente.",
+    "keywords": "Términos por los que alguien buscaría esta página.",
+    "tenant_variance": "Cuánto cambia lo descrito de una instancia a otra.",
+    "status": "`draft` mientras la página no cumpla la definición de página completa; `verified` cuando la cumple.",
+    "verified_at": "Fecha (AAAA-MM-DD) de la última verificación contra el producto.",
+    "sources": "Contra qué se verificó: repositorio, archivo y commit."
+  },
+
+  "requeridos": {
+    "_": "Se suma `todas` + lo propio del tipo de página. `portada` es docs/index.md, que no describe ninguna pantalla ni pertenece a un bloque.",
+    "todas": ["title", "audience", "summary", "keywords", "tenant_variance", "status", "verified_at", "sources"],
+    "pantalla": ["module", "route", "aliases", "permission"],
+    "concepto": ["module"],
+    "portada": []
+  },
+
+  "prohibidos": {
+    "concepto": ["route", "aliases", "permission"],
+    "portada": ["route", "aliases", "permission", "module"]
+  },
+
+  "vocabularios": {
+    "audience": ["Clientes", "Usuarios", "Administradores", "Implementadores"],
+    "tenant_variance": ["none", "low", "high", "unknown"],
+    "repos": ["celes-platform", "celes-wiki"]
+  },
+
+  "limites": {
+    "summary_frases": 3,
+    "summary_caracteres": 420,
+    "title_caracteres": 80,
+    "keywords_maximo": 12
+  },
+
+  "verified": {
+    "_": "Lo que además exige `status: verified` — es la «definición de página completa» de la épica, comprobable por máquina. Los puntos que no lo son (que el texto sea correcto, que la captura esté saneada) los cubre la revisión humana del PR.",
+    "tenant_variance_decidido": true,
+    "keywords_minimo": 2,
+    "sources_minimo": 1,
+    "secciones_pantalla": ["que-es", "que-puedes-hacer", "requisitos"],
+    "captura_minima": 1
+  },
+
+  "placeholders": {
+    "_": "Textos que siembra tools/scaffold-pages.mjs. Una página `verified` no puede conservarlos.",
+    "summary": ["Pendiente. Esta página es un esqueleto"],
+    "cuerpo": ["Página en construcción"]
+  }
+}

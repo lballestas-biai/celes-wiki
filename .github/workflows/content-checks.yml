@@ -1,0 +1,52 @@
+name: Comprobar el contenido
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: content-checks-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  content-checks:
+    name: content-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Los dos corren siempre, aunque el primero falle: quien abre el PR merece ver
+      # todo lo que tiene que arreglar de una vez, no de uno en uno.
+      - name: Contrato de contenido
+        run: node tools/validate-frontmatter.mjs
+
+      - name: Contenido no publicable
+        if: ${{ !cancelled() }}
+        run: node tools/check-denylist.mjs
+
+  secrets:
+    name: secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # gitleaks compara commits: necesita el historial, no solo la punta.
+          fetch-depth: 0
+
+      # gitleaks-action es gratuito en repositorios públicos de una cuenta personal.
+      # Si este repositorio pasa alguna vez a una organización, exige `GITLEAKS_LICENSE`
+      # y este paso empieza a fallar por licencia, no por hallazgos.
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"

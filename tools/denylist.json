@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "_": [
+    "Lo que no puede aparecer en una wiki pública. Lo comprueba tools/check-denylist.mjs.",
+    "Dos mecanismos, y la diferencia importa:",
+    "  · `reglas` son patrones estructurales — nombrar lo que se busca no revela nada.",
+    "  · `nombres` son literales que NO se pueden escribir aquí sin publicarlos, así que",
+    "    van como hash. Es un repositorio público: una lista de clientes en claro sería",
+    "    exactamente la fuga que esta regla existe para impedir.",
+    "Esto es una red, no una prueba. Lo que atrapa, atrapa; que el contenido sea",
+    "publicable lo decide la revisión humana del PR."
+  ],
+
+  "ambitos": {
+    "_": "Se revisa lo que se publica como sitio. README.md y CONTRIBUTING.md quedan fuera a propósito: documentan la cadena de construcción y nombran el repositorio de la aplicación, cosa que D5 de la épica ya acepta.",
+    "incluye": ["docs/**", "overrides/**", "mkdocs.yml"],
+    "excluye": ["docs/assets/stylesheets/**"]
+  },
+
+  "reglas": [
+    {
+      "id": "tenant-slug",
+      "que": "identificador de instancia de cliente",
+      "ambito": "todo",
+      "regex": "\\b[a-z][a-z0-9]{2,}(?:[-_][a-z0-9]+)*[-_](?=[a-z0-9]{5}\\b)(?=[a-z0-9]*[0-9])[a-z0-9]{5}\\b",
+      "porque": "Los identificadores de instancia terminan en un sufijo aleatorio de cinco caracteres. Nombran a un cliente concreto."
+    },
+    {
+      "id": "sql",
+      "que": "consulta SQL",
+      "ambito": "todo",
+      "regex": "\\bSELECT\\b[\\s\\S]{0,300}?\\bFROM\\b|\\b(?:INSERT\\s+INTO|CREATE\\s+(?:OR\\s+REPLACE\\s+)?(?:TABLE|VIEW)|(?:LEFT|RIGHT|INNER|FULL|CROSS)\\s+JOIN|GROUP\\s+BY|ORDER\\s+BY|WITH\\s+\\w+\\s+AS\\s*\\()\\b",
+      "flags": "i",
+      "porque": "La wiki explica qué significa un número, no cómo se calcula en la bodega de datos."
+    },
+    {
+      "id": "almacen-de-datos",
+      "que": "interioridades del almacén de datos",
+      "ambito": "todo",
+      "regex": "\\bbig\\s?query\\b|\\bdatasets?\\b|\\bdatamarts?\\b|\\bdbt\\b|`[a-z][a-z0-9_-]*\\.[a-z][a-z0-9_-]*\\.(?:[A-Z][A-Za-z0-9_]*|[a-z0-9]+_[A-Za-z0-9_]+)`|\\b(?:DM|DTC|stg|fct|dim|raw)_[A-Za-z0-9_]{2,}",
+      "nota": "La referencia de tres partes exige tabla en mayúscula inicial o con guion bajo: un `modulo.seccion.pantalla` de permiso también tiene tres partes y no es una tabla.",
+      "porque": "Nombres de tablas, capas y modelos son internos: cambian sin aviso y no significan nada para un cliente."
+    },
+    {
+      "id": "constructor-de-consultas",
+      "que": "interioridades del constructor de reportes",
+      "ambito": "todo",
+      "regex": "\\bqb_(?:fields?|querys?|queries)\\b|\\bquery_(?:id|template|metadata)\\b|\\bcolumn_metadata\\b|\\bquery\\s+builder\\b|\\bslugs?\\b",
+      "porque": "Cómo está armado un reporte por dentro es configuración, no producto."
+    },
+    {
+      "id": "credencial",
+      "que": "credencial o llave",
+      "ambito": "todo",
+      "regex": "\\bX-(?:API-Key|Celes-Tenant)\\b|Authorization:\\s*Bearer|\\bAIza[0-9A-Za-z_-]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|\\bgh[pousr]_[A-Za-z0-9]{20,}|\\b(?:client_secret|service[_-]account|api[_-]key|access[_-]token)\\b",
+      "redactar": true,
+      "porque": "Ninguna credencial entra al repositorio, ni de ejemplo: el historial de git es permanente."
+    },
+    {
+      "id": "url-interna",
+      "que": "dirección interna",
+      "ambito": "todo",
+      "regex": "\\.run\\.app\\b|console\\.cloud\\.google\\.com|\\.googleapis\\.com|\\blocalhost(?::\\d+)?\\b|\\b127\\.0\\.0\\.1\\b|\\bgs://|github\\.com/celes-app/",
+      "porque": "Una dirección interna no le sirve a un cliente y sí a quien busca superficie de ataque."
+    },
+    {
+      "id": "infraestructura",
+      "que": "detalle de infraestructura",
+      "ambito": "todo",
+      "regex": "\\bceles-platform-(?:app|prd|dev|stg)\\b|\\bprojects/[a-z][a-z0-9-]{5,}\\b|\\bCloud\\s+(?:Run|Tasks|Logging|Functions|Storage)\\b|\\bFirestore\\b|\\bDatastore\\b|\\bPub/?Sub\\b",
+      "porque": "Dónde corre el producto es interno. La wiki describe qué hace, no sobre qué."
+    },
+    {
+      "id": "base-de-conocimiento-interna",
+      "que": "contenido de la base de conocimiento de soporte",
+      "ambito": "todo",
+      "regex": "\\bfallas?[- ]conocidas\\b|~/support\\b|\\bagente-issues\\b|\\bceles-triage\\b|\\bplaybooks?/\\b|\\bceles-app/implementation\\b|\\(#\\d{2,6}\\)",
+      "porque": "La base de conocimiento de soporte es otra audiencia: habla de fallas, tenants y tickets."
+    },
+    {
+      "id": "ruta-de-codigo",
+      "que": "ruta de un archivo del código",
+      "ambito": "cuerpo",
+      "solo_en": "docs/",
+      "regex": "\\bapps/[a-z][a-z0-9-]*/|\\bsrc/[A-Za-z][\\w/.-]*|\\b[A-Za-z][A-Za-z0-9_.]*\\.(?:tsx?|jsx?|mjs|py)\\b",
+      "porque": "Las rutas del código van en `sources:` del frontmatter — que es donde D5 las confina — y en ningún otro sitio."
+    },
+    {
+      "id": "correo-interno",
+      "que": "dirección de correo interna",
+      "ambito": "todo",
+      "regex": "[A-Za-z0-9._%+-]+@(?:biai\\.tech|celes\\.[a-z]{2,})",
+      "porque": "El canal de soporte se documenta como canal, no como el correo de una persona."
+    }
+  ],
+
+  "archivos": {
+    "_": "Reglas sobre qué archivos pueden estar en docs/, no sobre su contenido.",
+    "imagenes_solo_en": "docs/assets/",
+    "nombres_prohibidos": "(^|[-_.])(raw|original|sin-sanear|sinsanear|tmp|wip)([-_.]|$)",
+    "extensiones_prohibidas": [".sql", ".csv", ".tsv", ".xlsx", ".xls", ".parquet", ".sqlite", ".db", ".env", ".pem", ".key"]
+  },
+
+  "nombres": {
+    "_": [
+      "Nombres de cliente, guardados como hash. Para añadir uno:",
+      "  node tools/check-denylist.mjs --hash 'Nombre del cliente'",
+      "y pegar aquí la línea que imprime. Nunca el nombre en claro.",
+      "No se listan los nombres que además son palabras corrientes del español: darían",
+      "falsos positivos en cada página. Esos los cubre `tenant-slug` cuando aparecen como",
+      "identificador, y la revisión humana cuando aparecen como palabra."
+    ],
+    "algoritmo": "sha256 del texto normalizado (sin tildes, minúsculas, separadores colapsados a un espacio), 12 primeros hex",
+    "hashes": [
+      { "h": "94b4506930f2", "pista": "nombre de cliente" },
+      { "h": "de7e67a6126e", "pista": "nombre de cliente" },
+      { "h": "4b9a0cdefdcb", "pista": "nombre de cliente" },
+      { "h": "c9d1aa596b0a", "pista": "nombre de cliente" },
+      { "h": "1e72167e3a32", "pista": "nombre de cliente" },
+      { "h": "ed3353022606", "pista": "nombre de cliente" },
+      { "h": "5fbdca1924ce", "pista": "nombre de cliente" },
+      { "h": "74bcbdbfee56", "pista": "nombre de cliente" },
+      { "h": "592496e6f67e", "pista": "nombre de cliente" },
+      { "h": "023aace43b78", "pista": "nombre de cliente" },
+      { "h": "298f1a8481d4", "pista": "nombre de cliente" },
+      { "h": "6de0909395f5", "pista": "nombre de cliente" }
+    ]
+  }
+}

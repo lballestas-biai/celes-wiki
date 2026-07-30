@@ -22,6 +22,16 @@ Esta wiki es **pública y cliente-facing**. Antes de escribir, dos cosas:
 El historial de git es permanente: una captura sin sanear que entre al repo no se
 borra con un commit siguiente. `tools/screenshots/raw/` está en `.gitignore`.
 
+Las dos reglas son ejecutables: el contrato de frontmatter y la lista de no
+publicables se comprueban en cada PR. **Antes de escribir una página, leer
+[`CONTRIBUTING.md`](CONTRIBUTING.md)**, que es el contrato en prosa.
+
+```bash
+node tools/validate-frontmatter.mjs   # el contrato de cada página
+node tools/check-denylist.mjs         # lo que ninguna página puede decir
+node tools/check-denylist.mjs --list  # qué busca y por qué
+```
+
 ## Desarrollo local
 
 ```bash
@@ -141,8 +151,11 @@ Dos cosas que conviene saber antes de tocar nada:
 - una pantalla de la aplicación se quedó sin página,
 - hay un `.md` en `docs/` que no corresponde a ninguna pantalla,
 - un alias no termina en ninguna página,
-- una página del inventario falta del `nav`,
-- el frontmatter de una página miente sobre su ruta, su permiso o sus alias.
+- una página del inventario falta del `nav`.
+
+Responde **qué páginas deben existir**. Lo que cada página dice de sí misma —incluido
+si su `route`, su `permission` y sus `aliases` coinciden con el inventario— lo
+comprueba `validate-frontmatter`, que es quien tiene el contrato.
 
 CI audita contra la foto commiteada porque el monorepo es privado. Para comprobar
 además que esa foto sigue vigente, con un checkout a mano:
@@ -167,10 +180,26 @@ nunca pisa una página existente.
 
 ```
 mkdocs.yml            # configuración y nav (el bloque `nav` lo genera scaffold-pages)
+CONTRIBUTING.md       # el contrato de contenido, en prosa
 docs/                 # el contenido
   assets/stylesheets/ # tokens de marca y porte del layout del mock
 overrides/            # extensiones del theme (ver «El tema»)
-tools/                # inventario de pantallas y auditoría (Node puro, sin dependencias)
+tools/                # inventario, auditoría y guardas (Node puro, sin dependencias)
+  content-contract.json  # qué frontmatter exige cada tipo de página
+  denylist.json          # qué no puede aparecer en una wiki pública
   data/               # la foto commiteada del código de la aplicación
 requirements.txt      # versiones pinneadas
 ```
+
+## Las guardas de CI
+
+| Workflow | Job | Qué impide |
+|---|---|---|
+| `deploy.yml` | `build` | Publicar un enlace roto, una página fuera del `nav` o una fecha inventada |
+| `nav-audit.yml` | `nav-audit` | Que una pantalla de la aplicación se quede sin página |
+| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable |
+| `content-checks.yml` | `secrets` | Que entre una credencial al historial (gitleaks) |
+
+Las cuatro son *status checks* obligatorios de `main`. `secrets` usa
+`gitleaks-action`, gratuito en repositorios públicos de una cuenta personal: si este
+repositorio pasa a una organización, pedirá `GITLEAKS_LICENSE`.
