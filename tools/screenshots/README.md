@@ -17,11 +17,13 @@ node tools/screenshots/capture.mjs                     # todos los objetivos
 node tools/screenshots/capture.mjs --solo comprar      # los que coincidan
 node tools/screenshots/capture.mjs --sin-escribir      # audita y no escribe nada
 
-# la puerta humana, y lo que comprueba CI
-node tools/screenshots/approve.mjs --pendientes
-node tools/screenshots/approve.mjs --todas --por "Tu nombre"
+# lo que comprueba CI
 node tools/screenshots/check-screenshots.mjs
 node tools/screenshots/scrub.test.mjs
+
+# opcional: dejar anotado que alguien la miró
+node tools/screenshots/approve.mjs --pendientes
+node tools/screenshots/approve.mjs --todas --por "Tu nombre"
 ```
 
 ## Las piezas
@@ -35,8 +37,8 @@ node tools/screenshots/scrub.test.mjs
 | `dom.mjs` | Las reglas de región, la identidad y **la guarda**. Corre dentro de la página |
 | `capture.mjs` | La corrida: navegar, cortar la red, sanear, auditar, recortar, escribir |
 | `png.mjs` | El PNG que se commitea: sin metadatos y recomprimido |
-| `approve.mjs` | La revisión humana, anotada en `manifest.json` |
-| `check-screenshots.mjs` | Lo que CI exige: manifiesto, revisión, y el historial de git limpio |
+| `approve.mjs` | La revisión humana, anotada en `manifest.json`. Opcional desde #2816 |
+| `check-screenshots.mjs` | Lo que CI exige: manifiesto, archivo intacto y el historial de git limpio |
 | `scrub.test.mjs` | Las pruebas del mapa de valores (corren en CI, sin navegador) |
 
 `scrub.mjs` y `dom.mjs` se inyectan en la página como un script clásico —`capture.mjs` les
@@ -146,30 +148,42 @@ sin mirar su sufijo, así que el `1300 k` de un eje valía 1300 y el `3 M` de al
 2. `node tools/screenshots/capture.mjs --sin-escribir --solo <pedazo del nombre>`. Si la
    guarda protesta, es que esa pantalla trae una región o una especie de columna que
    `reglas.json` todavía no describe.
-3. Cuando salga limpia, capturar de verdad, **abrir el PNG y mirarlo**, y aprobar.
+3. Cuando salga limpia, capturar de verdad y **abrir el PNG y mirarlo**.
 
-El paso 2 se repite hasta que la guarda calle. Vale la pena mirar el PNG aunque la guarda
-esté contenta: en las cinco primeras pantallas, lo que la guarda no podía saber salió a la
+El paso 2 se repite hasta que la guarda calle. El paso 3 ya no lo exige CI, y aun así vale
+la pena: en las cinco primeras pantallas, lo que la guarda no podía saber salió a la
 vista mirando —un eje de porcentajes que decía 914 %, un botón «Generar Orden» convertido en
 «Dato De Ejemplo», dos centros distintos con el mismo nombre ficticio—. Ninguna de esas tres
 es una fuga; las tres eran capturas que documentaban una aplicación que no existe.
 
-## La revisión humana
+## La revisión humana ya no es obligatoria
 
-**Ninguna captura se publica sin que una persona la haya abierto y mirado.** No es
-burocracia: la guarda lee el DOM, y hay cosas que solo están en los píxeles —lo que la
-aplicación pinte dentro de un `canvas`, una marca de agua, un tooltip que quedó abierto—.
+Lo fue hasta el 2026-07-30. La quitó una decisión de Luis Ballestas, registrada en la
+épica #2781 e implementada en #2816: *«prefiero hacer esto de manera correctiva, las
+heurísticas y controles que tienes actualmente han funcionado muy bien»*. La wiki avanza
+al ritmo de las heurísticas y se corrige cuando algo salga mal.
 
-El registro es ejecutable, no una promesa:
+Conviene tener claro qué se ganó y qué se perdió con eso:
 
-1. `capture.mjs` escribe la entrada del manifiesto con `revision: null`.
-2. Quien revisa abre los PNG (`approve.mjs --pendientes` los lista) y aprueba con su
-   nombre. La aprobación guarda el `sha256` de **esa** imagen.
-3. `check-screenshots.mjs` —obligatorio en `main`— falla si un PNG no está en el
-   manifiesto, si no tiene revisión, o si cambió después de que alguien lo revisara.
+- **Sigue en pie todo lo preventivo**: el saneamiento del DOM antes del disparo, la guarda
+  que aborta, los botones de administrador que se quitan del DOM, y las comprobaciones de
+  ubicación, nombre e historial. Eso es ahora **el** control, no un complemento.
+- **Se perdió lo único que miraba los píxeles.** La guarda lee el DOM: lo que la
+  aplicación pinte dentro de un `canvas`, una marca de agua o un tooltip que quedó abierto
+  no lo ve nadie. Ahí es donde vive el riesgo aceptado.
+- **Y el historial de git es permanente.** Si un dato se escapa, no basta con volver a
+  capturar: hay que reescribir la historia. Corregir aquí es más caro que prevenir, y la
+  decisión se tomó sabiéndolo.
 
-Volver a capturar borra la aprobación anterior a propósito: se aprueba una imagen, no un
-nombre de archivo.
+`approve.mjs` se queda como herramienta opcional, y su firma se sigue respetando: guarda
+el `sha256` de **esa** imagen, y `check-screenshots.mjs` falla si el manifiesto conserva
+una firma que ya no corresponde al archivo publicado —el manifiesto no puede afirmar que
+alguien aprobó algo que no es lo que se ve—. Volver a capturar borra la firma anterior a
+propósito: se aprueba una imagen, no un nombre de archivo.
+
+**Mirar el PNG sigue siendo buena idea**, aunque ya no lo pida CI: las tres cosas que se
+encontraron mirando en las cinco primeras pantallas no eran fugas, eran capturas que
+documentaban una aplicación que no existe (ver «Añadir una pantalla»).
 
 ## El original nunca entra al repositorio
 
@@ -201,11 +215,12 @@ capturas son comparables sin publicar el salt.
 
 ## Lo que este pipeline **no** resuelve
 
-- **La cuenta de captura es de administrador.** Hoy se captura con la API key personal del
-  agente (`is_admin=true`), y eso cambia la interfaz: la pantalla trae botones «Ver SQL» y
-  «Copiar SQL» que un cliente no ve. Se quitan en `reglas.json`, pero quitar de la captura
-  lo que sobra es un parche: para esta épica basta una cuenta **de solo lectura**, pedida en
-  el issue #2811.
+- **La cuenta de captura es de administrador**, y va a seguir siéndolo: #2811 se cerró por
+  decisión el 2026-07-30 —*«no acotaré, me gusta que tengas acceso a todo, hará una mejor
+  documentación»*—. Eso cambia la interfaz: la pantalla trae botones «Ver SQL» y «Copiar
+  SQL» que un cliente no ve. Se quitan del DOM en `reglas.json`, y eso deja de ser un
+  parche temporal para ser **el** control: si aparece un botón nuevo de administrador,
+  hay que declararlo ahí.
 - **La forma de las curvas es real.** Los ejes se reescalan —las magnitudes no se publican—
   pero el dibujo de la serie sigue siendo el del tenant. Sin volúmenes ni nombres no
   identifica a nadie; queda anotado porque es una decisión, no un olvido.
@@ -216,12 +231,13 @@ capturas son comparables sin publicar el salt.
 - **Un eje se mira entero, una tabla no.** La comprobación del eje garantiza que ninguna
   gráfica salga desordenada o con etiquetas repetidas. No hay una comprobación equivalente
   que sume las columnas de una tabla y las compare con su fila de agregado: la linealidad lo
-  garantiza por construcción, pero si alguien añade una regla que rompa la linealidad, quien
-  lo va a notar es la revisión humana.
-- **Los píxeles no se leen.** Ver «La revisión humana».
+  garantiza por construcción, pero si alguien añade una regla que rompa la linealidad, nada
+  lo va a notar.
+- **Los píxeles no se leen, y desde #2816 ya nadie los mira por obligación.** Ver «La
+  revisión humana ya no es obligatoria».
 - **Un código corto se le puede escapar.** Quitando de `reglas.json` las tres formas de
   encontrar una celda, la guarda caza los cuatro nombres de centro de la pantalla de
   Comprar y no escribe nada —falla cerrado, se puede comprobar—, pero los códigos de tres
   dígitos de esa misma tabla no la despiertan: no tienen forma de magnitud ni de nombre. La
   guarda caza nombres y magnitudes; un identificador corto en una región que nadie declaró
-  depende de la revisión humana.
+  no lo caza nada.

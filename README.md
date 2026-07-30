@@ -181,12 +181,12 @@ nunca pisa una página existente.
 Cada página de pantalla lleva al menos una captura, y **ninguna captura contiene datos de
 ningún cliente**. No se difumina el PNG después: se cambia el dato en el DOM antes de
 disparar la cámara, con un catálogo ficticio determinista, y una guarda aborta la captura
-si queda algo con forma de dato. Después la mira una persona, y sin ese visto bueno CI no
-deja publicarla.
+si queda algo con forma de dato. Todo eso pasa **antes** del disparo, que es lo único que
+protege de verdad: ninguna máquina lee los píxeles de un PNG.
 
 ```bash
 node tools/screenshots/capture.mjs --solo comprar
-node tools/screenshots/approve.mjs --pendientes
+node tools/screenshots/check-screenshots.mjs
 ```
 
 El procedimiento completo —cómo se declara una pantalla nueva, qué hacer cuando la guarda
@@ -218,7 +218,7 @@ requirements.txt      # versiones pinneadas
 |---|---|---|
 | `deploy.yml` | `build` | Publicar un enlace roto, una página fuera del `nav` o una fecha inventada |
 | `nav-audit.yml` | `nav-audit` | Que una pantalla de la aplicación se quede sin página |
-| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable, y una captura sin revisión humana |
+| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable, y una captura que no salió del pipeline |
 | `content-checks.yml` | `secrets` | Que entre una credencial al historial (gitleaks) |
 
 Las cuatro son *status checks* obligatorios de `main`. `secrets` usa
