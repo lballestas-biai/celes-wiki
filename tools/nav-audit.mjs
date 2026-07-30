@@ -17,8 +17,11 @@
  *   3. página sin pantalla    todo .md de docs/ está en el inventario
  *   4. alias sin canónica     todo alias y toda sección terminan en una página real
  *   5. nav completo           toda página del inventario está en el nav de mkdocs.yml
- *   6. frontmatter            title/route/permission/aliases coinciden con el inventario
- *   7. deriva                 (solo con --against-repo) la foto commiteada sigue vigente
+ *   6. deriva                 (solo con --against-repo) la foto commiteada sigue vigente
+ *
+ * Esta herramienta responde **qué páginas deben existir**. Lo que cada página dice de
+ * sí misma —incluido si su `route`/`permission`/`aliases` coinciden con el inventario—
+ * lo comprueba `tools/validate-frontmatter.mjs`, que es quien tiene el contrato.
  */
 
 import { spawnSync } from 'node:child_process'
@@ -51,28 +54,12 @@ for (const script of ['build-inventory.mjs', 'scaffold-pages.mjs']) {
   }
 }
 
-// 2 y 6. Cada página del inventario existe y su frontmatter dice la verdad --
+// 2. Cada página del inventario existe -------------------------------------
 
 for (const page of inventory.pages) {
-  const file = path.join(DOCS, page.page)
-  if (!existsSync(file)) {
+  if (!existsSync(path.join(DOCS, page.page))) {
     const quien = page.route ? `la pantalla \`${page.route}\`` : 'una página transversal'
     report('pantalla sin página', `${quien} no tiene \`docs/${page.page}\`.`)
-    continue
-  }
-
-  const front = parseFrontmatter(readFileSync(file, 'utf8'))
-  if (!front) {
-    report('frontmatter', `docs/${page.page} no tiene frontmatter.`)
-    continue
-  }
-
-  expect(page, front, 'title', page.title)
-  expect(page, front, 'module', inventory.blocks[page.block])
-  if (page.route) {
-    expect(page, front, 'route', page.route)
-    expect(page, front, 'permission', page.permission.code ?? '~')
-    expect(page, front, 'aliases', `[${page.aliases.join(', ')}]`)
   }
 }
 
@@ -112,7 +99,7 @@ for (const page of inventory.pages) {
   }
 }
 
-// 7. Deriva contra el código vivo ------------------------------------------
+// 6. Deriva contra el código vivo ------------------------------------------
 
 if (againstRepo) {
   const { buildSnapshot } = await import('./lib/snapshot.mjs')
@@ -174,31 +161,6 @@ function indent(text) {
     .split('\n')
     .map((line) => `      ${line}`)
     .join('\n')
-}
-
-function expect(page, front, key, value) {
-  if (front[key] !== value) {
-    report(
-      'frontmatter',
-      `docs/${page.page}: \`${key}\` dice «${front[key] ?? '(nada)'}» y el inventario dice «${value}».`,
-    )
-  }
-}
-
-/**
- * Lee los escalares de una línea del frontmatter. No es un parser de YAML: solo mira
- * `clave: valor` en la primera columna, que es lo que el contrato pide comprobar.
- * El validador completo del contrato es 0.4.
- */
-function parseFrontmatter(source) {
-  const match = source.match(/^---\n([\s\S]*?)\n---\n/)
-  if (!match) return null
-  const fields = {}
-  for (const line of match[1].split('\n')) {
-    const field = line.match(/^([a-z_]+):\s*(.*)$/)
-    if (field) fields[field[1]] = field[2].trim()
-  }
-  return fields
 }
 
 function markdownFiles(dir, prefix = '') {
