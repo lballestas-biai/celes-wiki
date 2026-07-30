@@ -47,6 +47,9 @@ const PROPOSITO_MANIFIESTO = [
   'que ser la firma de la imagen que se publica hoy.',
   '`salt_id` identifica el salt con el que se saneó sin revelarlo: dos capturas con el',
   'mismo salt_id usan los mismos nombres ficticios y son comparables entre sí.',
+  '`reglas` y `catalogo` son el número de versión de esos dos archivos, y ese número no',
+  'se sube en cada edición: para saber con qué reglas exactas salió una captura, el',
+  'historial de git de reglas.json en la fecha de `tomada_en`.',
 ]
 
 const AMBIENTES = {

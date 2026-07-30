@@ -6,7 +6,10 @@
     "si cambió después de capturarse. `revision` es opcional desde #2816: si está, tiene",
     "que ser la firma de la imagen que se publica hoy.",
     "`salt_id` identifica el salt con el que se saneó sin revelarlo: dos capturas con el",
-    "mismo salt_id usan los mismos nombres ficticios y son comparables entre sí."
+    "mismo salt_id usan los mismos nombres ficticios y son comparables entre sí.",
+    "`reglas` y `catalogo` son el número de versión de esos dos archivos, y ese número no",
+    "se sube en cada edición: para saber con qué reglas exactas salió una captura, el",
+    "historial de git de reglas.json en la fecha de `tomada_en`."
   ],
   "capturas": [
     {
@@ -131,8 +134,8 @@
       "page": "reabastecimiento/distribucion-automatica.md",
       "ruta": "/work-area/automation/automatic-replenishment",
       "ambiente": "prd",
-      "sha256": "8c201476836014ca5b823f7c9f10fff6f013912d0729cd57a5b4c4fdff6d7d88",
-      "bytes": 228999,
+      "sha256": "5f94efe10b405f307022e828ed34325eeb33ef6867b83329922a82a0d3d3e4e8",
+      "bytes": 228038,
       "ancho": 1360,
       "alto": 900,
       "tomada_en": "2026-07-30",
