@@ -26,7 +26,6 @@
     "regiones que sanear y encuentra datos crudos. Falla cerrado, que es como tiene que",
     "fallar esto."
   ],
-
   "quitar": [
     {
       "sel": "#customer-assistant-button",
@@ -45,7 +44,6 @@
       "porque": "Un tooltip que quedó abierto del paso anterior sale en la captura y muestra el dato de una celda."
     }
   ],
-
   "regiones": [
     {
       "sel": ".MuiDataGrid-cell, [role='gridcell'], td",
@@ -79,7 +77,6 @@
       "que": "tooltip de las gráficas"
     }
   ],
-
   "interfaz": {
     "_": [
       "Dentro de una celda no todo es dato: la columna «Acciones» trae el botón «Generar",
@@ -92,7 +89,6 @@
     ],
     "sel": "button, a[href], [role='button'], [role='menuitem'], select, label"
   },
-
   "especies": {
     "_": [
       "De qué es la columna, para elegir la lista del catálogo. Se resuelve con **las dos**",
@@ -122,21 +118,59 @@
       "«Resultado» **no** está, y estuvo un rato: es texto **libre**, no un vocabulario. La",
       "columna «Resultado» de Distribución Automática trae el mensaje crudo del motor —«DBT",
       "data not ready», «All products…»—, en inglés y con términos que la wiki no publica.",
-      "Cerrado se conserva; libre se reemplaza. La prueba está en mirar el PNG."
+      "Cerrado se conserva; libre se reemplaza. La prueba está en mirar el PNG.",
+      "",
+      "«Flags Activas» (`flag_names`) es vocabulario cerrado, y lo dice el propio código: las",
+      "cuatro anomalías del forecast —Hockey Stick, Death Spiral, Missed Seasonal Lift y Missed",
+      "Seasonal Drop— son un conjunto fijo con su explicación en los locales. Sin esta entrada",
+      "la columna salía como «Dato De Ejemplo» y la captura contradecía a la página que explica",
+      "qué significa cada bandera. Es el mismo error que «Canal» y «Origen» en 1a.3."
     ],
     "orden": [
-      { "especie": "vocabulario", "patron": "(^|[\\s_])(status|engine|type|state)([\\s_]|$)|(^|\\s)(channel|origin)([\\s_]|$)|(^|\\s)(canal|origen)(\\s|$)|estado|motor|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query)|regla|par[aá]metro|consulta" },
-      { "especie": "usuario", "patron": "(^|[\\s_])(created_by|updated_by|user|owner|email|mail)([\\s_]|$)|creado por|actualizado por|modificado por|usuario|responsable|autor|correo" },
-      { "especie": "codigo", "patron": "(^|[\\s_])(code|codigo|id|sku|ean|barcode)([\\s_]|$)|c[oó]digo" },
-      { "especie": "cedi", "patron": "warehouse|bodega|cedi|distribution_?center|centro de distribuci|centro suministrador" },
-      { "especie": "tienda", "patron": "store|tienda|sucursal|local|punto de venta|nodo" },
-      { "especie": "proveedor", "patron": "supplier|vendor|proveedor|fabricante" },
-      { "especie": "categoria", "patron": "categor|department|departamento|linea|l[ií]nea|subclase|clase|jerarqu" },
-      { "especie": "marca", "patron": "brand|marca" },
-      { "especie": "producto", "patron": "product|producto|item|art[ií]culo|descripci[oó]n" }
+      {
+        "especie": "vocabulario",
+        "patron": "(^|[\\s_])(status|engine|type|state)([\\s_]|$)|(^|\\s)(channel|origin)([\\s_]|$)|(^|\\s)(canal|origen)(\\s|$)|estado|motor|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query|flags?)([\\s_]|$)|bandera|regla|par[aá]metro|consulta"
+      },
+      {
+        "especie": "usuario",
+        "patron": "(^|[\\s_])(created_by|updated_by|user|owner|email|mail)([\\s_]|$)|creado por|actualizado por|modificado por|usuario|responsable|autor|correo"
+      },
+      {
+        "especie": "codigo",
+        "patron": "(^|[\\s_])(code|codigo|id|sku|ean|barcode)([\\s_]|$)|c[oó]digo"
+      },
+      {
+        "especie": "cedi",
+        "patron": "warehouse|bodega|cedi|distribution_?center|centro de distribuci|centro suministrador"
+      },
+      {
+        "especie": "tienda",
+        "patron": "store|tienda|sucursal|local|punto de venta|nodo"
+      },
+      {
+        "especie": "proveedor",
+        "patron": "supplier|vendor|proveedor|fabricante"
+      },
+      {
+        "especie": "categoria",
+        "patron": "categor|department|departamento|linea|l[ií]nea|subclase|clase|jerarqu"
+      },
+      {
+        "especie": "marca",
+        "patron": "brand|marca"
+      },
+      {
+        "especie": "producto",
+        "patron": "product|producto|item|art[ií]culo|descripci[oó]n"
+      }
     ],
     "porDefecto": "generico",
-    "unicos": ["cedi", "tienda", "proveedor", "producto"],
+    "unicos": [
+      "cedi",
+      "tienda",
+      "proveedor",
+      "producto"
+    ],
     "__unicos": [
       "Especies en las que dos valores reales distintos no pueden salir con el mismo nombre",
       "ficticio: una tabla con dos filas «CD ABARROTES» y códigos distintos se lee como un",
@@ -144,7 +178,6 @@
       "correcto: muchos productos comparten categoría."
     ]
   },
-
   "numeros": {
     "_": [
       "El saneamiento no interpreta el número: cambia cada dígito por otro dejando los",
@@ -163,7 +196,6 @@
     "patron": "(?:[$€£]\\s*)?\\d[\\d.,\\u00a0\\u202f ]*\\d(?:\\s*(?:%|k|K|M|MM|mil|millones|Unidades))?|(?:[$€£]\\s*)\\d",
     "exige": "[.,]\\d|\\d[.,\\u00a0\\u202f]\\d{3}|\\d{4,}|[$€£]|\\d\\s*(?:%|k|K|M|MM|mil|millones)"
   },
-
   "magnitudes": {
     "_": [
       "Cómo se cambia una cifra. Antes se rehacían sus dígitos, y una captura así no cuadra:",
@@ -188,24 +220,43 @@
     "moneda": "[$€£]|(^|[\\s_])(usd|cop|eur|clp|pen|mxn)([\\s_]|$)",
     "porcentajes_propios": "mape|smape|(^|[\\s_(])s?mae([\\s_)]|$)|bias|accuracy|precisi[oó]n|exactitud|(^|[\\s_(])fva([\\s_)]|$)|desviaci[oó]n|error",
     "factores": {
-      "dinero": { "min": 0.35, "max": 2.75 },
-      "cantidad": { "min": 0.35, "max": 2.75 },
-      "porcentaje": { "min": 0.45, "max": 2.2 }
+      "dinero": {
+        "min": 0.35,
+        "max": 2.75
+      },
+      "cantidad": {
+        "min": 0.35,
+        "max": 2.75
+      },
+      "porcentaje": {
+        "min": 0.45,
+        "max": 2.2
+      }
     }
   },
-
   "fechas": {
     "_": [
       "Las fechas no se sanean: no identifican a nadie y una fecha falsa vuelve incoherente",
       "la pantalla (un rango que no cuadra con su gráfica).",
       "`anios` es la excepción que hay que declarar aparte: un año son cuatro dígitos y",
       "cuatro dígitos son «forma de dato», así que sin esta regla «16 de jul, 2026 - 30 de",
-      "jul, 2026» —que es un solo nodo, y no una fecha completa— sale con el año cambiado."
+      "jul, 2026» —que es un solo nodo, y no una fecha completa— sale con el año cambiado.",
+      "",
+      "`nunca_en_mayusculas` es la otra excepción, y va al revés: no todo lo que se parece a",
+      "una fecha lo es. El patrón acepta un mes suelto («jul», «julio») porque así vienen los",
+      "ticks de un eje agregado por mes, y con eso un escenario que alguien llamó «JULIO»",
+      "entraba por fecha y salía sin sanear. La discriminante es la caja: una fecha la escribe",
+      "la aplicación y nunca viene en mayúsculas sostenidas; un texto que el usuario tecleó, sí.",
+      "Lo cazó la guarda por su regla `mayusculas`, no el saneamiento.",
+      "El largo mínimo es el mismo de `guarda.mayusculas` (4) a propósito: así las dos reglas",
+      "dicen lo mismo y el saneamiento solo deja de conceder la excepción de fecha justo a lo",
+      "que la guarda iba a rechazar. Con 3 se habría llevado por delante un «JUL» o un «DIC»,",
+      "que sí son la abreviatura de un mes."
     ],
     "patron": "^(?:\\d{1,2}\\s+de\\s+[a-záéíóúñ.]{3,12},?\\s*(?:\\d{2,4})?|\\d{4}-\\d{2}-\\d{2}|\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}|(?:ene|feb|mar|abr|may|jun|jul|ago|sep|set|oct|nov|dic)[a-z.]*\\s*\\d{0,4}|(?:sem|semana|w)\\s*\\d{1,2}|(?:19|20)\\d{2})(?:,?\\s*(?:[T ])?\\d{1,2}:\\d{2}(?::\\d{2})?(?:\\s*[ap]\\.?\\s?m\\.?)?)?$|^\\d{1,2}:\\d{2}(?::\\d{2})?$",
-    "anios": "^(?:19|20)\\d{2}$"
+    "anios": "^(?:19|20)\\d{2}$",
+    "nunca_en_mayusculas": "^[^\\p{Ll}\\d]*\\p{Lu}{4,}[^\\p{Ll}\\d]*$"
   },
-
   "ejes": {
     "_": [
       "Los ejes numéricos de una gráfica no se pueden sanear tick por tick: cada uno saldría",
@@ -228,7 +279,6 @@
     "sel": ".MuiChartsAxis-root",
     "ticks": ".MuiChartsAxis-tickLabel"
   },
-
   "guarda": {
     "_": [
       "Lo que hace abortar la captura. La guarda no confía en que las reglas de arriba",
@@ -249,17 +299,79 @@
     ],
     "mayusculas": {
       "largo_minimo": 4,
-      "vocabulario_permitido": ["ACTIVO", "INACTIVO", "ACTIVA", "INACTIVA", "MANUAL", "AUTOMATICO", "AUTOMÁTICO"],
+      "vocabulario_permitido": [
+        "ACTIVO",
+        "INACTIVO",
+        "ACTIVA",
+        "INACTIVA",
+        "MANUAL",
+        "AUTOMATICO",
+        "AUTOMÁTICO"
+      ],
       "siglas_permitidas": [
-        "CEDI", "CEDIS", "SKU", "SKUS", "EAN", "OC", "ANS", "IVA", "KPI", "PDF", "CSV", "XLSX", "XLS",
-        "SQL", "API", "URL", "ERP", "POS", "SFTP", "FTP", "HTTP", "HTTPS", "MAE", "MAPE", "SMAPE", "BIAS", "FVA", "GMROI", "ABC",
-        "MIX", "DTC", "PS", "NA", "ND", "TOTAL", "CELES", "CELI", "MOQ", "LEAD", "TIME", "STOCK",
-        "FIFO", "CD", "CDS", "UND", "UNID", "KG", "GR", "ML", "LT", "PZA", "CAJA", "CTRL", "ENTER"
+        "CEDI",
+        "CEDIS",
+        "SKU",
+        "SKUS",
+        "EAN",
+        "OC",
+        "ANS",
+        "IVA",
+        "KPI",
+        "PDF",
+        "CSV",
+        "XLSX",
+        "XLS",
+        "SQL",
+        "API",
+        "URL",
+        "ERP",
+        "POS",
+        "SFTP",
+        "FTP",
+        "HTTP",
+        "HTTPS",
+        "MAE",
+        "MAPE",
+        "SMAPE",
+        "BIAS",
+        "FVA",
+        "GMROI",
+        "ABC",
+        "MIX",
+        "DTC",
+        "PS",
+        "NA",
+        "ND",
+        "TOTAL",
+        "CELES",
+        "CELI",
+        "MOQ",
+        "LEAD",
+        "TIME",
+        "STOCK",
+        "FIFO",
+        "CD",
+        "CDS",
+        "UND",
+        "UNID",
+        "KG",
+        "GR",
+        "ML",
+        "LT",
+        "PZA",
+        "CAJA",
+        "CTRL",
+        "ENTER"
       ]
     },
     "imagenes": {
       "_": "Un `img` de otro origen es, en la práctica, la foto de la cuenta que captura.",
-      "origenes_permitidos": ["app.celes.ai", "qas.app.celes.ai", "dev.app.celes.ai"]
+      "origenes_permitidos": [
+        "app.celes.ai",
+        "qas.app.celes.ai",
+        "dev.app.celes.ai"
+      ]
     }
   }
 }

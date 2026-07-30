@@ -25,11 +25,12 @@
     "Esta lista arranca con las cinco pantallas que cierran 1a.1. Cada bloque de contenido",
     "(1a.2 … 1a.9) añade las suyas."
   ],
-
-  "viewport": { "ancho": 1440, "alto": 900 },
+  "viewport": {
+    "ancho": 1440,
+    "alto": 900
+  },
   "reposo_ms": 2500,
   "recorte_por_defecto": "main",
-
   "objetivos": [
     {
       "page": "reabastecimiento/comprar.md",
@@ -56,7 +57,6 @@
       "espera": ".MuiDataGrid-row",
       "nota": "Una pantalla de configuración, no de datos: sirve para ver que el saneamiento no se come el vocabulario de la aplicación."
     },
-
     {
       "page": "reabastecimiento/creacion-de-orden-de-compra.md",
       "espera": ".MuiDataGrid-row",
@@ -102,6 +102,26 @@
       "page": "reabastecimiento/trazabilidad-de-entregas.md",
       "espera": ".MuiDataGrid-row",
       "nota": "1a.3. Un envío por fila, con estado y canal."
+    },
+    {
+      "page": "pronostico/alertas-de-forecast.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.4. Las alertas del forecast con sus tarjetas de error y el escenario sugerido semana a semana."
+    },
+    {
+      "page": "pronostico/escenarios.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.4. La lista de escenarios con su estado, su vigencia y quién los creó."
+    },
+    {
+      "page": "pronostico/demanda-y-promociones.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.4. El pronóstico día a día por producto, con el histórico al lado y el panel de promoción."
+    },
+    {
+      "page": "pronostico/calendario-de-eventos.md",
+      "espera": ".grid-cols-7",
+      "nota": "1a.4. El calendario mensual. Se espera la rejilla de la semana porque mientras carga se pinta un cargador en su lugar."
     }
   ]
 }
