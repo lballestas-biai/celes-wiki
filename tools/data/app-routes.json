@@ -1,0 +1,3300 @@
+{
+  "_": "Generado por tools/snapshot-app-routes.mjs. No editar a mano: regenerar y revisar el diff.",
+  "source": {
+    "repo": "celes-app/celes-platform",
+    "ref": "981f61942",
+    "ref_full": "981f619429de9ca1eb89e91175f2b6684159e042",
+    "ref_date": "2026-07-29",
+    "files": {
+      "apps/web-client/src/routeTree.gen.ts": "96031001bb6880cf",
+      "apps/web-client/public/locales/es/routes.json": "368731fea178e4a7",
+      "apps/web-client/public/locales/en/routes.json": "24db126b469dea3b",
+      "apps/web-client/src/components/Layout/NavMenu/navigationItems.ts": "65d5c58f291d1585",
+      "apps/web-client/src/providers/AuthProvider/checkModuleAccess.ts": "89809e9be543196c",
+      "apps/web-client/src/providers/AuthProvider/helpers.ts": "abbdf33e7635a878",
+      "apps/web-client/src/utils/routeMigrations.ts": "362d30858a049bf2"
+    }
+  },
+  "totals": {
+    "routes": 153,
+    "in_router": 141,
+    "labelled_only": 12,
+    "in_nav": 46,
+    "dynamic_or_form": 42
+  },
+  "migrations": [
+    {
+      "alias": "/reports-and-analytics/overall",
+      "canonical": "/reports-and-analytics/history",
+      "permissions": [
+        {
+          "new": "reports-and-analytics.history",
+          "legacy": [
+            "reports-and-analytics.overall"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/reports-and-analytics/forecast-analysis",
+      "canonical": "/planning/forecast-alerts",
+      "permissions": [
+        {
+          "new": "planning.forecast-alerts",
+          "legacy": [
+            "reports-and-analytics.forecast-analysis"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/reports-and-analytics/forecast",
+      "canonical": "/planning/forecast-summary",
+      "permissions": [
+        {
+          "new": "planning.forecast-summary",
+          "legacy": [
+            "reports-and-analytics.forecast"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/planning/promotional-campaigns",
+      "canonical": "/promotions/campaigns",
+      "permissions": [
+        {
+          "new": "promotions.campaigns",
+          "legacy": [
+            "planning.promotional-campaigns"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/planning/promotional-calendar",
+      "canonical": "/promotions/calendar",
+      "permissions": [
+        {
+          "new": "promotions.calendar",
+          "legacy": [
+            "planning.promotional-calendar"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/planning/trade-marketing-campaigns",
+      "canonical": "/assortment/trade-marketing",
+      "permissions": [
+        {
+          "new": "assortment.trade-marketing",
+          "legacy": [
+            "planning.trade-marketing-campaigns"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/administration/operation",
+      "canonical": "/work-area/automation",
+      "permissions": [
+        {
+          "new": "work-area.automation",
+          "legacy": [
+            "administration.operation.automatic-replenishment",
+            "administration.operation.automatic-procurement",
+            "administration.operation.pipeline-configuration",
+            "administration.operation.dispatches"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/planning/external-collaborators",
+      "canonical": "/administration/external-collaborators",
+      "permissions": [
+        {
+          "new": "administration.external-collaborators",
+          "legacy": [
+            "planning.external-collaborators"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/administration/data-manager",
+      "canonical": "/administration/master-data",
+      "permissions": [
+        {
+          "new": "administration.master-data.mapping",
+          "legacy": [
+            "administration.data-manager.mapping"
+          ]
+        },
+        {
+          "new": "administration.master-data.data-quality",
+          "legacy": [
+            "administration.data-manager.data-quality"
+          ]
+        }
+      ],
+      "unmigrated_nested": [
+        "data-upload"
+      ]
+    },
+    {
+      "alias": "/administration/configuration/business-rules",
+      "canonical": "/activation/business-rules",
+      "permissions": [
+        {
+          "new": "activation.business-rules",
+          "legacy": [
+            "administration.configuration.business-rules"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/administration/configuration/grouping-products",
+      "canonical": "/activation/grouping-products",
+      "permissions": [
+        {
+          "new": "activation.grouping-products",
+          "legacy": [
+            "administration.configuration.synthetic-products"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    },
+    {
+      "alias": "/administration/configuration/substitute-products",
+      "canonical": "/activation/substitute-products",
+      "permissions": [
+        {
+          "new": "activation.substitute-products",
+          "legacy": [
+            "administration.configuration.substitute-products"
+          ]
+        }
+      ],
+      "unmigrated_nested": []
+    }
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "label_es": "Inicio",
+      "label_en": "Home",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": null
+      },
+      "migration": null
+    },
+    {
+      "path": "/activation",
+      "label_es": "Activación",
+      "label_en": "Activation",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "activation",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/activation/business-rules",
+      "label_es": "Reglas de Negocio",
+      "label_en": "Business Rules",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/activation"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/business-rules"
+      }
+    },
+    {
+      "path": "/activation/business-rules/$id",
+      "label_es": "Detalle de Regla de Negocio",
+      "label_en": "Business Rule Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/business-rules/$id"
+      }
+    },
+    {
+      "path": "/activation/business-rules/create",
+      "label_es": "Crear Regla de Negocio",
+      "label_en": "Create Business Rule",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/business-rules/create"
+      }
+    },
+    {
+      "path": "/activation/grouping-products",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/activation"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/grouping-products"
+      }
+    },
+    {
+      "path": "/activation/grouping-products/$id",
+      "label_es": "Detalle de Producto de Agrupación",
+      "label_en": "Grouping Product Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/grouping-products/$id"
+      }
+    },
+    {
+      "path": "/activation/grouping-products/create",
+      "label_es": "Crear Producto de Agrupación",
+      "label_en": "Create Grouping Product",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/grouping-products/create"
+      }
+    },
+    {
+      "path": "/activation/substitute-products",
+      "label_es": "Sustitutos",
+      "label_en": "Substitutes",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/activation"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/substitute-products"
+      }
+    },
+    {
+      "path": "/activation/substitute-products/$id",
+      "label_es": "Detalle de Sustituto",
+      "label_en": "Substitute Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/substitute-products/$id"
+      }
+    },
+    {
+      "path": "/activation/substitute-products/create",
+      "label_es": "Crear Sustituto",
+      "label_en": "Create Substitute",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/configuration/substitute-products/create"
+      }
+    },
+    {
+      "path": "/administration",
+      "label_es": "Administración",
+      "label_en": "Administration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "administration",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/access-control",
+      "label_es": "Control de Acceso",
+      "label_en": "Access Control",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/access-control/data-permission",
+      "label_es": "Permiso de datos",
+      "label_en": "Data Permission",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.data-permission",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/access-control/roles-and-permissions",
+      "label_es": "Roles y Permisos",
+      "label_en": "Roles and Permissions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.roles-and-permissions",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/access-control/users",
+      "label_es": "Usuarios",
+      "label_en": "Users",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.users",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/access-control/users/$userId",
+      "label_es": "Detalle de Usuario",
+      "label_en": "User Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.access-control.users",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration",
+      "label_es": "Configuración General",
+      "label_en": "General Settings",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/app-filters",
+      "label_es": "Filtros",
+      "label_en": "Filters",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.app-filters",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/business-rules",
+      "label_es": "Reglas de Negocio",
+      "label_en": "Business Rules",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/business-rules"
+      }
+    },
+    {
+      "path": "/administration/configuration/business-rules/$id",
+      "label_es": "Detalle de Regla de Negocio",
+      "label_en": "Business Rule Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/business-rules/$id"
+      }
+    },
+    {
+      "path": "/administration/configuration/business-rules/create",
+      "label_es": "Crear Regla de Negocio",
+      "label_en": "Create Business Rule",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.business-rules",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.business-rules"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/business-rules/create"
+      }
+    },
+    {
+      "path": "/administration/configuration/column-groups",
+      "label_es": "Grupos de columnas",
+      "label_en": "Column Groups",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.column-groups",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/column-groups/$columnGroupId",
+      "label_es": "Detalle de grupo de columnas",
+      "label_en": "Detail Column Group",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.column-groups",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/config-columns",
+      "label_es": "Columnas",
+      "label_en": "Columns",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.config-columns",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/cubing-configurations",
+      "label_es": "Configuraciones de Cubicaje",
+      "label_en": "Cubing Configurations",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.cubing-configurations",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/data-allocation",
+      "label_es": "Asignación de Datos",
+      "label_en": "Data Allocation",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.data-allocation",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/environment-variables",
+      "label_es": "Variables de entorno",
+      "label_en": "Environment variables",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.environment-variables",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/general-parameters",
+      "label_es": "Parámetros Generales",
+      "label_en": "General Parameters",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.general-parameters",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/grouping-products",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/grouping-products"
+      }
+    },
+    {
+      "path": "/administration/configuration/grouping-products/$id",
+      "label_es": "Detalle de Producto de Agrupación",
+      "label_en": "Grouping Product Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/grouping-products/$id"
+      }
+    },
+    {
+      "path": "/administration/configuration/grouping-products/create",
+      "label_es": "Crear Producto de Agrupación",
+      "label_en": "Create Grouping Product",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.grouping-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.synthetic-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/grouping-products/create"
+      }
+    },
+    {
+      "path": "/administration/configuration/integration-engine",
+      "label_es": "Motor de Integración",
+      "label_en": "Integration Engine",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.integration-engine",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/other",
+      "label_es": "Otras configuraciones",
+      "label_en": "Other configurations",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.other",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/parameters-manager",
+      "label_es": "Configuración de Parámetros",
+      "label_en": "Parameters Manager",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.parameters-manager",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/query-builder",
+      "label_es": "Consultas",
+      "label_en": "Queries",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.query-builder",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/query-builder/$slug",
+      "label_es": "Detalle de consulta",
+      "label_en": "Query Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.query-builder",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/reference-products",
+      "label_es": "Productos de Referencia",
+      "label_en": "Reference Products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/reference-products/$id",
+      "label_es": "Detalle de Producto de Referencia",
+      "label_en": "Reference Product Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/reference-products/create",
+      "label_es": "Crear Producto de Referencia",
+      "label_en": "Create Reference Product",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.reference-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/substitute-products",
+      "label_es": "Productos Sustitutos",
+      "label_en": "Substitute Products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/substitute-products"
+      }
+    },
+    {
+      "path": "/administration/configuration/substitute-products/$id",
+      "label_es": "Detalle de Producto Sustituto",
+      "label_en": "Substitute Product Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/substitute-products/$id"
+      }
+    },
+    {
+      "path": "/administration/configuration/substitute-products/create",
+      "label_es": "Crear Producto Sustituto",
+      "label_en": "Create Substitute Product",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "activation.substitute-products",
+        "alternatives": [],
+        "legacy": [
+          "administration.configuration.substitute-products"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/activation/substitute-products/create"
+      }
+    },
+    {
+      "path": "/administration/configuration/synthetic-products",
+      "label_es": "Productos de Agrupación",
+      "label_en": "Grouping Products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.synthetic-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/synthetic-products/$id",
+      "label_es": "Detalle de Producto de Agrupación",
+      "label_en": "Grouping Product Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.synthetic-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/configuration/synthetic-products/create",
+      "label_es": "Crear Producto de Agrupación",
+      "label_en": "Create Grouping Product",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.configuration.synthetic-products",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/data-manager",
+      "label_es": "Gestión de Datos",
+      "label_en": "Data Management",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "alternatives": [
+          "administration.master-data.data-quality"
+        ],
+        "legacy": [
+          "administration.data-manager.mapping",
+          "administration.data-manager.data-quality",
+          "administration.data-manager.data-upload"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/administration/master-data"
+      }
+    },
+    {
+      "path": "/administration/data-manager/data-quality",
+      "label_es": "Calidad de Datos",
+      "label_en": "Data Quality",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.data-quality",
+        "legacy": [
+          "administration.data-manager.data-quality"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/administration/master-data/data-quality"
+      }
+    },
+    {
+      "path": "/administration/data-manager/data-upload",
+      "label_es": "Carga de Datos",
+      "label_en": "Data Upload",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.data-manager.data-upload",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/data-manager/data-upload/$folderKey/files",
+      "label_es": "Archivos de la Carpeta",
+      "label_en": "Folder Files",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.data-manager.data-upload",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/data-manager/mapping",
+      "label_es": "Homologación",
+      "label_en": "Mapping",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "legacy": [
+          "administration.data-manager.mapping"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/administration/master-data/mapping"
+      }
+    },
+    {
+      "path": "/administration/external-collaborators",
+      "label_es": "Colaboradores Externos",
+      "label_en": "External collaborators",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.external-collaborators",
+        "alternatives": [],
+        "legacy": [
+          "planning.external-collaborators"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/external-collaborators"
+      }
+    },
+    {
+      "path": "/administration/job-history",
+      "label_es": "Historial de Jobs",
+      "label_en": "Job History",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.job-history",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/master-data",
+      "label_es": "Datos Maestros",
+      "label_en": "Master Data",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "alternatives": [
+          "administration.master-data.data-quality"
+        ],
+        "legacy": [
+          "administration.data-manager.mapping",
+          "administration.data-manager.data-quality",
+          "administration.data-manager.data-upload"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/data-manager"
+      }
+    },
+    {
+      "path": "/administration/master-data/data-quality",
+      "label_es": "Calidad de Datos",
+      "label_en": "Data Quality",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.data-quality",
+        "legacy": [
+          "administration.data-manager.data-quality"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/data-manager/data-quality"
+      }
+    },
+    {
+      "path": "/administration/master-data/mapping",
+      "label_es": "Homologación",
+      "label_en": "Mapping",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.master-data.mapping",
+        "legacy": [
+          "administration.data-manager.mapping"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/data-manager/mapping"
+      }
+    },
+    {
+      "path": "/administration/operation",
+      "label_es": "Operación",
+      "label_en": "Operation",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "alternatives": [],
+        "legacy": [
+          "administration.operation.automatic-replenishment",
+          "administration.operation.automatic-procurement",
+          "administration.operation.pipeline-configuration",
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation"
+      }
+    },
+    {
+      "path": "/administration/operation/automatic-procurement",
+      "label_es": "Compra Automática",
+      "label_en": "Automatic Purchase Order",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/automatic-procurement"
+      }
+    },
+    {
+      "path": "/administration/operation/automatic-procurement/$id",
+      "label_es": "Compra Automática - Detalles",
+      "label_en": "Automatic Purchase Order - Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/automatic-procurement/$id"
+      }
+    },
+    {
+      "path": "/administration/operation/automatic-procurement/create",
+      "label_es": "Crear compra automática",
+      "label_en": "Create Automatic Purchase Order",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/automatic-procurement/create"
+      }
+    },
+    {
+      "path": "/administration/operation/automatic-replenishment",
+      "label_es": "Distribución Automática",
+      "label_en": "Automatic Replenishment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/automatic-replenishment"
+      }
+    },
+    {
+      "path": "/administration/operation/automatic-replenishment/$id",
+      "label_es": "Distribución Automática - Detalles",
+      "label_en": "Automatic Replenishment - Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/automatic-replenishment/$id"
+      }
+    },
+    {
+      "path": "/administration/operation/automatic-replenishment/create",
+      "label_es": "Crear distribución automática",
+      "label_en": "Create Automatic Replenishment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/automatic-replenishment/create"
+      }
+    },
+    {
+      "path": "/administration/operation/dispatches",
+      "label_es": "Trazabilidad de entregas",
+      "label_en": "Delivery traceability",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/dispatches"
+      }
+    },
+    {
+      "path": "/administration/operation/pipeline-configuration",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/pipeline-configuration"
+      }
+    },
+    {
+      "path": "/administration/operation/pipeline-configuration/$id",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/pipeline-configuration/$id"
+      }
+    },
+    {
+      "path": "/administration/operation/pipeline-configuration/create",
+      "label_es": "Crear Configuración de Pipeline",
+      "label_en": "Create Pipeline Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/work-area/automation/pipeline-configuration/create"
+      }
+    },
+    {
+      "path": "/administration/sla-dashboard",
+      "label_es": "Dashboard ANS",
+      "label_en": "SLA Dashboard",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/sla-dashboard/configuration",
+      "label_es": "Configuración",
+      "label_en": "Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard.configuration",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/sla-dashboard/dashboard",
+      "label_es": "Dashboard",
+      "label_en": "Dashboard",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.sla-dashboard.dashboard",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/administration/users-logs",
+      "label_es": "Logs de Usuarios",
+      "label_en": "Users Logs",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/administration"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "administration-prefix",
+        "code": "administration.users-logs",
+        "note": "en Administración un permiso abre la ruta si los segmentos de uno son prefijo de los del otro, en cualquier dirección"
+      },
+      "migration": null
+    },
+    {
+      "path": "/assortment",
+      "label_es": "Surtido",
+      "label_en": "Assortment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "assortment",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/assortment/trade-marketing",
+      "label_es": "Trade Marketing",
+      "label_en": "Trade Marketing",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/assortment"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/trade-marketing-campaigns"
+      }
+    },
+    {
+      "path": "/assortment/trade-marketing/exhibitions-promotions",
+      "label_es": "Promociones de Exhibición",
+      "label_en": "Exhibition Promotions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/trade-marketing-campaigns/exhibitions-promotions"
+      }
+    },
+    {
+      "path": "/dashboard",
+      "label_es": "Inicio",
+      "label_en": "Dashboard",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "dashboard",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/login",
+      "label_es": "Inicio de sesión",
+      "label_en": "Login",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "login",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/logout",
+      "label_es": "Cierre de sesión",
+      "label_en": "Logout",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "logout",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning",
+      "label_es": "Pronóstico",
+      "label_en": "Forecast",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "planning",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/demand-and-promotions",
+      "label_es": "Demanda y Promociones",
+      "label_en": "Demand and Promotions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.demand-and-promotions"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/demand-and-promotions/details",
+      "label_es": "Demanda y Promociones",
+      "label_en": "Demand and Promotions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.demand-and-promotions"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/events-calendar",
+      "label_es": "Calendario de Eventos",
+      "label_en": "Events Calendar",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.events-calendar"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/external-collaborators",
+      "label_es": "Colaboradores externos",
+      "label_en": "External collaborators",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "administration.external-collaborators",
+        "alternatives": [],
+        "legacy": [
+          "planning.external-collaborators"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/administration/external-collaborators"
+      }
+    },
+    {
+      "path": "/planning/forecast-alerts",
+      "label_es": "Alertas de Forecast",
+      "label_en": "Forecast Alerts",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-alerts",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast-analysis"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/reports-and-analytics/forecast-analysis"
+      }
+    },
+    {
+      "path": "/planning/forecast-summary",
+      "label_es": "Resumen",
+      "label_en": "Summary",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-summary",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/reports-and-analytics/forecast"
+      }
+    },
+    {
+      "path": "/planning/procurement-calendar",
+      "label_es": "Calendario de Compras",
+      "label_en": "Procurement Calendar",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.procurement-calendar"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/promotional-calendar",
+      "label_es": "Calendario de Promociones",
+      "label_en": "Promotional Calendar",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.calendar",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-calendar"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/promotions/calendar"
+      }
+    },
+    {
+      "path": "/planning/promotional-campaigns",
+      "label_es": "Campañas Promocionales",
+      "label_en": "Promotional Campaigns",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/promotions/campaigns"
+      }
+    },
+    {
+      "path": "/planning/promotional-campaigns/$campaignId",
+      "label_es": "Campaña Promocional",
+      "label_en": "Campaign",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/promotions/campaigns/$campaignId"
+      }
+    },
+    {
+      "path": "/planning/promotional-campaigns/$campaignId/promotion/$promotionId",
+      "label_es": "Promoción",
+      "label_en": "Promotion Campaign",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/promotions/campaigns/$campaignId/promotion/$promotionId"
+      }
+    },
+    {
+      "path": "/planning/promotional-campaigns/$campaignId/promotion/$promotionId/details",
+      "label_es": "Detalle de Promoción",
+      "label_en": "Promotion Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/promotions/campaigns/$campaignId/promotion/$promotionId/details"
+      }
+    },
+    {
+      "path": "/planning/scenarios",
+      "label_es": "Escenarios",
+      "label_en": "Scenarios",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/scenarios/$scenarioId",
+      "label_es": "Escenario",
+      "label_en": "Scenario",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/scenarios/create",
+      "label_es": "Crear escenario",
+      "label_en": "Create Scenario",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "exact",
+        "code": "planning.scenarios"
+      },
+      "migration": null
+    },
+    {
+      "path": "/planning/trade-marketing-campaigns",
+      "label_es": "Campañas de Marketing Comercial",
+      "label_en": "Trade Marketing Campaigns",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/planning"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/assortment/trade-marketing"
+      }
+    },
+    {
+      "path": "/planning/trade-marketing-campaigns/exhibitions-promotions",
+      "label_es": "Promociones de Exhibición",
+      "label_en": "Exhibition Promotions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "assortment.trade-marketing",
+        "alternatives": [],
+        "legacy": [
+          "planning.trade-marketing-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/assortment/trade-marketing/exhibitions-promotions"
+      }
+    },
+    {
+      "path": "/product-detail",
+      "label_es": "Detalle de Producto",
+      "label_en": "Product Detail",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "product-detail",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/promotions",
+      "label_es": "Promociones",
+      "label_en": "Promotions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "promotions",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/promotions/calendar",
+      "label_es": "Calendario de Promociones",
+      "label_en": "Promotional Calendar",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/promotions"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.calendar",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-calendar"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/promotional-calendar"
+      }
+    },
+    {
+      "path": "/promotions/campaigns",
+      "label_es": "Campañas",
+      "label_en": "Campaigns",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/promotions"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/promotional-campaigns"
+      }
+    },
+    {
+      "path": "/promotions/campaigns/$campaignId",
+      "label_es": "Campaña Promocional",
+      "label_en": "Campaign",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/promotional-campaigns/$campaignId"
+      }
+    },
+    {
+      "path": "/promotions/campaigns/$campaignId/promotion/$promotionId",
+      "label_es": "Promoción",
+      "label_en": "Promotion Campaign",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/promotional-campaigns/$campaignId/promotion/$promotionId"
+      }
+    },
+    {
+      "path": "/promotions/campaigns/$campaignId/promotion/$promotionId/details",
+      "label_es": "Detalle de Promoción",
+      "label_en": "Promotion Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "promotions.campaigns",
+        "alternatives": [],
+        "legacy": [
+          "planning.promotional-campaigns"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/planning/promotional-campaigns/$campaignId/promotion/$promotionId/details"
+      }
+    },
+    {
+      "path": "/reports-and-analytics",
+      "label_es": "Reportes",
+      "label_en": "Reports",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "reports-and-analytics",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/adherence",
+      "label_es": "Adherencia",
+      "label_en": "Adherence",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/adherence/orders",
+      "label_es": "Adherencia a Órdenes",
+      "label_en": "Adherence to Orders",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/adherence/procurement",
+      "label_es": "Adherencia a Compras",
+      "label_en": "Adherence to Procurement",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/adherence/replenishment",
+      "label_es": "Adherencia a Distribución",
+      "label_en": "Adherence to Replenishment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.adherence"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/commercial-performance",
+      "label_es": "Desempeño Comercial",
+      "label_en": "Commercial Performance",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.commercial-performance"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/forecast",
+      "label_es": "Forecast",
+      "label_en": "Forecast Performance",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-summary",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/planning/forecast-summary"
+      }
+    },
+    {
+      "path": "/reports-and-analytics/forecast-analysis",
+      "label_es": "Alertas del Forecast",
+      "label_en": "Forecast Alerts",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "planning.forecast-alerts",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.forecast-analysis"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/planning/forecast-alerts"
+      }
+    },
+    {
+      "path": "/reports-and-analytics/history",
+      "label_es": "Histórico",
+      "label_en": "History",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "reports-and-analytics.history",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.overall"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/reports-and-analytics/overall"
+      }
+    },
+    {
+      "path": "/reports-and-analytics/inventory-balancing",
+      "label_es": "Balanceo de Inventario",
+      "label_en": "Inventory Balancing",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.inventory-balancing"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/inventory-balancing/details",
+      "label_es": "Balanceo de Inventario - Detalles",
+      "label_en": "Inventory Balancing - Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.inventory-balancing"
+      },
+      "migration": null
+    },
+    {
+      "path": "/reports-and-analytics/overall",
+      "label_es": "Desempeño General",
+      "label_en": "Overall Performance",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "reports-and-analytics.history",
+        "alternatives": [],
+        "legacy": [
+          "reports-and-analytics.overall"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "alias",
+        "counterpart": "/reports-and-analytics/history"
+      }
+    },
+    {
+      "path": "/reports-and-analytics/replenishment-report",
+      "label_es": "Distribuciones Estimadas",
+      "label_en": "Estimated Distributions",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/reports-and-analytics"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "reports-and-analytics.replenishment-report"
+      },
+      "migration": null
+    },
+    {
+      "path": "/settings/lang",
+      "label_es": "Settings (language)",
+      "label_en": "Settings (language)",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "settings.lang"
+      },
+      "migration": null
+    },
+    {
+      "path": "/settings/parameters",
+      "label_es": "Settings - Parameters",
+      "label_en": "Settings - Parameters",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "migration": null
+    },
+    {
+      "path": "/settings/parameters/exhibitions",
+      "label_es": "Settings - Parameters - Exhibitions",
+      "label_en": "Settings - Parameters - Exhibitions",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "migration": null
+    },
+    {
+      "path": "/settings/parameters/general",
+      "label_es": "Settings - Parameters - General",
+      "label_en": "Settings - Parameters - General",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "migration": null
+    },
+    {
+      "path": "/settings/parameters/lead-time",
+      "label_es": "Settings - Parameters - Leadtime",
+      "label_en": "Settings - Parameters - Leadtime",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "migration": null
+    },
+    {
+      "path": "/settings/parameters/perishables",
+      "label_es": "Settings - Parameters - Perishables",
+      "label_en": "Settings - Parameters - Perishables",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "settings.parameters"
+      },
+      "migration": null
+    },
+    {
+      "path": "/support",
+      "label_es": "Soporte",
+      "label_en": "Support",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "support",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/support/tickets",
+      "label_es": "Tickets de Soporte",
+      "label_en": "Support Tickets",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "support.tickets"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area",
+      "label_es": "Reabastecimiento",
+      "label_en": "Replenishment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "module",
+        "code": "work-area",
+        "note": "basta cualquier permiso activo del módulo"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/automation",
+      "label_es": "Automatización & Operación",
+      "label_en": "Automation & Operation",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/work-area"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "alternatives": [],
+        "legacy": [
+          "administration.operation.automatic-replenishment",
+          "administration.operation.automatic-procurement",
+          "administration.operation.pipeline-configuration",
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation"
+      }
+    },
+    {
+      "path": "/work-area/automation/automatic-procurement",
+      "label_es": "Compra Automática",
+      "label_en": "Automatic Purchase Order",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/automatic-procurement"
+      }
+    },
+    {
+      "path": "/work-area/automation/automatic-procurement/$id",
+      "label_es": "Compra Automática - Detalles",
+      "label_en": "Automatic Purchase Order - Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/automatic-procurement/$id"
+      }
+    },
+    {
+      "path": "/work-area/automation/automatic-procurement/create",
+      "label_es": "Crear compra automática",
+      "label_en": "Create Automatic Purchase Order",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-procurement"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/automatic-procurement/create"
+      }
+    },
+    {
+      "path": "/work-area/automation/automatic-replenishment",
+      "label_es": "Distribución Automática",
+      "label_en": "Automatic Replenishment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/automatic-replenishment"
+      }
+    },
+    {
+      "path": "/work-area/automation/automatic-replenishment/$id",
+      "label_es": "Distribución Automática - Detalles",
+      "label_en": "Automatic Replenishment - Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/automatic-replenishment/$id"
+      }
+    },
+    {
+      "path": "/work-area/automation/automatic-replenishment/create",
+      "label_es": "Crear distribución automática",
+      "label_en": "Create Automatic Replenishment",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.automatic-replenishment"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/automatic-replenishment/create"
+      }
+    },
+    {
+      "path": "/work-area/automation/dispatches",
+      "label_es": "Trazabilidad de entregas",
+      "label_en": "Delivery traceability",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.dispatches"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/dispatches"
+      }
+    },
+    {
+      "path": "/work-area/automation/pipeline-configuration",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/pipeline-configuration"
+      }
+    },
+    {
+      "path": "/work-area/automation/pipeline-configuration/$id",
+      "label_es": "Configuración de Pipeline",
+      "label_en": "Pipeline Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/pipeline-configuration/$id"
+      }
+    },
+    {
+      "path": "/work-area/automation/pipeline-configuration/create",
+      "label_es": "Crear Configuración de Pipeline",
+      "label_en": "Create Pipeline Configuration",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": true,
+      "permission": {
+        "kind": "migrated",
+        "code": "work-area.automation",
+        "legacy": [
+          "administration.operation.pipeline-configuration"
+        ],
+        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+      },
+      "migration": {
+        "role": "canonical",
+        "counterpart": "/administration/operation/pipeline-configuration/create"
+      }
+    },
+    {
+      "path": "/work-area/inventory-balancing",
+      "label_es": "Balanceo de Inventario",
+      "label_en": "Inventory Balancing",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.inventory-balancing"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/inventory-balancing/details",
+      "label_es": "Balanceo de Inventario - Detalles",
+      "label_en": "Inventory Balancing - Details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.inventory-balancing"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/price-definition",
+      "label_es": "Definición de Precios",
+      "label_en": "Price Definition",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.price-definition"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement",
+      "label_es": "Comprar",
+      "label_en": "Buy",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/work-area"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement-calendar",
+      "label_es": "Calendario de OC",
+      "label_en": "PO Calendar",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/work-area"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "unrestricted",
+        "code": null,
+        "note": "checkModuleAccess la deja pasar antes de mirar permisos: la ve cualquier usuario autenticado"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement-calendar/order",
+      "label_es": "Creación de Órden de Compra",
+      "label_en": "Procurement order",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "unrestricted",
+        "code": null,
+        "note": "checkModuleAccess la deja pasar antes de mirar permisos: la ve cualquier usuario autenticado"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement/calendar",
+      "label_es": "Calendario de Órdenes de Compra",
+      "label_en": "Procurement calendar",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement/order",
+      "label_es": "Creación de Orden de Compra",
+      "label_en": "Procurement order",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement/order-history",
+      "label_es": "Historial de Órdenes de Compra",
+      "label_en": "Procurement orders sent",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/procurement/order-history/products/$orderId",
+      "label_es": "Productos de la orden de compra",
+      "label_en": "Procurement order products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.procurement"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/product-dashboard",
+      "label_es": "Detalle de Producto",
+      "label_en": "Product details",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.product-dashboard"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/replenishment",
+      "label_es": "Distribuir",
+      "label_en": "Distribute",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/work-area"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/replenishment-suggestions",
+      "label_es": "Solicitudes de Tiendas",
+      "label_en": "Store Requests",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": true,
+      "nav_parents": [
+        "/work-area"
+      ],
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment-suggestions"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/replenishment/order",
+      "label_es": "Solicitud de Distribución",
+      "label_en": "Replenishment request",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/replenishment/order-history",
+      "label_es": "Historial de Órdenes de Distribución",
+      "label_en": "Replenishment requests sent",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/replenishment/order-history/products/$orderId",
+      "label_es": "Productos de la orden de distribución",
+      "label_en": "Replenishment order products",
+      "in_router": true,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": true,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/replenishment/suggestions",
+      "label_es": "Distribución Sugerida",
+      "label_en": "Suggested Replenishment",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.replenishment"
+      },
+      "migration": null
+    },
+    {
+      "path": "/work-area/surplurs-management",
+      "label_es": "Gestión de Excedentes",
+      "label_en": "Surplurs Management",
+      "in_router": false,
+      "in_routes_json": true,
+      "in_nav": false,
+      "nav_parents": null,
+      "dynamic": false,
+      "form": false,
+      "permission": {
+        "kind": "exact",
+        "code": "work-area.surplurs-management"
+      },
+      "migration": null
+    }
+  ]
+}

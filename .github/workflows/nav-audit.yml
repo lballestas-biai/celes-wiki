@@ -1,0 +1,34 @@
+name: Auditar el inventario de pantallas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: nav-audit-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  nav-audit:
+    name: nav-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Auditar
+        # Sin dependencias a propósito: las herramientas son Node puro, así que esto
+        # corre sin `npm install`. La auditoría va contra la foto commiteada del código
+        # de la aplicación (tools/data/app-routes.json): el monorepo es privado y CI no
+        # lo puede clonar. Quien regenera la foto es una persona, con `--repo`, y el
+        # diff se revisa en el PR.
+        run: node tools/nav-audit.mjs
