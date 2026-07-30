@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "_": [
+    "Qué pantallas se capturan y cómo se sabe que acabaron de cargar.",
+    "",
+    "`page` es la clave del inventario (tools/inventory.json): de ahí sale la ruta que se",
+    "visita y el nombre del PNG, así que no se repite ninguna de las dos cosas aquí. Si el",
+    "inventario cambia el destino de una pantalla, la captura la sigue.",
+    "",
+    "`espera` es el selector que solo existe cuando la pantalla ya tiene datos. Es",
+    "obligatorio: sin él la captura sale con el esqueleto de carga y nadie se da cuenta",
+    "hasta que la página está publicada. Si no aparece, la captura falla — mejor eso que un",
+    "PNG de una pantalla vacía.",
+    "",
+    "`recorte` es opcional: el selector de la región que se fotografía. Por defecto es",
+    "`main`, que deja fuera la barra lateral —vacía de contenido y distinta según los",
+    "permisos de quien mire—. Una pantalla que quiera salir con el menú puede pedir `body`.",
+    "",
+    "Esta lista arranca con las cinco pantallas que cierran 1a.1. Cada bloque de contenido",
+    "(1a.2 … 1a.9) añade las suyas."
+  ],
+
+  "viewport": { "ancho": 1440, "alto": 900 },
+  "reposo_ms": 2500,
+  "recorte_por_defecto": "main",
+
+  "objetivos": [
+    {
+      "page": "reabastecimiento/comprar.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "La lista agregada por centro de distribución, que es lo primero que ve quien entra a comprar."
+    },
+    {
+      "page": "reabastecimiento/distribuir.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "El equivalente de distribución: misma pantalla, otras columnas."
+    },
+    {
+      "page": "reportes/historico.md",
+      "espera": ".MuiChartsSurface-root",
+      "nota": "Indicadores, gráfica y tabla en la misma pantalla: es la que ejercita todas las reglas de saneamiento."
+    },
+    {
+      "page": "pronostico/resumen.md",
+      "espera": ".MuiChartsSurface-root",
+      "nota": "Forecast contra ventas, con las métricas de error."
+    },
+    {
+      "page": "activacion/reglas-de-negocio.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "Una pantalla de configuración, no de datos: sirve para ver que el saneamiento no se come el vocabulario de la aplicación."
+    }
+  ]
+}

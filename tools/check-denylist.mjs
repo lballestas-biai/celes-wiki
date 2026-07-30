@@ -20,27 +20,15 @@
  * El motivo es obligatorio: una excepción sin motivo es una regla apagada a escondidas.
  */
 
-import { createHash } from 'node:crypto'
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readFrontmatter } from './lib/frontmatter.mjs'
+import { buscarNombres, hashOf, redact } from './lib/nombres.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const argv = process.argv.slice(2)
 const denylist = JSON.parse(readFileSync(path.join(ROOT, 'tools/denylist.json'), 'utf8'))
-
-/** Con tildes fuera, en minúsculas y con los separadores colapsados. */
-function normalize(text) {
-  return text
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim()
-}
-
-const hashOf = (text) => createHash('sha256').update(normalize(text)).digest('hex').slice(0, 12)
 
 // --- modos de ayuda -------------------------------------------------------
 
@@ -147,33 +135,21 @@ function scan(regex, source, lines, onMatch) {
 }
 
 /**
- * Nombres de cliente: se comparan hashes de los n-gramas de 1 a 3 palabras, porque el
- * literal no puede estar en un repositorio público (ver el encabezado de denylist.json).
+ * Nombres de cliente. La comparación vive en `lib/nombres.mjs` porque el pipeline de
+ * capturas hace la misma pregunta sobre el texto de una pantalla.
  */
 function scanNames(file, lines) {
   if (!nameHashes.size) return
   lines.forEach((text, index) => {
     const line = index + 1
     if (allowed(lines, line, line, 'nombre-de-cliente')) return
-
-    const words = normalize(text).split(' ').filter(Boolean)
-    let claimed = 0 // hasta qué palabra llega el último nombre ya reportado
-    for (let i = 0; i < words.length; i += 1) {
-      // De más largo a más corto: «Grupo X» y «X» son la misma fuga, no dos.
-      for (let n = Math.min(3, words.length - i); n >= 1; n -= 1) {
-        if (i < claimed) break
-        const gram = words.slice(i, i + n).join(' ')
-        const pista = nameHashes.get(hashOf(gram))
-        if (!pista) continue
-        claimed = i + n
-        report(
-          { id: 'nombre-de-cliente', que: pista, porque: 'La wiki es pública: no nombra a ningún cliente.' },
-          file,
-          line,
-          redact(gram),
-        )
-        break
-      }
+    for (const { gram, pista } of buscarNombres(text, nameHashes)) {
+      report(
+        { id: 'nombre-de-cliente', que: pista, porque: 'La wiki es pública: no nombra a ningún cliente.' },
+        file,
+        line,
+        redact(gram),
+      )
     }
   })
 }
@@ -222,11 +198,6 @@ function allowed(lines, start, end, id) {
     if (pragma && pragma[1] === id && pragma[2].trim().length >= 10) return true
   }
   return false
-}
-
-function redact(text) {
-  if (text.length <= 4) return `${text[0]}${'·'.repeat(text.length - 1)}`
-  return `${text.slice(0, 2)}${'·'.repeat(Math.min(text.length - 3, 12))}${text.slice(-1)}`
 }
 
 function collapse(text) {

@@ -1,0 +1,23 @@
+# Que el código se pueda revisar, siempre.
+#
+# `scrub.mjs` llevaba un byte nulo —el separador entre el salt y el texto, escrito en crudo—
+# y con eso git lo consideraba binario: el archivo central del pipeline de capturas no
+# mostraba su diff en ningún PR, en un repositorio cuya garantía es que una persona mire.
+# El byte ya está escrito como escape, y esto lo deja dicho por si vuelve a colarse.
+*.mjs   text diff
+*.mts   text diff
+*.js    text diff
+*.json  text diff
+*.md    text diff
+*.py    text diff
+*.yml   text diff
+*.yaml  text diff
+*.css   text diff
+*.html  text diff
+
+# Los binarios de verdad: que git no intente diffearlos ni normalizar sus finales de línea.
+*.png   binary
+*.jpg   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary

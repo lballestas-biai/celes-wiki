@@ -20,19 +20,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # check-screenshots barre el historial completo buscando imágenes fuera de
+          # docs/assets/screenshots/: un original commiteado no se borra con el commit
+          # siguiente, así que la comprobación tiene que poder mirar el pasado.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      # Los dos corren siempre, aunque el primero falle: quien abre el PR merece ver
-      # todo lo que tiene que arreglar de una vez, no de uno en uno.
+      # Todos corren siempre, aunque uno falle: quien abre el PR merece ver todo lo que
+      # tiene que arreglar de una vez, no de uno en uno.
       - name: Contrato de contenido
         run: node tools/validate-frontmatter.mjs
 
       - name: Contenido no publicable
         if: ${{ !cancelled() }}
         run: node tools/check-denylist.mjs
+
+      - name: Saneamiento de capturas
+        if: ${{ !cancelled() }}
+        run: node tools/screenshots/scrub.test.mjs
+
+      - name: Capturas revisadas
+        if: ${{ !cancelled() }}
+        run: node tools/screenshots/check-screenshots.mjs
 
   secrets:
     name: secrets

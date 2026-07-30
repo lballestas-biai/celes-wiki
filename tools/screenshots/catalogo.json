@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "_": [
+    "El catálogo ficticio con el que se reemplazan los datos del cliente antes de capturar.",
+    "Nada de aquí existe: ni las tiendas, ni los proveedores, ni los productos, ni las",
+    "personas. Son nombres inventados con la forma de los reales para que la captura",
+    "siga pareciéndose a la pantalla que documenta.",
+    "",
+    "Dos reglas al añadir entradas:",
+    "  · Que no se parezca a ningún cliente ni a ninguna cadena real. `scrub.test.mjs`",
+    "    comprueba que ninguna entrada coincida con la lista de nombres de tools/denylist.json,",
+    "    pero eso solo atrapa lo que ya sabemos nombrar.",
+    "  · Que respete la forma del dato que sustituye — mayúsculas sostenidas donde la",
+    "    aplicación las usa, largo parecido. Un nombre mucho más corto o más largo mueve",
+    "    la columna y la captura deja de parecerse a la pantalla.",
+    "",
+    "Las listas no se reordenan a la ligera: el índice se deriva del valor real, así que",
+    "reordenar cambia todas las capturas ya tomadas (no las hace inseguras, solo distintas)."
+  ],
+
+  "tienda": [
+    "TIENDA VALLE ALTO",
+    "TIENDA PUERTO CLARO",
+    "TIENDA LOMA VERDE",
+    "TIENDA CAMPO REAL",
+    "TIENDA SIERRA NUEVA",
+    "MINIMARKET RIO AZUL",
+    "MINIMARKET PLAZA NORTE",
+    "MINIMARKET LLANO GRANDE",
+    "AUTOSERVICIO COSTA SUR",
+    "AUTOSERVICIO CERRO ALTO",
+    "EXPRESS AVENIDA CENTRAL",
+    "EXPRESS BARRIO ANTIGUO"
+  ],
+
+  "cedi": [
+    "CD VALLE ALTO",
+    "CD PUERTO CLARO",
+    "CD REFRIGERADOS",
+    "CD PERECEDEROS",
+    "CD ABARROTES",
+    "BODEGA CENTRAL NORTE",
+    "BODEGA CENTRAL SUR",
+    "BODEGA REGIONAL ORIENTE"
+  ],
+
+  "proveedor": [
+    "DISTRIBUIDORA VALLE ALTO",
+    "DISTRIBUIDORA PUERTO CLARO",
+    "ALIMENTOS LLANO GRANDE",
+    "ALIMENTOS SIERRA NUEVA",
+    "LACTEOS CAMPO REAL",
+    "BEBIDAS RIO AZUL",
+    "CONSERVAS LOMA VERDE",
+    "IMPORTADORA COSTA SUR",
+    "COMERCIALIZADORA CERRO ALTO",
+    "PRODUCTOS PLAZA NORTE"
+  ],
+
+  "_personas": [
+    "No hay catálogo de personas a propósito. En la aplicación hay proveedores que son",
+    "personas naturales, y el nombre real se reemplaza por el de una empresa inventada",
+    "(`proveedor`): un nombre de persona inventado puede coincidir con una persona real",
+    "y esta wiki es pública."
+  ],
+
+  "producto": [
+    "GALLETA INTEGRAL 200G",
+    "ACEITE VEGETAL 1L",
+    "ARROZ BLANCO 5KG",
+    "AZUCAR MORENA 1KG",
+    "LECHE ENTERA 900ML",
+    "YOGURT NATURAL 150G",
+    "ATUN EN ACEITE 170G",
+    "FIDEO ESPAGUETI 400G",
+    "JABON DE MANOS 250ML",
+    "PAPEL HIGIENICO 4 ROLLOS",
+    "DETERGENTE EN POLVO 2KG",
+    "CAFE MOLIDO 500G",
+    "AGUA SIN GAS 600ML",
+    "GASEOSA COLA 1.5L",
+    "PAN TAJADO 500G",
+    "QUESO FRESCO 400G"
+  ],
+
+  "categoria": [
+    "ABARROTES",
+    "BEBIDAS",
+    "LACTEOS",
+    "CUIDADO PERSONAL",
+    "ASEO DEL HOGAR",
+    "PANADERIA",
+    "FRUVER",
+    "CARNICOS"
+  ],
+
+  "marca": ["MARCA ALFA", "MARCA BETA", "MARCA GAMMA", "MARCA DELTA", "MARCA OMEGA"],
+
+  "generico": [
+    "VALOR DE EJEMPLO",
+    "DATO DE EJEMPLO",
+    "REGISTRO DE EJEMPLO",
+    "ELEMENTO DE EJEMPLO",
+    "ENTRADA DE EJEMPLO"
+  ],
+
+  "usuario": {
+    "_": "Con quién se reemplaza la identidad de la cuenta que toma la captura.",
+    "nombre": "Usuario de Ejemplo",
+    "correo": "usuario@ejemplo.com",
+    "inicial": "U"
+  }
+}
