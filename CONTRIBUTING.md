@@ -85,7 +85,10 @@ comprueba el validador; las dos últimas, quien revisa el PR.
    `{ #que-es }`, `{ #que-puedes-hacer }`, `{ #requisitos }`. Las anclas son estables
    porque el agente de la Etapa 2 cita página **y** sección.
 3. `tenant_variance` decidido (`none`, `low` o `high`) y al menos dos `keywords`.
-4. Al menos una captura en `docs/assets/screenshots/`.
+4. Al menos una captura en `docs/assets/screenshots/`, tomada con
+   `tools/screenshots/capture.mjs` y **revisada por una persona**
+   (`tools/screenshots/README.md`). Las capturas no se hacen a mano: el saneamiento del
+   dato de cliente es del pipeline, y CI comprueba que exista la revisión.
 5. `sources:` con al menos una referencia y `verified_at` del día en que se verificó.
 6. Usa los nombres de la interfaz **exactos**, y enlaza a los conceptos transversales
    que explican el porqué.
@@ -135,8 +138,10 @@ en el diff se ve igual de bien que el texto que justifica.
 
 **El historial de git es permanente.** Una captura sin sanear o una credencial que
 entren al repositorio no se borran con el commit siguiente; hay que reescribir el
-historial y rotar lo filtrado. Por eso `tools/screenshots/raw/` está en `.gitignore` y
-por eso hay un escáner de secretos en CI además del denylist.
+historial y rotar lo filtrado. Por eso `tools/screenshots/raw/` está en `.gitignore`, por
+eso `check-screenshots.mjs` barre el historial completo buscando imágenes fuera de
+`docs/assets/screenshots/`, y por eso hay un escáner de secretos en CI además del
+denylist.
 
 ## El flujo
 

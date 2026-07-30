@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "_": [
+    "Qué se considera dato del cliente en la pantalla, con qué se reemplaza y qué hace",
+    "abortar la captura. Lo aplica tools/screenshots/dom.mjs dentro de la página.",
+    "",
+    "El orden del razonamiento es este:",
+    "  1. `quitar` — lo que no debería salir en una captura de producto (identidad de la",
+    "     cuenta, afordancias que solo ve un administrador, widgets flotantes).",
+    "  2. `regiones` — dónde vive el dato del cliente. Fuera de las regiones el texto es",
+    "     vocabulario de la aplicación y se conserva tal cual, porque el contenido de la wiki",
+    "     tiene que citar los nombres de la interfaz exactos.",
+    "  3. `interfaz` y `especies` — qué es cada cosa **dentro** de una región, que no es todo",
+    "     dato: hay controles («Generar Orden»), vocabulario de la plataforma («Estado»,",
+    "     «Motor») y columnas de las que depende con qué lista del catálogo se reemplazan.",
+    "  4. `numeros` — un número con forma de dato (miles, decimales, moneda, magnitud) se",
+    "     rehace esté donde esté, también fuera de las regiones. Los números de la interfaz",
+    "     («25», «de 5») no tienen esa forma y sobreviven. `ejes` y `fechas` son las dos",
+    "     excepciones que hay que declarar a mano.",
+    "  5. `guarda` — lo que queda en pie después de todo eso. Si la guarda encuentra algo,",
+    "     no se escribe ningún PNG.",
+    "",
+    "Cuando la aplicación cambie sus clases, lo que falla es la guarda: se queda sin",
+    "regiones que sanear y encuentra datos crudos. Falla cerrado, que es como tiene que",
+    "fallar esto."
+  ],
+
+  "quitar": [
+    {
+      "sel": "#customer-assistant-button",
+      "porque": "El asistente flotante tapa la esquina de la pantalla y no es parte de lo que se documenta."
+    },
+    {
+      "sel": "[aria-label='Copiar SQL'], [aria-label='Ver SQL']",
+      "porque": "Solo las ve un administrador y publican la consulta de la pantalla: es exactamente lo que la wiki no puede decir. Con la cuenta de captura acotada a lectura no aparecerían, y hasta que exista hay que quitarlas."
+    },
+    {
+      "sel": "[data-testid='sidebar-profile-toggle'], .MuiAvatar-root",
+      "porque": "La foto y las iniciales de la cuenta que captura son identidad, no producto."
+    },
+    {
+      "sel": "[role='tooltip'], .MuiTooltip-popper",
+      "porque": "Un tooltip que quedó abierto del paso anterior sale en la captura y muestra el dato de una celda."
+    }
+  ],
+
+  "regiones": [
+    {
+      "sel": ".MuiDataGrid-cell, [role='gridcell'], td",
+      "que": "celdas de tabla",
+      "excepto": ".MuiDataGrid-columnHeader, th"
+    },
+    {
+      "sel": ".MuiChartsAxis-tickLabel, .MuiChartsAxis-label",
+      "que": "ejes de las gráficas"
+    },
+    {
+      "sel": ".MuiChartsTooltip-root, .MuiChartsTooltip-paper",
+      "que": "tooltip de las gráficas"
+    }
+  ],
+
+  "interfaz": {
+    "_": [
+      "Dentro de una celda no todo es dato: la columna «Acciones» trae el botón «Generar",
+      "Orden», que es vocabulario de la aplicación. Reemplazarlo deja una captura que",
+      "muestra un botón que no existe, y el contenido de la wiki tiene que citar los",
+      "nombres de la interfaz exactos.",
+      "",
+      "La excepción vale solo para el control que está **dentro** de la región: si la región",
+      "entera fuera un control, exceptuarla dejaría la celda sin sanear."
+    ],
+    "sel": "button, a[href], [role='button'], [role='menuitem'], select, label"
+  },
+
+  "especies": {
+    "_": [
+      "De qué es la columna, para elegir la lista del catálogo. Se resuelve con **las dos**",
+      "pistas —el encabezado que ve el lector y el `data-field` técnico— porque ninguna basta",
+      "sola: en Desempeño General la columna «Nombre del Proveedor» tiene",
+      "`data-field=\"category\"` (el reporte se agrupa por proveedor y el campo se llama como",
+      "el agrupador), y con el campo solo un nombre de proveedor saldría como categoría.",
+      "Gana el primer patrón que coincida, así que lo específico va arriba.",
+      "",
+      "Dos especies no salen del catálogo, y son las que más se olvidan:",
+      "  · `vocabulario` **no se toca**. En una pantalla de configuración las celdas traen",
+      "    vocabulario de la plataforma —el «Estado» de una regla, su «Motor», el nombre",
+      "    `is_distributed`—, y reemplazarlo deja una captura que documenta algo que no existe.",
+      "    La guarda sigue mirando esas celdas: solo deja de exigir que estén reemplazadas.",
+      "  · `usuario` se cambia por la identidad de ejemplo. «Creado por» trae el correo de",
+      "    quien configuró la instancia, que en la práctica es una persona de Celes.",
+      "",
+      "Y un «Nombre» a secas **no es un producto**: la columna «Nombre» de Reglas de Negocio",
+      "trae `is_distributed`. Para caer en `producto` hace falta que la pista lo diga."
+    ],
+    "orden": [
+      { "especie": "vocabulario", "patron": "(^|[\\s_])(status|engine|type|state)([\\s_]|$)|estado|motor|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query)|regla|par[aá]metro|consulta" },
+      { "especie": "usuario", "patron": "(^|[\\s_])(created_by|updated_by|user|owner|email|mail)([\\s_]|$)|creado por|actualizado por|modificado por|usuario|responsable|autor|correo" },
+      { "especie": "codigo", "patron": "(^|[\\s_])(code|codigo|id|sku|ean|barcode)([\\s_]|$)|c[oó]digo" },
+      { "especie": "cedi", "patron": "warehouse|bodega|cedi|distribution_?center|centro de distribuci|centro suministrador" },
+      { "especie": "tienda", "patron": "store|tienda|sucursal|local|punto de venta|nodo" },
+      { "especie": "proveedor", "patron": "supplier|vendor|proveedor|fabricante" },
+      { "especie": "categoria", "patron": "categor|department|departamento|linea|l[ií]nea|subclase|clase|jerarqu" },
+      { "especie": "marca", "patron": "brand|marca" },
+      { "especie": "producto", "patron": "product|producto|item|art[ií]culo|descripci[oó]n" }
+    ],
+    "porDefecto": "generico",
+    "unicos": ["cedi", "tienda", "proveedor", "producto"],
+    "__unicos": [
+      "Especies en las que dos valores reales distintos no pueden salir con el mismo nombre",
+      "ficticio: una tabla con dos filas «CD ABARROTES» y códigos distintos se lee como un",
+      "defecto de la aplicación. `categoria` y `marca` no están porque ahí repetirse es lo",
+      "correcto: muchos productos comparten categoría."
+    ]
+  },
+
+  "numeros": {
+    "_": [
+      "El saneamiento no interpreta el número: cambia cada dígito por otro dejando los",
+      "separadores en su sitio, así que el formato y el ancho se conservan sin tener que",
+      "entender el locale. Los ceros se dejan como están —un cero no dice nada de nadie y",
+      "verlo cambiado hace que la pantalla mienta sobre su propio estado— y los ceros a la",
+      "izquierda también, para que un código siga pareciendo un código.",
+      "",
+      "Hay dos patrones y la diferencia es la que evita estropear la interfaz:",
+      "  · `completo` reconoce un nodo que es **solo** un número. Dentro de una región de",
+      "    datos se rehace siempre; fuera, solo si además tiene forma de dato (`exige`),",
+      "    porque el «25» del selector de filas por página también es un nodo numérico.",
+      "  · `patron` busca números dentro de una frase, y ahí `exige` manda siempre."
+    ],
+    "completo": "^[-+(]?\\s*(?:[$€£]\\s*)?\\d[\\d.,\\u00a0\\u202f ]*(?:\\s*(?:%|k|K|M|MM|mil|millones|Unidades))?\\)?$",
+    "patron": "(?:[$€£]\\s*)?\\d[\\d.,\\u00a0\\u202f ]*\\d(?:\\s*(?:%|k|K|M|MM|mil|millones|Unidades))?|(?:[$€£]\\s*)\\d",
+    "exige": "[.,]\\d|\\d[.,\\u00a0\\u202f]\\d{3}|\\d{4,}|[$€£]|\\d\\s*(?:%|k|K|M|MM|mil|millones)"
+  },
+
+  "fechas": {
+    "_": [
+      "Las fechas no se sanean: no identifican a nadie y una fecha falsa vuelve incoherente",
+      "la pantalla (un rango que no cuadra con su gráfica).",
+      "`anios` es la excepción que hay que declarar aparte: un año son cuatro dígitos y",
+      "cuatro dígitos son «forma de dato», así que sin esta regla «16 de jul, 2026 - 30 de",
+      "jul, 2026» —que es un solo nodo, y no una fecha completa— sale con el año cambiado."
+    ],
+    "patron": "^(?:\\d{1,2}\\s+de\\s+[a-záéíóúñ.]{3,12},?\\s*(?:\\d{2,4})?|\\d{4}-\\d{2}-\\d{2}|\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}|(?:ene|feb|mar|abr|may|jun|jul|ago|sep|set|oct|nov|dic)[a-z.]*\\s*\\d{0,4}|(?:sem|semana|w)\\s*\\d{1,2}|(?:19|20)\\d{2})(?:,?\\s*(?:[T ])?\\d{1,2}:\\d{2}(?::\\d{2})?(?:\\s*[ap]\\.?\\s?m\\.?)?)?$|^\\d{1,2}:\\d{2}(?::\\d{2})?$",
+    "anios": "^(?:19|20)\\d{2}$"
+  },
+
+  "ejes": {
+    "_": [
+      "Los ejes numéricos de una gráfica no se pueden sanear tick por tick: cada uno saldría",
+      "con un número independiente y el eje dejaría de ser creciente. Una gráfica con el eje",
+      "desordenado no documenta nada, avisa de que la captura está trucada.",
+      "",
+      "Se aplica **un solo factor** a todos los ticks del mismo eje, sacado del hash del eje",
+      "completo. Es una transformación lineal: conserva el orden y las proporciones (que ya",
+      "se ven en la curva) y no conserva las magnitudes, que es lo que no puede publicarse.",
+      "",
+      "Los ejes en porcentaje se dejan intactos: un 0-100% es una escala fija de la interfaz,",
+      "no un dato del cliente, y multiplicarlo daría un 140%."
+    ],
+    "sel": ".MuiChartsAxis-root",
+    "ticks": ".MuiChartsAxis-tickLabel",
+    "factor_min": 0.35,
+    "factor_max": 2.75
+  },
+
+  "guarda": {
+    "_": [
+      "Lo que hace abortar la captura. La guarda no confía en que las reglas de arriba",
+      "hayan cubierto la pantalla: comprueba el resultado.",
+      "",
+      "`mayusculas` es la regla que más atrapa en esta aplicación: los nombres de tienda,",
+      "de centro y de proveedor vienen en mayúsculas sostenidas desde el maestro del",
+      "cliente. Un nombre en mayúsculas que no salga del catálogo y no sea una sigla",
+      "conocida es, casi siempre, un dato que se escapó de una región que no declaramos."
+    ],
+    "mayusculas": {
+      "largo_minimo": 4,
+      "siglas_permitidas": [
+        "CEDI", "CEDIS", "SKU", "SKUS", "EAN", "OC", "ANS", "IVA", "KPI", "PDF", "CSV", "XLSX", "XLS",
+        "SQL", "API", "URL", "ERP", "POS", "MAE", "MAPE", "SMAPE", "BIAS", "FVA", "GMROI", "ABC",
+        "MIX", "DTC", "PS", "NA", "ND", "TOTAL", "CELES", "CELI", "MOQ", "LEAD", "TIME", "STOCK",
+        "FIFO", "CD", "CDS", "UND", "UNID", "KG", "GR", "ML", "LT", "PZA", "CAJA", "CTRL", "ENTER"
+      ]
+    },
+    "imagenes": {
+      "_": "Un `img` de otro origen es, en la práctica, la foto de la cuenta que captura.",
+      "origenes_permitidos": ["app.celes.ai", "qas.app.celes.ai", "dev.app.celes.ai"]
+    }
+  }
+}

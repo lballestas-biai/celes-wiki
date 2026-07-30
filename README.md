@@ -176,6 +176,24 @@ El paso 2 falla a propósito ante una pantalla nueva: obliga a decidir qué se h
 ella en `tools/decisions.json` en lugar de dejarla caer en silencio. `scaffold-pages`
 nunca pisa una página existente.
 
+## Las capturas
+
+Cada página de pantalla lleva al menos una captura, y **ninguna captura contiene datos de
+ningún cliente**. No se difumina el PNG después: se cambia el dato en el DOM antes de
+disparar la cámara, con un catálogo ficticio determinista, y una guarda aborta la captura
+si queda algo con forma de dato. Después la mira una persona, y sin ese visto bueno CI no
+deja publicarla.
+
+```bash
+node tools/screenshots/capture.mjs --solo comprar
+node tools/screenshots/approve.mjs --pendientes
+```
+
+El procedimiento completo —cómo se declara una pantalla nueva, qué hacer cuando la guarda
+protesta y por qué el original nunca entra al repositorio— está en
+[`tools/screenshots/README.md`](tools/screenshots/README.md). Es el único paso de la wiki
+que no es Node puro: usa el Playwright y la sesión del navegador de diagnóstico.
+
 ## Estructura
 
 ```
@@ -183,11 +201,14 @@ mkdocs.yml            # configuración y nav (el bloque `nav` lo genera scaffold
 CONTRIBUTING.md       # el contrato de contenido, en prosa
 docs/                 # el contenido
   assets/stylesheets/ # tokens de marca y porte del layout del mock
+  assets/screenshots/ # las capturas saneadas, una por pantalla
 overrides/            # extensiones del theme (ver «El tema»)
 tools/                # inventario, auditoría y guardas (Node puro, sin dependencias)
   content-contract.json  # qué frontmatter exige cada tipo de página
   denylist.json          # qué no puede aparecer en una wiki pública
   data/               # la foto commiteada del código de la aplicación
+  lib/                # lo que comparten las guardas (frontmatter, nombres de cliente)
+  screenshots/        # el pipeline de capturas (ver su README)
 requirements.txt      # versiones pinneadas
 ```
 
@@ -197,7 +218,7 @@ requirements.txt      # versiones pinneadas
 |---|---|---|
 | `deploy.yml` | `build` | Publicar un enlace roto, una página fuera del `nav` o una fecha inventada |
 | `nav-audit.yml` | `nav-audit` | Que una pantalla de la aplicación se quede sin página |
-| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable |
+| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable, y una captura sin revisión humana |
 | `content-checks.yml` | `secrets` | Que entre una credencial al historial (gitleaks) |
 
 Las cuatro son *status checks* obligatorios de `main`. `secrets` usa
