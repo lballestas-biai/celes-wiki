@@ -102,7 +102,13 @@ async function capturar(objetivo) {
   const page = await contexto.newPage()
   try {
     await page.setViewportSize({ width: objetivos.viewport.ancho, height: objetivos.viewport.alto })
-    await page.goto(base + pagina.route, { waitUntil: 'domcontentloaded', timeout: 60_000 })
+    // `busqueda` ajusta el estado que la pantalla lee de la URL —un rango de fechas, un
+    // agrupador—. La ruta la sigue mandando el inventario: esto no puede llevar a otra
+    // pantalla, solo pedirle a la misma que muestre algo.
+    await page.goto(base + pagina.route + (objetivo.busqueda ?? ''), {
+      waitUntil: 'domcontentloaded',
+      timeout: 60_000,
+    })
     if (/\/login|\/signin/u.test(page.url())) {
       return { objetivo, estado: 'error', motivo: 'la sesión del navegador expiró: volver a correr auto-login.mjs' }
     }

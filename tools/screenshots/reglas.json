@@ -9,7 +9,9 @@
     "     cuenta, afordancias que solo ve un administrador, widgets flotantes).",
     "  2. `regiones` — dónde vive el dato del cliente. Fuera de las regiones el texto es",
     "     vocabulario de la aplicación y se conserva tal cual, porque el contenido de la wiki",
-    "     tiene que citar los nombres de la interfaz exactos.",
+    "     tiene que citar los nombres de la interfaz exactos. Una región puede declarar",
+    "     `pista`: el selector de su etiqueta, para las pantallas que no presentan el dato en",
+    "     una tabla y por tanto no tienen encabezado del que deducir la especie.",
     "  3. `interfaz` y `especies` — qué es cada cosa **dentro** de una región, que no es todo",
     "     dato: hay controles («Generar Orden»), vocabulario de la plataforma («Estado»,",
     "     «Motor») y columnas de las que depende con qué lista del catálogo se reemplazan.",
@@ -48,7 +50,25 @@
     {
       "sel": ".MuiDataGrid-cell, [role='gridcell'], td",
       "que": "celdas de tabla",
-      "excepto": ".MuiDataGrid-columnHeader, th"
+      "excepto": ".MuiDataGrid-columnHeader, th, .MuiDayCalendar-root",
+      "__": [
+        "El calendario de un selector de fechas también pinta sus días en `td`, y ahí el",
+        "número no es un dato del cliente sino el día del mes. Sin esta excepción, el mes",
+        "de julio del Calendario de OC salía con los días escalados: «13 13 0 1 1 2 2»,",
+        "repetidos y fuera de orden. No es una fuga —es peor: es una captura que documenta",
+        "un calendario que no existe."
+      ]
+    },
+    {
+      "sel": "li > div.text-caption-1-strong",
+      "que": "el valor de una tarjeta etiqueta/valor",
+      "pista": ".text-caption-1",
+      "__": [
+        "El Calendario de OC no pinta una tabla: cada orden es una tarjeta con pares",
+        "«Nombre de Proveedor» / valor. Sin `pista` no hay encabezado ni `data-field` de",
+        "donde sacar la especie, así que los nombres de proveedor —que en este tenant son",
+        "nombres de personas— salían por la especie por defecto y la guarda abortaba."
+      ]
     },
     {
       "sel": ".MuiChartsAxis-tickLabel, .MuiChartsAxis-label",
@@ -91,10 +111,16 @@
       "    quien configuró la instancia, que en la práctica es una persona de Celes.",
       "",
       "Y un «Nombre» a secas **no es un producto**: la columna «Nombre» de Reglas de Negocio",
-      "trae `is_distributed`. Para caer en `producto` hace falta que la pista lo diga."
+      "trae `is_distributed`. Para caer en `producto` hace falta que la pista lo diga.",
+      "",
+      "«Canal», «Origen» y «Resultado» son vocabulario cerrado de la aplicación —el canal de",
+      "un envío es SFTP o Correo, su origen es Automática— y reemplazarlos deja una captura",
+      "que contradice a la página que la publica. Van con la palabra **suelta** (`(^|\\\\s)`,",
+      "no `[\\\\s_]`) a propósito: así «Origen» sola es vocabulario y `key_warehouse_origin`",
+      "sigue cayendo en `cedi`, que es donde tiene que caer un nombre de bodega."
     ],
     "orden": [
-      { "especie": "vocabulario", "patron": "(^|[\\s_])(status|engine|type|state)([\\s_]|$)|estado|motor|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query)|regla|par[aá]metro|consulta" },
+      { "especie": "vocabulario", "patron": "(^|[\\s_])(status|engine|type|state)([\\s_]|$)|(^|\\s)(channel|origin|result)([\\s_]|$)|(^|\\s)(canal|origen|resultado)(\\s|$)|estado|motor|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query)|regla|par[aá]metro|consulta" },
       { "especie": "usuario", "patron": "(^|[\\s_])(created_by|updated_by|user|owner|email|mail)([\\s_]|$)|creado por|actualizado por|modificado por|usuario|responsable|autor|correo" },
       { "especie": "codigo", "patron": "(^|[\\s_])(code|codigo|id|sku|ean|barcode)([\\s_]|$)|c[oó]digo" },
       { "especie": "cedi", "patron": "warehouse|bodega|cedi|distribution_?center|centro de distribuci|centro suministrador" },
@@ -206,13 +232,22 @@
       "`mayusculas` es la regla que más atrapa en esta aplicación: los nombres de tienda,",
       "de centro y de proveedor vienen en mayúsculas sostenidas desde el maestro del",
       "cliente. Un nombre en mayúsculas que no salga del catálogo y no sea una sigla",
-      "conocida es, casi siempre, un dato que se escapó de una región que no declaramos."
+      "conocida es, casi siempre, un dato que se escapó de una región que no declaramos.",
+      "",
+      "Hay dos listas y no son intercambiables. `siglas_permitidas` vale en toda la pantalla",
+      "y es para el vocabulario de la aplicación (CEDI, MAPE, MOQ). `vocabulario_permitido`",
+      "vale **solo dentro de una celda que la especie ya decidió no reemplazar**: ahí el",
+      "valor se conserva a propósito —«ACTIVO» en «Estado del Producto» reemplazado por un",
+      "nombre ficticio documentaría una aplicación que no existe— y la guarda tiene que",
+      "dejar de exigirlo. Fuera de esas celdas, la misma palabra sigue abortando la captura.",
+      "Un nombre de tienda, de centro o de proveedor no entra en ninguna de las dos."
     ],
     "mayusculas": {
       "largo_minimo": 4,
+      "vocabulario_permitido": ["ACTIVO", "INACTIVO", "ACTIVA", "INACTIVA", "MANUAL", "AUTOMATICO", "AUTOMÁTICO"],
       "siglas_permitidas": [
         "CEDI", "CEDIS", "SKU", "SKUS", "EAN", "OC", "ANS", "IVA", "KPI", "PDF", "CSV", "XLSX", "XLS",
-        "SQL", "API", "URL", "ERP", "POS", "MAE", "MAPE", "SMAPE", "BIAS", "FVA", "GMROI", "ABC",
+        "SQL", "API", "URL", "ERP", "POS", "SFTP", "FTP", "HTTP", "HTTPS", "MAE", "MAPE", "SMAPE", "BIAS", "FVA", "GMROI", "ABC",
         "MIX", "DTC", "PS", "NA", "ND", "TOTAL", "CELES", "CELI", "MOQ", "LEAD", "TIME", "STOCK",
         "FIFO", "CD", "CDS", "UND", "UNID", "KG", "GR", "ML", "LT", "PZA", "CAJA", "CTRL", "ENTER"
       ]

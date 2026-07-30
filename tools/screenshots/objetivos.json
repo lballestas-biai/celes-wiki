@@ -12,6 +12,12 @@
     "hasta que la página está publicada. Si no aparece, la captura falla — mejor eso que un",
     "PNG de una pantalla vacía.",
     "",
+    "`busqueda` es opcional: lo que se le añade a la URL de la pantalla para que tenga algo",
+    "que mostrar. La ruta la sigue mandando el inventario, así que esto no lleva a otra",
+    "pantalla: solo ajusta el estado que la pantalla lee de la URL. Hace falta cuando el",
+    "valor por defecto deja la tabla vacía —el Historial de Órdenes de Compra abre con la",
+    "última semana, y en un tenant que compra por temporada esa semana no tiene ninguna.",
+    "",
     "`recorte` es opcional: el selector de la región que se fotografía. Por defecto es",
     "`main`, que deja fuera la barra lateral —vacía de contenido y distinta según los",
     "permisos de quien mire—. Una pantalla que quiera salir con el menú puede pedir `body`.",
@@ -49,6 +55,53 @@
       "page": "activacion/reglas-de-negocio.md",
       "espera": ".MuiDataGrid-row",
       "nota": "Una pantalla de configuración, no de datos: sirve para ver que el saneamiento no se come el vocabulario de la aplicación."
+    },
+
+    {
+      "page": "reabastecimiento/creacion-de-orden-de-compra.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. La mesa de trabajo de la compra: cantidades editables, plugins y el botón de enviar."
+    },
+    {
+      "page": "reabastecimiento/solicitud-de-distribucion.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. El equivalente de distribución, con el candado de lo ya enviado y «Desbloquear todos los enviados»."
+    },
+    {
+      "page": "reabastecimiento/historial-de-ordenes-de-compra.md",
+      "espera": ".MuiDataGrid-row",
+      "busqueda": "?dm=2026-04-01_2026-07-30",
+      "nota": "1a.3. El rango por defecto —la última semana— no trae ninguna orden en el tenant de captura, así que se pide un rango más ancho para que la captura muestre la pantalla con datos."
+    },
+    {
+      "page": "reabastecimiento/historial-de-ordenes-de-distribucion.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. Una orden por fila, con el rango de fechas por defecto (la última semana)."
+    },
+    {
+      "page": "reabastecimiento/calendario-de-oc.md",
+      "espera": ".MuiPickersDay-root",
+      "nota": "1a.3. No es una tabla: mes a la izquierda y semana a la derecha. Se espera el día del calendario porque mientras carga se pinta un esqueleto."
+    },
+    {
+      "page": "reabastecimiento/distribucion-automatica.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. Las configuraciones con su estado y su próxima ejecución. Sirve también de captura del índice de Automatización & Operación, que abre en esta pestaña."
+    },
+    {
+      "page": "reabastecimiento/compra-automatica.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. La misma lista para compras."
+    },
+    {
+      "page": "reabastecimiento/configuracion-de-pipeline.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. Los flujos de cálculo por módulo."
+    },
+    {
+      "page": "reabastecimiento/trazabilidad-de-entregas.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3. Un envío por fila, con estado y canal."
     }
   ]
 }

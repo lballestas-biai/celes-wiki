@@ -160,7 +160,7 @@ export function sanear(saneador, reglas, raiz = document.body) {
     const region = regionDe(elemento, reglas)
     const resultado = saneador.sanear(nodo.nodeValue, {
       enRegion: Boolean(region),
-      especie: region ? especieDeRegion(region, saneador) : undefined,
+      especie: region ? especieDeRegion(region, saneador, reglas) : undefined,
       pista: pistaDe(elemento, region),
     })
     if (!resultado) continue
@@ -211,6 +211,8 @@ export function auditar(saneador, reglas, { identidad = [] } = {}) {
   const reporte = (regla, muestra, donde) => hallazgos.push({ regla, muestra: recortar(muestra), donde })
   const config = reglas.guarda
   const siglas = new Set(config.mayusculas.siglas_permitidas)
+  // Vale solo dentro de una celda marcada `vocabulario`: ver `guarda` en reglas.json.
+  const vocabulario = new Set(config.mayusculas.vocabulario_permitido ?? [])
   const reMayusculas = new RegExp(`\\b[A-ZÁÉÍÓÚÑÜ][A-ZÁÉÍÓÚÑÜ0-9.&'’-]{${config.mayusculas.largo_minimo - 1},}\\b`, 'gu')
   const visibles = []
 
@@ -236,8 +238,10 @@ export function auditar(saneador, reglas, { identidad = [] } = {}) {
       reporte('numero-sin-sanear', texto, ruta(elemento))
     }
     if (!reemplazado) {
+      const esVocabulario = marcas.includes('vocabulario')
       for (const palabra of texto.match(reMayusculas) ?? []) {
         if (siglas.has(palabra.replace(/[.']/gu, ''))) continue
+        if (esVocabulario && vocabulario.has(palabra)) continue
         if (/^\d+$/u.test(palabra)) continue
         reporte('mayusculas', palabra, ruta(elemento))
       }
@@ -322,11 +326,31 @@ function esInterfaz(elemento, region, reglas) {
  * como el agrupador—, así que con el `data-field` solo, un nombre de proveedor se
  * reemplazaría por una categoría.
  */
-function especieDeRegion(region, saneador) {
+function especieDeRegion(region, saneador, reglas) {
   const campo = region.getAttribute?.('data-field') ?? ''
   const encabezado = encabezadoDe(region, campo)
-  if (!campo && !encabezado) return saneador.especieDe(region.getAttribute?.('class') ?? '')
-  return saneador.especieDe(encabezado, campo)
+  if (campo || encabezado) return saneador.especieDe(encabezado, campo)
+  const etiqueta = etiquetaDe(region, reglas)
+  if (etiqueta) return saneador.especieDe(etiqueta)
+  return saneador.especieDe(region.getAttribute?.('class') ?? '')
+}
+
+/**
+ * La etiqueta de una región que no es una celda de tabla.
+ *
+ * No toda pantalla presenta el dato en una tabla: el Calendario de OC pinta cada orden
+ * como una tarjeta de pares etiqueta/valor —«Nombre de Proveedor» encima del nombre—, y
+ * ahí la única pista de qué es el valor está en el nodo de al lado. La región lo declara
+ * con `pista`, un selector que se busca **dentro del padre de la región**; sin él, esos
+ * nombres de proveedor salían por la especie por defecto y la guarda abortaba la captura.
+ */
+function etiquetaDe(region, reglas) {
+  for (const declaracion of reglas.regiones) {
+    if (!declaracion.pista || !region.matches?.(declaracion.sel)) continue
+    const etiqueta = region.parentElement?.querySelector(declaracion.pista)
+    if (etiqueta && etiqueta !== region) return etiqueta.textContent.trim()
+  }
+  return ''
 }
 
 /**
