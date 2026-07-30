@@ -21,7 +21,11 @@
       "salt_id": "0ccddab6",
       "reglas": 1,
       "catalogo": 1,
-      "revision": null
+      "revision": {
+        "por": "Luis Ballestas",
+        "en": "2026-07-30",
+        "sha256": "bea6b7cedc406f102e09a932bcbe413a4d09a7a92439289c6c5fa339c5f03614"
+      }
     },
     {
       "destino": "pronostico/resumen.png",
@@ -36,7 +40,11 @@
       "salt_id": "0ccddab6",
       "reglas": 1,
       "catalogo": 1,
-      "revision": null
+      "revision": {
+        "por": "Luis Ballestas",
+        "en": "2026-07-30",
+        "sha256": "a21bef1db6ef49ef14782178f9ee50e30a022d115361c17541f9654f2cd1cd0f"
+      }
     },
     {
       "destino": "reabastecimiento/comprar.png",
@@ -51,7 +59,11 @@
       "salt_id": "0ccddab6",
       "reglas": 1,
       "catalogo": 1,
-      "revision": null
+      "revision": {
+        "por": "Luis Ballestas",
+        "en": "2026-07-30",
+        "sha256": "87f0b64673080f35fd7564d6c856d84485b9469b13c1cb73a2fb279420880c2f"
+      }
     },
     {
       "destino": "reabastecimiento/distribuir.png",
@@ -66,7 +78,11 @@
       "salt_id": "0ccddab6",
       "reglas": 1,
       "catalogo": 1,
-      "revision": null
+      "revision": {
+        "por": "Luis Ballestas",
+        "en": "2026-07-30",
+        "sha256": "5b7fb2dccafb2ebb9d41359b399b473f21b557e9162968fafb2f41ad401aed0b"
+      }
     },
     {
       "destino": "reportes/historico.png",
@@ -81,7 +97,11 @@
       "salt_id": "0ccddab6",
       "reglas": 1,
       "catalogo": 1,
-      "revision": null
+      "revision": {
+        "por": "Luis Ballestas",
+        "en": "2026-07-30",
+        "sha256": "dd02587ac9393842a398af24bb8f058bd2caa1234fb69c20fe57f2d3739c9552"
+      }
     }
   ]
 }
