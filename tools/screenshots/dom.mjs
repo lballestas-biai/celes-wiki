@@ -63,10 +63,16 @@ export function congelar() {
 export function aplicar(saneador, reglas, { pares = [] } = {}, raiz = document.body) {
   const quitados = quitar(reglas)
   const identidad = reemplazarIdentidad(pares, raiz)
-  const ejes = escalarEjes(saneador, reglas)
+  const { escalados, incoherentes } = escalarEjes(saneador, reglas)
+  // Se acumulan para que `auditar` los reporte: así el único camino por el que se aborta una
+  // captura sigue siendo la guarda, y no hay una segunda salida que mantener.
+  for (const eje of incoherentes) ejesIncoherentes.set(`${eje.donde}|${eje.porque}`, eje)
   const cuenta = sanear(saneador, reglas, raiz)
-  return { ...cuenta, identidad, ejes, quitados }
+  return { ...cuenta, identidad, ejes: escalados, ejesIncoherentes: ejesIncoherentes.size, quitados }
 }
+
+/** Los ejes que no se pudieron escalar sin que la gráfica mintiera. Ver `escalarEjes`. */
+const ejesIncoherentes = new Map()
 
 /**
  * Los ejes numéricos, con un factor por eje.
@@ -76,8 +82,9 @@ export function aplicar(saneador, reglas, { pares = [] } = {}, raiz = document.b
  * `ejes` en reglas.json.
  */
 export function escalarEjes(saneador, reglas) {
-  if (!reglas.ejes) return 0
+  if (!reglas.ejes) return { escalados: 0, incoherentes: [] }
   let escalados = 0
+  const incoherentes = []
   for (const eje of document.querySelectorAll(reglas.ejes.sel)) {
     const etiquetas = [...eje.querySelectorAll(reglas.ejes.ticks)]
     const nodos = etiquetas.map((etiqueta) => [...nodosDeTexto(etiqueta)]).flat()
@@ -85,6 +92,14 @@ export function escalarEjes(saneador, reglas) {
 
     const decision = saneador.escalarEje(nodos.map((nodo) => nodo.nodeValue))
     if (!decision) continue // no es un eje numérico: que lo sanee el pase normal
+
+    // Un eje que salió desordenado o con etiquetas repetidas no se puede arreglar aquí, y
+    // dejarlo con sus valores reales sería publicar las magnitudes. Se anota y la corrida se
+    // cae: es la única salida que no publica nada malo.
+    if (decision.accion === 'incoherente') {
+      incoherentes.push({ porque: decision.porque, donde: ruta(eje) })
+      continue
+    }
 
     if (decision.accion === 'intacto') {
       // Protegerlo, no solo no escalarlo: si el pase normal lo alcanza, rehace cada etiqueta
@@ -104,7 +119,7 @@ export function escalarEjes(saneador, reglas) {
     })
     escalados += 1
   }
-  return escalados
+  return { escalados, incoherentes }
 }
 
 /**
@@ -146,6 +161,7 @@ export function sanear(saneador, reglas, raiz = document.body) {
     const resultado = saneador.sanear(nodo.nodeValue, {
       enRegion: Boolean(region),
       especie: region ? especieDeRegion(region, saneador) : undefined,
+      pista: pistaDe(elemento, region),
     })
     if (!resultado) continue
 
@@ -190,7 +206,7 @@ export function auditar(saneador, reglas, { identidad = [] } = {}) {
   // Marcas que dicen «esta celda se miró y se decidió dejarla como está». Eximen de exigir
   // reemplazo, no del resto de la guarda: un dato de cliente escondido en una columna que
   // creímos vocabulario sigue teniendo que caer por número o por mayúsculas.
-  const SIN_REEMPLAZO = new Set(['fecha', 'vocabulario'])
+  const SIN_REEMPLAZO = new Set(['fecha', 'vocabulario', 'razon-coherente'])
   const hallazgos = []
   const reporte = (regla, muestra, donde) => hallazgos.push({ regla, muestra: recortar(muestra), donde })
   const config = reglas.guarda
@@ -207,9 +223,10 @@ export function auditar(saneador, reglas, { identidad = [] } = {}) {
 
     const marcas = (elemento.getAttribute(MARCA) ?? '').split(' ').filter(Boolean)
     const reemplazado = marcas.some((marca) => !SIN_REEMPLAZO.has(marca) && !marca.startsWith('eje-'))
-    // Un eje intocable (porcentaje, fechas) se miró **entero** y se decidió dejarlo: sus
-    // números no son magnitudes del cliente. Las palabras, en cambio, se siguen mirando.
-    const ejeDecidido = marcas.some((marca) => marca.startsWith('eje-'))
+    // Un eje intocable (porcentaje, fechas) y una razón que tiene que seguir cuadrando con
+    // las cifras de al lado se miraron y se decidieron: sus números se quedan a propósito.
+    // Las palabras, en cambio, se siguen mirando.
+    const ejeDecidido = marcas.some((marca) => marca.startsWith('eje-') || marca === 'razon-coherente')
     const region = regionDe(elemento, reglas)
 
     if (region && !marcas.length && /[\p{L}\p{N}]/u.test(texto)) {
@@ -225,6 +242,15 @@ export function auditar(saneador, reglas, { identidad = [] } = {}) {
         reporte('mayusculas', palabra, ruta(elemento))
       }
     }
+  }
+
+  // Un eje que no se pudo escalar sin que la gráfica mintiera. No es una fuga —sus números
+  // ya no son los del cliente— pero sí una captura que documenta algo que no existe, y eso
+  // tampoco se publica.
+  // Va sin `reporte` a propósito: la muestra es un motivo nuestro y no un dato del cliente,
+  // así que se imprime entera y no tapada.
+  for (const eje of ejesIncoherentes.values()) {
+    hallazgos.push({ regla: 'eje-incoherente', muestra: eje.porque, donde: eje.donde })
   }
 
   const aLaVista = visibles.join(' ').toLowerCase()
@@ -301,6 +327,25 @@ function especieDeRegion(region, saneador) {
   const encabezado = encabezadoDe(region, campo)
   if (!campo && !encabezado) return saneador.especieDe(region.getAttribute?.('class') ?? '')
   return saneador.especieDe(encabezado, campo)
+}
+
+/**
+ * De qué habla esta cifra, para decidir qué hacer con un porcentaje.
+ *
+ * Un `69,77%` no dice si es un MAPE —que no deriva de nada visible y se sanea— o un margen
+ * bruto —que es la razón entre dos cifras que están ahí al lado y hay que dejar quieta—. La
+ * pista es el encabezado si la cifra está en una tabla, y si no el texto de la tarjeta que la
+ * contiene: en una tarjeta KPI el título y el valor son hermanos («MAPE» y «69,77%»), así que
+ * subir hasta el bloque y leerlo entero basta y no hace falta declarar un selector por
+ * pantalla.
+ */
+function pistaDe(elemento, region) {
+  if (region) {
+    const campo = region.getAttribute?.('data-field') ?? ''
+    return `${encabezadoDe(region, campo)} ${campo}`.trim()
+  }
+  const tarjeta = elemento.closest('[class*="Card"], [class*="Paper"], [class*="Tile"]')
+  return (tarjeta?.textContent ?? '').replace(/\s+/gu, ' ').trim().slice(0, 120)
 }
 
 /** El encabezado de la columna de una celda: por campo, y si no, por posición. */

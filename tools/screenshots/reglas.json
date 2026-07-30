@@ -133,6 +133,36 @@
     "exige": "[.,]\\d|\\d[.,\\u00a0\\u202f]\\d{3}|\\d{4,}|[$€£]|\\d\\s*(?:%|k|K|M|MM|mil|millones)"
   },
 
+  "magnitudes": {
+    "_": [
+      "Cómo se cambia una cifra. Antes se rehacían sus dígitos, y una captura así no cuadra:",
+      "una columna cuyas filas no suman su propio total, un sobreinventario mayor que el",
+      "inventario, un forecast que en dinero supera a las ventas y en unidades no llega.",
+      "",
+      "Ahora la transformación es **lineal y compartida**: un factor por dimensión, el mismo en",
+      "toda la captura. Multiplicar conserva las sumas, los totales y las desigualdades sin",
+      "declarar ninguna fórmula, y no conserva las magnitudes, que es lo que no se publica.",
+      "Dinero y cantidades llevan factores distintos, así que el precio unitario implícito",
+      "tampoco sobrevive.",
+      "",
+      "Lo que sí sobrevive —decisión, y está en el README— son las razones dentro de una misma",
+      "dimensión: el factor se cancela al dividir, así que el margen bruto y el porcentaje de",
+      "venta perdida que la pantalla muestra son los de verdad. Es el precio de que las cifras",
+      "cuadren: cambiar el porcentaje es justo lo que las descuadraba.",
+      "",
+      "`porcentajes_propios` es la excepción: los errores del forecast no derivan de ninguna",
+      "cifra visible, así que no tienen con qué cuadrar y sí se sanean. Se reconocen por la",
+      "pista de la columna o de la tarjeta, no por el número."
+    ],
+    "moneda": "[$€£]|(^|[\\s_])(usd|cop|eur|clp|pen|mxn)([\\s_]|$)",
+    "porcentajes_propios": "mape|smape|(^|[\\s_(])s?mae([\\s_)]|$)|bias|accuracy|precisi[oó]n|exactitud|(^|[\\s_(])fva([\\s_)]|$)|desviaci[oó]n|error",
+    "factores": {
+      "dinero": { "min": 0.35, "max": 2.75 },
+      "cantidad": { "min": 0.35, "max": 2.75 },
+      "porcentaje": { "min": 0.45, "max": 2.2 }
+    }
+  },
+
   "fechas": {
     "_": [
       "Las fechas no se sanean: no identifican a nadie y una fecha falsa vuelve incoherente",
@@ -151,17 +181,21 @@
       "con un número independiente y el eje dejaría de ser creciente. Una gráfica con el eje",
       "desordenado no documenta nada, avisa de que la captura está trucada.",
       "",
-      "Se aplica **un solo factor** a todos los ticks del mismo eje, sacado del hash del eje",
-      "completo. Es una transformación lineal: conserva el orden y las proporciones (que ya",
-      "se ven en la curva) y no conserva las magnitudes, que es lo que no puede publicarse.",
+      "Se aplica **un solo factor** a todos los ticks del mismo eje, y es el de su dimensión",
+      "(ver `magnitudes`): si el eje llevara un factor propio, la gráfica y la tabla de debajo",
+      "hablarían de magnitudes distintas. Es una transformación lineal: conserva el orden y las",
+      "proporciones —que ya se ven en la curva— y no conserva las magnitudes.",
       "",
       "Los ejes en porcentaje se dejan intactos: un 0-100% es una escala fija de la interfaz,",
-      "no un dato del cliente, y multiplicarlo daría un 140%."
+      "no un dato del cliente, y multiplicarlo daría un 140%.",
+      "",
+      "Un eje se escala **mirándolo entero y comprobando el resultado**: si el eje nuevo",
+      "retrocede o repite una etiqueta, no se publica ninguna captura de esa pantalla. Los dos",
+      "defectos que motivaron la comprobación están en el README, y los dos daban un eje que",
+      "no existe en ninguna aplicación."
     ],
     "sel": ".MuiChartsAxis-root",
-    "ticks": ".MuiChartsAxis-tickLabel",
-    "factor_min": 0.35,
-    "factor_max": 2.75
+    "ticks": ".MuiChartsAxis-tickLabel"
   },
 
   "guarda": {

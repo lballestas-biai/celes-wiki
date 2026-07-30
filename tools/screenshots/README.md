@@ -73,6 +73,7 @@ hacer y no se entera. Por eso la pregunta de la guarda no es «¿hice lo que dij
 | `identidad` | El nombre, el correo o la instancia de la cuenta que está capturando |
 | `imagen-externa` | Un `img` de otro origen, que en la práctica es la foto de esa cuenta |
 | `nombre-de-cliente` · `tenant-slug` | Un nombre de la lista de `denylist.json`, o un identificador de instancia, en el texto que quedó a la vista |
+| `eje-incoherente` | Un eje que, después de escalarlo, retrocede o repite una etiqueta. No es una fuga: es una gráfica que documenta una aplicación que no existe (ver «Que la captura cuadre») |
 
 Más una última pregunta que se hace ya en Node, sobre el texto que quedó a la vista:
 **¿aparece el nombre de algún cliente conocido, o el identificador de una instancia?** La
@@ -86,6 +87,57 @@ que hacer es **declarar la región o la especie que falta** en `reglas.json` y v
 correr. La lista de siglas permitidas es para lo que de verdad es vocabulario de la
 aplicación —una palabra que el cliente lee igual en su pantalla—; **un dato no se silencia
 ahí**, y en el diff se distingue perfectamente una cosa de la otra.
+
+## Que la captura cuadre
+
+Una captura no solo tiene que no filtrar: tiene que **poder leerse**. La primera versión
+rehacía los dígitos de cada celda por su cuenta, y eso deja una pantalla que se desmiente
+sola —una columna cuyas dos filas no suman su propio total, un sobreinventario mayor que el
+inventario, un forecast que en dinero supera a las ventas y en unidades no llega—. No es una
+fuga; es peor para lo que la wiki quiere: cualquiera que divida dos cifras de la captura
+concluye que la aplicación no sabe sumar.
+
+Así que las cifras se escalan con una **transformación lineal compartida**: un factor por
+dimensión —uno para el dinero, otro para las cantidades—, el mismo en toda la captura y en
+todas las capturas del mismo salt. Multiplicar por una constante conserva las sumas, los
+totales y las desigualdades sin que haya que declararle a nadie qué significa cada columna,
+y no conserva las magnitudes, que es lo único que no se puede publicar.
+
+De ahí salen tres consecuencias que conviene tener presentes:
+
+- **Las razones dentro de una dimensión sobreviven**, porque el factor se cancela al
+  dividir. El margen bruto, el porcentaje de venta perdida y el GMROI que muestra una
+  captura son los del tenant. Es una decisión, tomada a sabiendas: **coherencia y ocultar
+  las razones son incompatibles**, y una página cuya aritmética no cuadra desacredita a la
+  wiki entera. Lo que no sobrevive: ninguna magnitud, ningún volumen, y tampoco el precio
+  unitario implícito (dinero y cantidades no comparten factor).
+- **Por eso un porcentaje derivable de dos cifras visibles se deja intacto**: cambiarlo es
+  justo lo que descuadraba la tarjeta. Los que no derivan de nada visible —los errores del
+  forecast: MAPE, sMAPE, BIAS, MAE, accuracy, FVA— no tienen con qué cuadrar y sí se sanean.
+  La lista está en `magnitudes.porcentajes_propios`, y se reconocen por el encabezado de la
+  columna o el texto de la tarjeta, no por el número.
+- **Un código no es una magnitud.** Un identificador multiplicado por 1,7 deja de tener la
+  longitud de un código, así que la especie `codigo` va por `forma` —dígito por dígito,
+  conservando los ceros de la izquierda— y con reparto sin colisiones dentro de la captura,
+  igual que los nombres. Esa rama va **antes** que la de los números: `797` es un nodo
+  numérico como cualquier otro y sin ella se lo llevaba el escalado.
+
+Un tick, además, sale con **las mismas cifras significativas que traía**: el eje que la
+aplicación pinta «500 k · 1 M · 2 M» se redondea a una cifra, y emitir el escalado con dos
+dejaba un «220 k» al lado de un «450 k» que ese formateador no produce nunca. La contrapartida
+es que la etiqueta redondeada puede quedar hasta un ~5 % por encima o por debajo de la
+posición geométrica del tick. Se prefiere así: una etiqueta creíble y ligeramente redondeada
+antes que una exacta que delate que el eje se escaló. Es la misma aproximación que ya hace la
+aplicación —el eje derecho de Desempeño General pinta **dos ticks distintos como «2 M»**, y la
+captura reproduce ese duplicado en vez de arreglarlo: documenta la aplicación que hay—.
+
+Un eje, además, se comprueba: se escala con el factor de su dimensión —si llevara uno propio,
+la gráfica y la tabla de debajo hablarían de escalas distintas— y después se le pregunta si
+**sigue ordenado y no repite ninguna etiqueta**. Si no, no se publica ninguna captura de esa
+pantalla. Los dos defectos que motivaron esa comprobación estaban los dos en el mismo eje de
+Desempeño General y tenían causas distintas: la rejilla emitía los ticks con cero decimales,
+así que un paso de medio millón salía «1 M · 1 M · 2 M · 2 M»; y el valor de un tick se leía
+sin mirar su sufijo, así que el `1300 k` de un eje valía 1300 y el `3 M` de al lado valía 3.
 
 ## Añadir una pantalla
 
@@ -154,10 +206,18 @@ capturas son comparables sin publicar el salt.
   «Copiar SQL» que un cliente no ve. Se quitan en `reglas.json`, pero quitar de la captura
   lo que sobra es un parche: para esta épica basta una cuenta **de solo lectura**, pedida en
   el issue #2811.
-- **La forma de las curvas es real.** Los ejes se reescalan con un factor por eje —las
-  magnitudes no se publican— pero el dibujo de la serie sigue siendo el del tenant. Sin
-  volúmenes ni nombres no identifica a nadie; queda anotado porque es una decisión, no un
-  olvido.
+- **La forma de las curvas es real.** Los ejes se reescalan —las magnitudes no se publican—
+  pero el dibujo de la serie sigue siendo el del tenant. Sin volúmenes ni nombres no
+  identifica a nadie; queda anotado porque es una decisión, no un olvido.
+- **Las razones sobreviven.** Es la contrapartida de que las cifras cuadren, y está explicada
+  en «Que la captura cuadre»: el margen bruto, el porcentaje de venta perdida y el GMROI que
+  muestra una captura son los del tenant. Lo que no sobrevive: ninguna magnitud, el precio
+  unitario implícito y los errores del forecast.
+- **Un eje se mira entero, una tabla no.** La comprobación del eje garantiza que ninguna
+  gráfica salga desordenada o con etiquetas repetidas. No hay una comprobación equivalente
+  que sume las columnas de una tabla y las compare con su fila de agregado: la linealidad lo
+  garantiza por construcción, pero si alguien añade una regla que rompa la linealidad, quien
+  lo va a notar es la revisión humana.
 - **Los píxeles no se leen.** Ver «La revisión humana».
 - **Un código corto se le puede escapar.** Quitando de `reglas.json` las tres formas de
   encontrar una celda, la guarda caza los cuatro nombres de centro de la pantalla de

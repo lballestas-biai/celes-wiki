@@ -75,10 +75,13 @@ prueba('otro salt da otro resultado', () => {
   cierto(conUno !== conOtro, 'con dos salts distintos salió el mismo nombre ficticio')
 })
 
-prueba('el número conserva su forma y pierde su valor', () => {
+// El ancho exacto ya no se conserva, y es a propósito: las cifras se escalan por un factor
+// (ver `magnitudes` en reglas.json) para que la aritmética de la captura cuadre, y un factor
+// puede añadir o quitar un dígito. Lo que sí se conserva es el formato.
+prueba('el número conserva su formato y pierde su valor', () => {
   const { texto } = saneador.sanear('$ 7.843.141,17', { enRegion: true })
   cierto(texto !== '$ 7.843.141,17', 'no cambió')
-  igual(texto.replace(/\d/gu, '#'), '$ #.###.###,##', 'la forma cambió: ')
+  cierto(/^\$ \d{1,3}(\.\d{3})*,\d{2}$/u.test(texto), `perdió el formato de la pantalla: ${texto}`)
 })
 
 prueba('los ceros se quedan quietos', () => {
@@ -191,6 +194,158 @@ prueba('un eje con dos unidades sigue creciendo', () => {
     cierto(enMiles[i] >= enMiles[i - 1], `el eje mezcló unidades y dejó de crecer: ${nuevos.join(' | ')}`)
   }
 })
+
+// --- que la captura cuadre --------------------------------------------------
+// Lo que estas pruebas defienden no se ve en un PNG de una en una: se ve al dividir dos
+// cifras de la misma captura. Antes de `magnitudes` cada celda se rehacía por su cuenta y
+// una columna no sumaba su propio total.
+
+const valorDe = (texto) => Number(texto.replace(/[^\d,-]/gu, '').replace(',', '.'))
+
+prueba('una columna suma su propio total', () => {
+  const filas = ['28.461,00', '359,00']
+  const total = '28.820,00'
+  const saneadas = filas.map((fila) => valorDe(saneador.sanear(fila, { enRegion: true }).texto))
+  const saneado = valorDe(saneador.sanear(total, { enRegion: true }).texto)
+  const suma = saneadas.reduce((acumulado, valor) => acumulado + valor, 0)
+  cierto(
+    Math.abs(suma - saneado) < 0.02,
+    `el agregado no es la suma de sus filas: ${saneadas.join(' + ')} = ${suma} y el total salió ${saneado}`,
+  )
+})
+
+prueba('lo que era menor sigue siendo menor', () => {
+  // Un sobreinventario mayor que el inventario total es lo que salió la primera vez.
+  const inventario = valorDe(saneador.sanear('$ 12.851.580,19', { enRegion: true }).texto)
+  const sobre = valorDe(saneador.sanear('$ 6.101.239,21', { enRegion: true }).texto)
+  cierto(sobre < inventario, `el sobreinventario (${sobre}) superó al inventario (${inventario})`)
+})
+
+prueba('la razón entre dos cifras de la misma dimensión se conserva', () => {
+  const ventas = valorDe(saneador.sanear('$ 5.185.536,17', { enRegion: true }).texto)
+  const utilidad = valorDe(saneador.sanear('$ 1.927.477,58', { enRegion: true }).texto)
+  const real = 1_927_477.58 / 5_185_536.17
+  cierto(Math.abs(utilidad / ventas - real) < 0.005, `el margen dejó de cuadrar: ${(utilidad / ventas).toFixed(4)} vs ${real.toFixed(4)}`)
+})
+
+prueba('el dinero y las cantidades no comparten factor', () => {
+  // Si lo compartieran, el precio unitario implícito de la tarjeta seguiría siendo el real.
+  cierto(
+    Math.abs(saneador.factorDe('dinero') - saneador.factorDe('cantidad')) > 0.05,
+    'dinero y cantidad salieron con el mismo factor: el precio unitario sobreviviría',
+  )
+})
+
+prueba('un porcentaje derivable se deja quieto y uno propio se sanea', () => {
+  const margen = saneador.sanear('13,64%', { enRegion: true, pista: 'Margen bruto' })
+  igual(margen.texto, '13,64%', 'un margen tiene que seguir cuadrando con sus dos cifras: ')
+  igual(margen.tipo, 'razon-coherente', 'y tiene que quedar marcado para que la guarda no lo cuente: ')
+
+  const mape = saneador.sanear('69,77%', { enRegion: true, pista: 'MAPE' })
+  cierto(mape.texto !== '69,77%', 'el MAPE no deriva de nada visible y sí se sanea')
+  cierto(valorDe(mape.texto) > 0 && valorDe(mape.texto) <= 100, `un porcentaje salió fuera de rango: ${mape.texto}`)
+})
+
+prueba('un porcentaje saneado nunca se sale del 100%', () => {
+  for (const valor of ['80,00%', '95,50%', '99,90%', '100,00%', '61,60%']) {
+    const { texto } = saneador.sanear(valor, { enRegion: true, pista: 'Accuracy' })
+    cierto(valorDe(texto) <= 100, `«${valor}» salió como «${texto}»`)
+  }
+})
+
+prueba('el subtítulo de una tarjeta se sanea como la cifra que describe', () => {
+  const { texto } = saneador.sanear('47,41% de las ventas totales', { enRegion: false, pista: 'Venta Perdida' })
+    ?? { texto: '47,41% de las ventas totales' }
+  igual(texto, '47,41% de las ventas totales', 'es la razón entre dos cifras visibles: ')
+})
+
+prueba('un código no se escala: se rehace y conserva su longitud', () => {
+  const propio = crearSaneador({ catalogo, reglas, salt: SALT })
+  for (const real of ['797', '004', '704757', 'PS-00412']) {
+    const { texto, tipo } = propio.sanear(real, { enRegion: true, especie: 'codigo' })
+    igual(tipo, 'codigo', `«${real}» no fue tratado como código: `)
+    igual(texto.length, real.length, `«${real}» → «${texto}» cambió de longitud: `)
+    cierto(texto !== real, `«${real}» no cambió`)
+  }
+  igual(propio.sanear('004', { enRegion: true, especie: 'codigo' }).texto.slice(0, 2), '00', 'perdió los ceros de la izquierda: ')
+})
+
+prueba('dos códigos distintos no salen iguales', () => {
+  const propio = crearSaneador({ catalogo, reglas, salt: SALT })
+  const reales = Array.from({ length: 120 }, (_, i) => String(100 + i))
+  const ficticios = reales.map((real) => propio.sanear(real, { enRegion: true, especie: 'codigo' }).texto)
+  igual(new Set(ficticios).size, reales.length, 'hubo códigos repetidos en la misma captura')
+})
+
+// Los dos defectos que se vieron en el PNG de Desempeño General: el eje derecho salió
+// «0 · 1300 k · 3 M · 5 M · 5 M · 8 M» —desordenado en valor y con una etiqueta repetida—.
+prueba('ningún eje plausible sale desordenado ni con etiquetas repetidas', () => {
+  const ejes = []
+  for (const unidad of [1, 1e3, 1e6]) {
+    for (const paso of [1, 1.6, 2.5, 75, 800]) {
+      for (const cuantos of [3, 5, 6, 9]) {
+        ejes.push(Array.from({ length: cuantos }, (_, i) => formatoDeEje(paso * i * unidad)))
+      }
+    }
+  }
+  ejes.push(['0', '800 k', '1,6 M', '2,4 M', '3,2 M', '4 M'])
+  ejes.push(['0', '1,6 M', '3,2 M', '4,8 M', '6,4 M', '8 M'])
+  ejes.push(['0', '500 k', '1 M', '1,5 M', '2 M'])
+
+  for (const eje of ejes) {
+    const decision = saneador.escalarEje(eje)
+    if (!decision || decision.accion === 'intacto') continue
+    cierto(decision.accion !== 'incoherente', `un eje corriente se declaró impublicable (${eje.join(' | ')}): ${decision.porque}`)
+    const nuevos = decision.ticks.filter((tick) => tick.trim())
+    const valores = nuevos.map(absolutoDeEje)
+    for (let i = 1; i < valores.length; i += 1) {
+      cierto(valores[i] > valores[i - 1], `el eje dejó de crecer: ${eje.join(' | ')} → ${nuevos.join(' | ')}`)
+      cierto(nuevos[i] !== nuevos[i - 1], `dos etiquetas salieron iguales: ${eje.join(' | ')} → ${nuevos.join(' | ')}`)
+    }
+  }
+})
+
+// El eje derecho de Desempeño General, tal como lo pinta la aplicación: su formateador
+// redondea a una cifra y **repite una etiqueta él solo**. La captura tiene que reproducir eso
+// —documenta la aplicación que hay, no una mejor— y no declararlo impublicable: la
+// comprobación solo caza los duplicados que introduce el escalado.
+prueba('un eje que la aplicación ya pinta con etiquetas repetidas se reproduce igual', () => {
+  const decision = saneador.escalarEje(['0', '500 k', '1 M', '2 M', '2 M', '3 M'])
+  igual(decision.accion, 'escalado', 'se declaró impublicable un eje que la aplicación pinta así: ')
+  const nuevos = decision.ticks
+  igual(nuevos[3], nuevos[4], 'el eje original repetía esa etiqueta y la captura tiene que repetirla: ')
+  const valores = nuevos.map(absolutoDeEje)
+  for (const [i, valor] of valores.entries()) {
+    if (i) cierto(valor >= valores[i - 1], `el eje retrocedió: ${nuevos.join(' | ')}`)
+  }
+  // Y con la precisión de la aplicación: un «220 k» al lado de un «500 k» no lo emite nunca.
+  for (const tick of nuevos.filter((entrada) => entrada !== '0')) {
+    cierto(/^[1-9](,\d+)? [kM]$/u.test(tick) || /^[1-9]00 k$/u.test(tick), `«${tick}» no lo pintaría ese formateador`)
+  }
+})
+
+prueba('la gráfica habla de las mismas magnitudes que la tabla', () => {
+  // Un eje con factor propio dejaba la gráfica y las cifras de debajo en escalas distintas.
+  const { ticks } = saneador.escalarEje(['0', '100 k', '200 k', '300 k', '400 k'])
+  const razon = absolutoDeEje(ticks[4]) / 400_000
+  cierto(
+    Math.abs(razon - saneador.factorDe('cantidad')) < 0.3,
+    `el eje se escaló por ${razon.toFixed(2)} y las celdas por ${saneador.factorDe('cantidad').toFixed(2)}`,
+  )
+})
+
+/** Un número como lo pinta el eje de la aplicación: compacto y con coma decimal. */
+function formatoDeEje(valor) {
+  if (valor === 0) return '0'
+  const [unidad, marca] = valor >= 1e6 ? [1e6, ' M'] : valor >= 1e3 ? [1e3, ' k'] : [1, '']
+  const enUnidad = valor / unidad
+  return `${(Number.isInteger(enUnidad) ? String(enUnidad) : enUnidad.toFixed(1)).replace('.', ',')}${marca}`
+}
+
+function absolutoDeEje(tick) {
+  const unidad = /\bM\b/u.test(tick) ? 1e6 : /\bk\b/iu.test(tick) ? 1e3 : 1
+  return Number(tick.replace(/[^\d,]/gu, '').replace(',', '.')) * unidad
+}
 
 prueba('la columna la nombra su encabezado, no solo su data-field', () => {
   // En el reporte de desempeño la columna «Nombre del Proveedor» tiene data-field="category".
