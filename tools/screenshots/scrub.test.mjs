@@ -400,6 +400,24 @@ prueba('quien creó la regla se cambia por la identidad de ejemplo', () => {
   igual(saneador.sanear('Diego Pérez', { enRegion: true, especie: 'usuario' }).texto, catalogo.usuario.nombre)
 })
 
+prueba('un mes en mayúsculas no es una fecha: es un texto que alguien tecleó', () => {
+  // El patrón de fechas acepta un mes suelto («jul», «julio») porque así vienen los ticks
+  // de un eje agregado por mes. Sin la discriminante de la caja, un escenario llamado
+  // «JULIO» entraba por fecha y salía de la captura sin sanear (lo cazó la guarda).
+  igual(saneador.clasificar('julio'), 'fecha')
+  igual(saneador.clasificar('jul'), 'fecha')
+  igual(saneador.clasificar('Julio 2026'), 'fecha')
+  igual(saneador.clasificar('JULIO'), 'texto')
+  igual(saneador.clasificar('ENERO'), 'texto')
+  // El umbral es el de `guarda.mayusculas` (4): una abreviatura de mes de tres letras sigue
+  // siendo una fecha, y es lo que la guarda tampoco iba a rechazar.
+  igual(saneador.clasificar('JUL'), 'fecha')
+  igual(saneador.clasificar('DIC'), 'fecha')
+  // Y no se lleva por delante una fecha real que traiga dígitos o mayúsculas de formato.
+  igual(saneador.clasificar('16 de jul, 2026'), 'fecha')
+  igual(saneador.clasificar('2026-07-30'), 'fecha')
+})
+
 prueba('una fecha con hora sigue siendo una fecha', () => {
   igual(saneador.clasificar('18/3/2026, 2:26:27 p. m.'), 'fecha')
   igual(saneador.clasificar('2026-07-30 14:32'), 'fecha')

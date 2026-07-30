@@ -94,6 +94,7 @@ export function crearSaneador({ catalogo, reglas, salt }) {
   const reExige = new RegExp(reglas.numeros.exige, 'u')
   const reFecha = new RegExp(reglas.fechas.patron, 'iu')
   const reAnio = new RegExp(reglas.fechas.anios, 'u')
+  const reNoEsFecha = new RegExp(reglas.fechas.nunca_en_mayusculas, 'u')
   const reMoneda = new RegExp(reglas.magnitudes.moneda, 'u')
   const rePorcentajePropio = new RegExp(reglas.magnitudes.porcentajes_propios, 'iu')
   const especies = reglas.especies.orden.map((entrada) => ({
@@ -105,7 +106,10 @@ export function crearSaneador({ catalogo, reglas, salt }) {
   function clasificar(texto) {
     const valor = texto.trim()
     if (!valor || !/[\p{L}\p{N}]/u.test(valor)) return 'vacio'
-    if (reFecha.test(valor)) return 'fecha'
+    // Ver `fechas.nunca_en_mayusculas` en reglas.json: el patrón acepta un mes suelto para
+    // los ejes agregados por mes, y eso dejaba pasar un escenario llamado «JULIO». Una fecha
+    // la escribe la aplicación y no viene en mayúsculas sostenidas.
+    if (reFecha.test(valor) && !reNoEsFecha.test(valor)) return 'fecha'
     if (reNumeroEntero.test(valor)) return 'numero'
     return 'texto'
   }

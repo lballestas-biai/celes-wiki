@@ -6,44 +6,49 @@ aliases: []
 permission: planning.procurement-calendar
 audience: [Clientes, Usuarios]
 summary: >
-  Pendiente. Esta página es un esqueleto: todavía no describe la pantalla.
-keywords: []
-tenant_variance: unknown
+  Esta entrada del menú de Pronóstico todavía no tiene pantalla: la dirección existe y
+  responde, pero no muestra nada. El calendario de compras que sí funciona es el de
+  Reabastecimiento.
+keywords: [calendario de compras, no disponible]
+tenant_variance: none
 status: draft
-verified_at: 2026-07-29
+verified_at: 2026-07-30
 sources:
   - repo: celes-platform
-    path: apps/web-client/src/routeTree.gen.ts
-    ref: 981f61942
+    path: apps/web-client/src/routes/_layout.planning.procurement-calendar.index.lazy.tsx
+    ref: fd8a12056
+  - repo: celes-platform
+    path: apps/web-client/src/components/Layout/NavMenu/navigationItems.ts
+    ref: fd8a12056
   - repo: celes-platform
     path: apps/web-client/public/locales/es/routes.json
-    ref: 981f61942
-  - repo: celes-platform
-    path: apps/web-client/src/providers/AuthProvider/checkModuleAccess.ts
-    ref: 981f61942
-  - repo: celes-platform
-    path: apps/web-client/src/utils/routeMigrations.ts
-    ref: 981f61942
+    ref: fd8a12056
 ---
 
 # Calendario de Compras
 
-!!! warning "Página en construcción"
-    Todavía no describe la pantalla. Lo único verificado por ahora es la ficha de
-    abajo, derivada del código de la aplicación.
+!!! warning "Esta pantalla todavía no existe"
 
-## Ficha de la pantalla { #ficha }
+    *Calendario de Compras* aparece en el menú de Pronóstico y su dirección
+    (`/planning/procurement-calendar`) responde, pero **la pantalla no está implementada**:
+    quien entre no verá ningún calendario. No es un problema de configuración de tu
+    instancia ni de permisos.
 
-| | |
-|---|---|
-| **Dónde está** | Menú: Pronóstico › Calendario de Compras |
-| **Dirección** | `/planning/procurement-calendar` |
-| **Quién la ve** | Usuarios con el permiso `planning.procurement-calendar`. |
+    Esta página se queda en borrador a propósito. No documentamos una pantalla que no
+    existe, y se actualizará cuando exista o cuando la entrada salga del menú.
 
-## Qué es y para qué sirve { #que-es }
+## Qué hay mientras tanto { #alternativa }
 
-## Qué puedes hacer aquí { #que-puedes-hacer }
+Si lo que buscas es el calendario de las órdenes de compra —qué se pide, a quién y qué
+día—, la pantalla que lo hace es
+[Calendario de Órdenes de Compra](../reabastecimiento/calendario-de-oc.md), en
+Reabastecimiento. Son pantallas distintas y esa sí está en producción.
 
-## Qué necesita para funcionar { #requisitos }
+Si lo que buscas es el calendario de promociones o el de eventos, están en
+[Calendario de Promociones](../promociones/calendario-de-promociones.md) y en
+[Calendario de Eventos](calendario-de-eventos.md).
 
 ## Conceptos relacionados { #conceptos }
+
+- [Pronóstico](index.md)
+- [Calendario de Órdenes de Compra](../reabastecimiento/calendario-de-oc.md)
