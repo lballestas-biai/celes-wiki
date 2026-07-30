@@ -55,6 +55,8 @@ theme:
     - navigation.instant.progress
     - navigation.tracking
     - navigation.sections
+    # Migas de pan: el mock las tiene y ubican la pantalla dentro de su módulo.
+    - navigation.path
     # La portada de cada sección es su propia página (docs/<bloque>/index.md).
     - navigation.indexes
     - navigation.top
@@ -68,9 +70,17 @@ theme:
     - content.tooltips
 
 extra_css:
+  # Tokens de marca (solo colores) y, encima, el porte del layout del mock.
   - assets/stylesheets/brand.css
+  - assets/stylesheets/layout.css
 
 extra:
+  # `status` del frontmatter → marca visible en el menú lateral. Sin una entrada
+  # aquí (y su `--md-status--<valor>` en brand.css) el theme pinta un cuadrado
+  # vacío, así que todo valor que use el contenido tiene que estar listado.
+  status:
+    draft: Borrador — todavía no describe la pantalla
+    verified: Verificada contra el producto
   # Sin analítica de terceros: la wiki es pública y no rastrea a los clientes.
   social:
     - icon: fontawesome/brands/github
@@ -102,6 +112,8 @@ markdown_extensions:
       permalink: true
       permalink_title: Enlace a esta sección
       toc_depth: 3
+      # El theme usa este título para el índice de la derecha.
+      title: En esta página
   - pymdownx.details
   # Habilita los iconos `:material-*:` que usa el contenido para referirse a
   # botones de la aplicación.

@@ -1,7 +1,16 @@
 /*
  * Tokens de marca portados del mock de referencia (eliana-a11y/celes-wiki).
- * Aquí solo viven los colores: el porte del layout (sidebar por grupos, bloque
- * de resumen, etiqueta de audiencia, pager) es el issue 0.3.
+ * Aquí solo viven los colores y las constantes; el porte del layout está en
+ * `layout.css`.
+ *
+ * Dos valores del mock se corrigieron a propósito, porque no pasaban AA (4.5:1)
+ * y la accesibilidad es parte del entregable:
+ *
+ *   · gris de textos secundarios pequeños  #9498B8 → #686E96   (2.6:1 → 4.6:1)
+ *   · ocre de avisos                       #B9760A → #9A6108   (3.5:1 → 4.8:1)
+ *
+ * Las relaciones se miden contra el lienzo real donde cae el texto
+ * (`--celes-canvas` en claro, `--celes-*` oscuro), no contra blanco puro.
  */
 
 :root,
@@ -12,17 +21,31 @@
   --md-accent-fg-color: #1e42e0;
   --md-accent-fg-color--transparent: #eef1ff;
 
-  --md-default-bg-color: #ffffff;
+  /* El lienzo es gris y las tarjetas son blancas, como en el mock. */
+  --md-default-bg-color: #f6f7fc;
   --md-default-fg-color: #12142e;
   --md-default-fg-color--light: #565c82;
-  --md-default-fg-color--lighter: #9498b8;
+  --md-default-fg-color--lighter: #686e96;
+  --md-default-fg-color--lightest: #d6daee;
   --md-typeset-a-color: #1e42e0;
 
+  --celes-canvas: #f6f7fc;
+  --celes-surface: #ffffff;
+  --celes-sidebar: #fbfbfe;
   --celes-bg: #f6f7fc;
   --celes-border: #e6e9f5;
   --celes-border-strong: #d6daee;
-  --celes-warn: #b9760a;
+  --celes-muted: #686e96;
+  --celes-accent-soft: #eef1ff;
+  --celes-accent-strong: #1e42e0;
+  /* Tinta sobre un fondo de acento (la marca de la barra superior). */
+  --celes-accent-ink: #ffffff;
+  --celes-navy: #0b1330;
+  --celes-warn: #9a6108;
   --celes-warn-soft: #fff6e8;
+
+  --celes-shadow-sm: 0 1px 2px rgba(18, 20, 46, 0.06);
+  --celes-shadow-md: 0 12px 32px -12px rgba(18, 20, 46, 0.22);
 }
 
 [data-md-color-scheme="slate"] {
@@ -35,12 +58,36 @@
   --md-default-bg-color: #0a0c1e;
   --md-default-fg-color: #eef0fc;
   --md-default-fg-color--light: #a8add4;
-  --md-default-fg-color--lighter: #6c7299;
+  --md-default-fg-color--lighter: #7b81ab;
+  --md-default-fg-color--lightest: #2f3566;
   --md-typeset-a-color: #8ca1ff;
 
+  --celes-canvas: #0a0c1e;
+  --celes-surface: #11142c;
+  --celes-sidebar: #0d1026;
   --celes-bg: #0a0c1e;
   --celes-border: #242a54;
   --celes-border-strong: #2f3566;
+  --celes-muted: #7b81ab;
+  --celes-accent-soft: #181f45;
+  --celes-accent-strong: #8ca1ff;
+  /* En oscuro el acento es claro, así que la tinta encima se invierte. */
+  --celes-accent-ink: #0a0c1e;
+  --celes-navy: #050713;
   --celes-warn: #f0b429;
   --celes-warn-soft: #241c0b;
+
+  --celes-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --celes-shadow-md: 0 12px 32px -12px rgba(0, 0, 0, 0.55);
+}
+
+/*
+ * Iconos de los `status` del frontmatter. El theme pinta `.md-status::after` con
+ * `mask-image: var(--md-status--<valor>)`: si el valor no tiene variable, la
+ * máscara queda vacía y sale un cuadrado sólido. Todo estado que use el contenido
+ * necesita su icono aquí y su entrada en `extra.status` de mkdocs.yml.
+ */
+:root {
+  --md-status--draft: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>');
+  --md-status--verified: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 3 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.68L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69zm-12.91 4.72-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48z"/></svg>');
 }
