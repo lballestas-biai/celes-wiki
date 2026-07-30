@@ -2,8 +2,9 @@
   "version": 1,
   "_": [
     "Una entrada por captura publicada. Lo escribe capture.mjs y lo comprueba",
-    "check-screenshots.mjs, que falla si un PNG de docs/assets/screenshots/ no está aquí,",
-    "si no tiene revisión humana, o si cambió después de que alguien lo revisara.",
+    "check-screenshots.mjs, que falla si un PNG de docs/assets/screenshots/ no está aquí o",
+    "si cambió después de capturarse. `revision` es opcional desde #2816: si está, tiene",
+    "que ser la firma de la imagen que se publica hoy.",
     "`salt_id` identifica el salt con el que se saneó sin revelarlo: dos capturas con el",
     "mismo salt_id usan los mismos nombres ficticios y son comparables entre sí."
   ],

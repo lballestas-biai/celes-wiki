@@ -1,20 +1,25 @@
 #!/usr/bin/env node
 /**
- * Lo que CI comprueba sobre las capturas. Cuatro preguntas:
+ * Lo que CI comprueba sobre las capturas. Tres preguntas:
  *
  *   1. ¿Está en el manifiesto? Un PNG en `docs/assets/screenshots/` que nadie anotó no se
  *      sabe de dónde salió ni con qué reglas se saneó.
- *   2. ¿La miró una persona? `revision` con nombre y con el `sha256` del archivo que hay
- *      hoy. Aprobar una imagen y cambiarla después no cuenta.
- *   3. ¿Es un PNG de verdad, del tamaño que dice? Barato de comprobar y delata un archivo
- *      cambiado a mano.
- *   4. ¿Entró alguna imagen al **historial** fuera de `docs/assets/screenshots/`? El
+ *   2. ¿Es un PNG de verdad, del tamaño que dice, y el mismo que se capturó? Barato de
+ *      comprobar y delata un archivo cambiado a mano.
+ *   3. ¿Entró alguna imagen al **historial** fuera de `docs/assets/screenshots/`? El
  *      historial de git es permanente: un original commiteado no se borra con el commit
- *      siguiente. Esta es la única de las cuatro que mira el pasado, y por eso el job de
+ *      siguiente. Esta es la única de las tres que mira el pasado, y por eso el job de
  *      CI clona con `fetch-depth: 0`.
  *
- * Lo que **no** comprueba: los píxeles. Que la captura no muestre datos de cliente lo
- * afirma la revisión humana del punto 2; esto solo se asegura de que esa revisión exista.
+ * Lo que **no** comprueba: los píxeles. Ninguna máquina lee una captura, así que lo que
+ * de verdad protege el repositorio es lo que pasa **antes** del disparo —el saneamiento
+ * determinista del DOM y la guarda que aborta ante lo que tenga forma de dato—, no esto.
+ *
+ * Antes, esta comprobación exigía además una firma humana por captura. Salió por decisión
+ * del 2026-07-30 (issue #2816): la wiki se corrige de forma correctiva. `approve.mjs`
+ * sigue existiendo y su firma se sigue respetando —una que no case con el archivo actual
+ * es un error, porque el manifiesto estaría diciendo que alguien aprobó otra imagen—,
+ * pero **no tenerla ya no bloquea**.
  *
  *   node tools/screenshots/check-screenshots.mjs
  *   node tools/screenshots/check-screenshots.mjs --sin-historial   # sin el barrido de git
@@ -61,19 +66,15 @@ for (const destino of publicadas) {
   }
 
   if (sha !== captura.sha256) {
-    anotar(`${destino} cambió después de capturarse`, 'Volver a correr capture.mjs y aprobar de nuevo.')
+    anotar(`${destino} cambió después de capturarse`, 'Volver a correr capture.mjs.')
     continue
   }
-  if (!captura.revision?.por) {
+  // La firma es opcional; lo que no se admite es una firma que no sea de esta imagen: el
+  // manifiesto estaría afirmando que alguien aprobó algo que ya no es lo que se publica.
+  if (captura.revision?.por && captura.revision.sha256 !== sha) {
     anotar(
-      `${destino} no tiene revisión humana`,
-      'Ningún script sabe si una captura muestra datos de cliente: eso lo mira una persona. ' +
-        'node tools/screenshots/approve.mjs --pendientes',
-    )
-  } else if (captura.revision.sha256 !== sha) {
-    anotar(
-      `${destino} se revisó con otro contenido`,
-      'La aprobación es de una imagen concreta. Volver a aprobar la que hay ahora.',
+      `${destino} tiene una firma de otro contenido`,
+      'La aprobación es de una imagen concreta. Volver a aprobarla, o quitar la entrada `revision`.',
     )
   }
 }
@@ -97,7 +98,10 @@ if (problemas.length) {
 }
 
 const revisadas = manifiesto.capturas.filter((captura) => captura.revision?.por).length
-console.log(`check-screenshots: limpio · ${publicadas.length} captura(s) publicadas, ${revisadas} revisadas`)
+console.log(
+  `check-screenshots: limpio · ${publicadas.length} captura(s) publicadas, ` +
+    `${revisadas} con firma humana (opcional desde #2816)`,
+)
 
 // --- el historial ----------------------------------------------------------
 

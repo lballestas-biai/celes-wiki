@@ -43,7 +43,7 @@ jobs:
         if: ${{ !cancelled() }}
         run: node tools/screenshots/scrub.test.mjs
 
-      - name: Capturas revisadas
+      - name: Capturas trazables
         if: ${{ !cancelled() }}
         run: node tools/screenshots/check-screenshots.mjs
 

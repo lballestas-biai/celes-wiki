@@ -42,8 +42,9 @@ const valor = (nombre, porDefecto) => (argv.includes(nombre) ? argv[argv.indexOf
 
 const PROPOSITO_MANIFIESTO = [
   'Una entrada por captura publicada. Lo escribe capture.mjs y lo comprueba',
-  'check-screenshots.mjs, que falla si un PNG de docs/assets/screenshots/ no está aquí,',
-  'si no tiene revisión humana, o si cambió después de que alguien lo revisara.',
+  'check-screenshots.mjs, que falla si un PNG de docs/assets/screenshots/ no está aquí o',
+  'si cambió después de capturarse. `revision` es opcional desde #2816: si está, tiene',
+  'que ser la firma de la imagen que se publica hoy.',
   '`salt_id` identifica el salt con el que se saneó sin revelarlo: dos capturas con el',
   'mismo salt_id usan los mismos nombres ficticios y son comparables entre sí.',
 ]
@@ -209,10 +210,10 @@ function nombresDeCliente(texto) {
 // --- manifiesto ------------------------------------------------------------
 
 /**
- * El manifiesto es el registro de la revisión humana: `revision: null` significa «esta
- * captura todavía no la miró nadie», y `check-screenshots.mjs` no deja publicar así.
- * Volver a capturar borra la revisión anterior a propósito — la aprobación es de un PNG
- * concreto, no del nombre del archivo.
+ * El manifiesto es de dónde salió cada PNG: con qué reglas, con qué salt y en qué fecha.
+ * `revision: null` significa «esta captura todavía no la miró nadie», que desde #2816 se
+ * puede publicar. Volver a capturar borra la revisión anterior a propósito — la
+ * aprobación es de un PNG concreto, no del nombre del archivo.
  */
 function anotarEnManifiesto({ destino, page, ruta, png, ancho, alto }) {
   const archivo = path.join(ROOT, 'tools/screenshots/manifest.json')
