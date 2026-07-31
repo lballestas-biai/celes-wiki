@@ -60,11 +60,26 @@ const AMBIENTES = {
 }
 
 /**
+ * La API de cada ambiente. No se deduce de la dirección de la aplicación —fuera de prd ni
+ * siquiera comparten dominio de primer nivel— y hace falta para preguntarle al servidor de
+ * quién es la sesión que está capturando (`leerIdentidad`).
+ */
+const APIS = {
+  prd: 'https://api.celes.ai',
+  qas: 'https://qas.api.celes.app',
+  dev: 'https://dev.api.celes.app',
+}
+
+/**
  * Las formas que puede declarar un parámetro de dirección (`resolverBusqueda`), para que un
  * valor mal copiado falle aquí —con el nombre del marcador— y no en una pantalla vacía.
  */
 const FORMAS = {
   uuid: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu,
+  // Las llaves internas de producto y bodega son enteros de 64 bits con signo: el
+  // signo importa y un valor copiado a medias sigue teniendo forma de número, así
+  // que lo que se comprueba es el largo además del alfabeto.
+  clave: /^-?\d{6,20}$/u,
 }
 
 const ambiente = valor('--ambiente', 'prd')
@@ -375,8 +390,24 @@ function valorDelParametro(nombre) {
 
 /**
  * De quién es la sesión del navegador, para poder borrarla de la pantalla y comprobar que
- * no quedó. Sale del registro que `auto-login.mjs` escribe en IndexedDB, así que no hay
- * que pasar el nombre a mano ni acertar con el tenant.
+ * no quedó.
+ *
+ * Se preguntan **las tres fuentes**, porque ninguna basta sola y en 1a.8 eso se pagó: el
+ * panel de inicio saluda con el nombre completo de la cuenta y salió publicado.
+ *
+ *   · El registro de sesión de IndexedDB —el que escribe `auto-login.mjs`— trae el correo
+ *     y la instancia, pero su `displayName` es **nulo**: ese login no pasa por ninguna
+ *     pantalla de proveedor y nadie llena ese campo.
+ *   · `localStorage['user.displayName']` es de donde lo saca la propia aplicación cuando
+ *     Firebase no lo trae (`syncUserDetails`): queda de un login interactivo anterior en
+ *     este perfil, y es exactamente el nombre que se ve en el saludo.
+ *   · `/configs/auth/me` es la fuente del servidor, la misma que usa la aplicación para el
+ *     resto de la sesión, y la única que no depende de lo que haya quedado en el navegador.
+ *
+ * Y el registro no es `getAll()[0]`: esa posición la ocupa el centinela `__sak` de
+ * Firebase, sin ningún dato. Leerlo daba un objeto verdadero con los tres campos vacíos,
+ * así que no había reemplazo, la guarda se quedaba sin valores que buscar **y no se
+ * imprimía ningún aviso**. Fallaba en silencio, que es lo peor que puede hacer un control.
  */
 async function leerIdentidad() {
   const page = await contexto.newPage()
@@ -393,36 +424,74 @@ async function leerIdentidad() {
             const todo = db.transaction('firebaseLocalStorage', 'readonly').objectStore('firebaseLocalStorage').getAll()
             todo.onerror = () => resolver(null)
             todo.onsuccess = () => {
-              const valor = todo.result?.[0]?.value
-              resolver(valor ? { nombre: valor.displayName, correo: valor.email, tenant: valor.tenantId } : null)
+              const sesion = todo.result?.find((fila) => String(fila?.fbase_key ?? '').startsWith('firebase:authUser:'))
+              const valor = sesion?.value
+              resolver({
+                nombre: valor?.displayName || localStorage.getItem('user.displayName') || null,
+                correo: valor?.email || localStorage.getItem('user.email') || null,
+                tenant: valor?.tenantId || null,
+                token: valor?.stsTokenManager?.accessToken || null,
+              })
             }
           }
         }),
     )
-    if (!registro) {
-      console.log('· aviso: no pude leer la identidad de la sesión; la guarda solo comprobará el resto de las reglas')
-      return { pares: [], valores: [] }
+
+    const delServidor = await nombreDelServidor(page, registro?.token)
+    const nombres = [registro?.nombre, delServidor?.nombre].filter(Boolean)
+    const correo = registro?.correo || delServidor?.correo || null
+
+    if (!nombres.length && !correo) {
+      // Sin identidad no hay ni reemplazo ni guarda que lo compruebe, y la pantalla de
+      // inicio saluda por el nombre. Antes esto era un aviso; ahora para la corrida.
+      fallar(
+        'no pude leer la identidad de la sesión (ni IndexedDB, ni localStorage, ni /configs/auth/me).\n' +
+          '  Sin ella el saludo del panel de inicio sale con el nombre real de la cuenta. Volver a loguear:\n' +
+          '  node ~/support/diag-harness/auto-login.mjs <tenant> prd',
+      )
     }
 
     const ejemplo = catalogo.usuario
     const pares = [
-      [registro.nombre, ejemplo.nombre],
-      [registro.correo, ejemplo.correo],
-      [registro.tenant, 'instancia-de-ejemplo'],
+      ...nombres.map((nombre) => [nombre, ejemplo.nombre]),
+      [correo, ejemplo.correo],
+      [registro?.tenant, 'instancia-de-ejemplo'],
     ].filter(([real]) => real)
 
     // Además de los literales completos, la guarda mira los pedazos: un apellido suelto en
-    // otra parte de la pantalla no lo arregla el reemplazo, pero sí tiene que abortar.
+    // otra parte de la pantalla no lo arregla el reemplazo, pero sí tiene que abortar. El
+    // local del correo se parte también por punto y guion bajo: `luis.ballestas` no aparece
+    // nunca en una pantalla, pero «Ballestas» sí.
     const pedazos = [
-      ...(registro.nombre?.split(/\s+/u) ?? []),
-      registro.correo?.split('@')[0],
-      registro.tenant?.split('-')[0],
+      ...nombres.flatMap((nombre) => nombre.split(/\s+/u)),
+      ...(correo?.split('@')[0].split(/[._-]/u) ?? []),
+      registro?.tenant?.split('-')[0],
     ].filter((pedazo) => pedazo && pedazo.length >= 4)
 
     return { pares, valores: [...pares.map(([real]) => real), ...pedazos] }
   } finally {
     await page.close().catch(() => {})
   }
+}
+
+/**
+ * El nombre que el servidor le da a la cuenta que captura. Es la fuente que no depende de
+ * lo que haya quedado en este navegador, y la misma que consulta la aplicación.
+ */
+async function nombreDelServidor(page, token) {
+  if (!token) return null
+  const respuesta = await page
+    .evaluate(
+      async ({ jwt, api }) => {
+        const r = await fetch(`${api}/configs/auth/me`, { headers: { Authorization: `Bearer ${jwt}` } })
+        if (!r.ok) return null
+        const j = await r.json()
+        return { nombre: j?.data?.user?.name ?? null, correo: j?.data?.user?.email ?? null }
+      },
+      { jwt: token, api: APIS[ambiente] },
+    )
+    .catch(() => null)
+  return respuesta
 }
 
 /**

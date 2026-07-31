@@ -69,6 +69,18 @@
       ]
     },
     {
+      "sel": "div.grid > div.min-w-0.truncate",
+      "que": "la barra de información general del Detalle de Producto",
+      "pista": "b",
+      "__": [
+        "El Detalle de Producto abre con una barra de pares «Código de Bodega: 001» donde la",
+        "etiqueta y el valor viven en el **mismo** nodo, con la etiqueta en un `<b>`. Sin esta",
+        "región, el nombre de la tienda y el del producto quedaban crudos y la guarda abortaba",
+        "por `mayusculas`. La `pista` es el `<b>`, y por eso `etiquetaDe` busca dentro de la",
+        "región antes que en su padre."
+      ]
+    },
+    {
       "sel": ".MuiChartsAxis-tickLabel, .MuiChartsAxis-label",
       "que": "ejes de las gráficas"
     },
@@ -85,9 +97,14 @@
       "nombres de la interfaz exactos.",
       "",
       "La excepción vale solo para el control que está **dentro** de la región: si la región",
-      "entera fuera un control, exceptuarla dejaría la celda sin sanear."
+      "entera fuera un control, exceptuarla dejaría la celda sin sanear.",
+      "",
+      "`b` entró en 1a.8 por la misma razón: en la barra del Detalle de Producto la etiqueta",
+      "del campo va en negrita **dentro** de la región del valor, y reemplazarla dejaría una",
+      "captura que llama «Galleta Integral» a lo que la aplicación llama «Nombre de Producto».",
+      "Es la etiqueta del dato, no el dato."
     ],
-    "sel": "button, a[href], [role='button'], [role='menuitem'], select, label"
+    "sel": "button, a[href], [role='button'], [role='menuitem'], select, label, b"
   },
   "especies": {
     "_": [
@@ -401,11 +418,19 @@
       ]
     },
     "imagenes": {
-      "_": "Un `img` de otro origen es, en la práctica, la foto de la cuenta que captura.",
+      "_": [
+        "Un `img` de otro origen es, en la práctica, la foto de la cuenta que captura.",
+        "",
+        "La excepción de 1a.8: las portadas de los libros del panel de inicio salen del sitio",
+        "público de Celes y están **escritas fijas en el código** de la tarjeta, iguales en",
+        "cualquier instancia. No son de nadie: no identifican al cliente ni a la cuenta que",
+        "captura. Se admite ese origen y nada más — cualquier otro sigue abortando."
+      ],
       "origenes_permitidos": [
         "app.celes.ai",
         "qas.app.celes.ai",
-        "dev.app.celes.ai"
+        "dev.app.celes.ai",
+        "cdn.prod.website-files.com"
       ]
     }
   }

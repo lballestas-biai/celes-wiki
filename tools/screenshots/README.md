@@ -84,6 +84,31 @@ lista es la misma de `tools/denylist.json` (como hash) y la comparación es la m
 texto libre, una celda que creímos vocabulario, un nombre de regla escrito con la marca del
 cliente.
 
+### De dónde sale la identidad de la cuenta
+
+De **tres sitios**, y no es redundancia: en 1a.8 el panel de inicio —que saluda con el
+nombre completo— salió publicado con el nombre real, y el control no dijo nada.
+
+| Fuente | Qué trae |
+|---|---|
+| El registro de sesión de IndexedDB | El correo y la instancia. Su `displayName` es **nulo**: el login automático no pasa por ninguna pantalla de proveedor y nadie llena ese campo |
+| `localStorage['user.displayName']` | Lo que la aplicación usa cuando Firebase no trae nombre; queda de un login interactivo anterior en ese perfil |
+| `GET /configs/auth/me` | El nombre del servidor, el único que no depende de lo que haya quedado en el navegador |
+
+Dos cosas que costaron una captura publicada:
+
+- **El registro no es `getAll()[0]`.** Esa posición la ocupa el centinela `__sak` de
+  Firebase, un objeto sin datos. Leerlo devolvía algo verdadero con los tres campos vacíos,
+  así que no había reemplazo, la guarda se quedaba sin valores que buscar **y no se
+  imprimía ningún aviso**. Ahora se busca la fila `firebase:authUser:*` y, si no aparece
+  ninguna identidad, la corrida **para**: era un aviso y ahora es un error.
+- **Lo que la aplicación pinta puede venir de una cuarta fuente que no se puede leer.**
+  El nombre del saludo sale del perfil del usuario en Firestore (`userSettingsProfile.name`),
+  y ahí no llega ni la API ni el navegador de captura. Si ese nombre difiere del del
+  servidor, lo que se reemplaza es el del servidor y el resto queda: en la captura de 1a.8
+  quedó una inicial suelta. Los pedazos de nombre y del local del correo (≥4 caracteres)
+  entran en la guarda para que una diferencia mayor aborte la corrida en vez de publicarse.
+
 Falla cerrado: si algo no calza, no hay archivo. Y cuando protesta, casi siempre lo que hay
 que hacer es **declarar la región o la especie que falta** en `reglas.json` y volver a
 correr. La lista de siglas permitidas es para lo que de verdad es vocabulario de la
@@ -291,6 +316,10 @@ despierta a `mayusculas`). Lo que sí manda —el `campaignId`— es lo que va p
   SQL» que un cliente no ve. Se quitan del DOM en `reglas.json`, y eso deja de ser un
   parche temporal para ser **el** control: si aparece un botón nuevo de administrador,
   hay que declararlo ahí.
+- **El nombre del perfil vive en Firestore y no se puede leer.** Ver «De dónde sale la
+  identidad de la cuenta»: se reemplaza el del servidor, y si el de Firestore es otro, lo
+  que quede lo tiene que cazar la guarda por pedazos. Es la cuarta fuente y la única que
+  este pipeline no alcanza.
 - **La forma de las curvas es real.** Los ejes se reescalan —las magnitudes no se publican—
   pero el dibujo de la serie sigue siendo el del tenant. Sin volúmenes ni nombres no
   identifica a nadie; queda anotado porque es una decisión, no un olvido.
