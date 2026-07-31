@@ -341,13 +341,22 @@ function especieDeRegion(region, saneador, reglas) {
  * No toda pantalla presenta el dato en una tabla: el Calendario de OC pinta cada orden
  * como una tarjeta de pares etiqueta/valor —«Nombre de Proveedor» encima del nombre—, y
  * ahí la única pista de qué es el valor está en el nodo de al lado. La región lo declara
- * con `pista`, un selector que se busca **dentro del padre de la región**; sin él, esos
- * nombres de proveedor salían por la especie por defecto y la guarda abortaba la captura.
+ * con `pista`, un selector que se busca **dentro de la región y, si no está, dentro de su
+ * padre**; sin él, esos nombres de proveedor salían por la especie por defecto y la guarda
+ * abortaba la captura.
+ *
+ * Los dos sitios hacen falta y no es una comodidad: el Calendario de OC pone la etiqueta
+ * como hermana del valor, y la barra de información del Detalle de Producto la pone
+ * **dentro** del mismo nodo (`<b>Nombre de Producto:</b> …`). Buscando solo en el padre,
+ * esa barra devolvía la etiqueta de la primera pareja para todas las demás, y el nombre de
+ * la tienda salía reemplazado por un nombre de producto — el mismo defecto que 1a.7
+ * encontró en las tablas HTML.
  */
 function etiquetaDe(region, reglas) {
   for (const declaracion of reglas.regiones) {
     if (!declaracion.pista || !region.matches?.(declaracion.sel)) continue
-    const etiqueta = region.parentElement?.querySelector(declaracion.pista)
+    const etiqueta =
+      region.querySelector?.(declaracion.pista) || region.parentElement?.querySelector(declaracion.pista)
     if (etiqueta && etiqueta !== region) return etiqueta.textContent.trim()
   }
   return ''

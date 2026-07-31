@@ -601,6 +601,36 @@
       "reglas": 1,
       "catalogo": 1,
       "revision": null
+    },
+    {
+      "destino": "vista-general/detalle-de-producto.png",
+      "page": "vista-general/detalle-de-producto.md",
+      "ruta": "/work-area/product-dashboard",
+      "ambiente": "prd",
+      "sha256": "816cbec60a4e941bb45d67cf68079f31e4fecd377ac15fcf5c2f6708ad3f9bd7",
+      "bytes": 96734,
+      "ancho": 1360,
+      "alto": 900,
+      "tomada_en": "2026-07-31",
+      "salt_id": "0ccddab6",
+      "reglas": 1,
+      "catalogo": 1,
+      "revision": null
+    },
+    {
+      "destino": "vista-general/panel-de-inicio.png",
+      "page": "vista-general/panel-de-inicio.md",
+      "ruta": "/dashboard",
+      "ambiente": "prd",
+      "sha256": "01cbf1dd475b5d86fc5f067832546be3480b400347c16100a5ee0b94531a58aa",
+      "bytes": 216877,
+      "ancho": 1360,
+      "alto": 900,
+      "tomada_en": "2026-07-31",
+      "salt_id": "0ccddab6",
+      "reglas": 1,
+      "catalogo": 1,
+      "revision": null
     }
   ]
 }

@@ -56,6 +56,16 @@
       "que": "El identificador de una campaña de trade marketing que ya tenga exhibiciones. La pantalla de Promociones de Exhibición no lista nada sin él: es el contexto de la campaña que se está mirando.",
       "como": "En la aplicación, Surtido › Trade Marketing → «Ver detalles» en una campaña con exhibiciones. El identificador es el `campaignId` de la dirección a la que lleva.",
       "forma": "uuid"
+    },
+    "producto-con-historial": {
+      "que": "La llave interna de un producto que ya tenga distribuciones registradas en la tienda de abajo. Sin las dos, el Detalle de Producto abre sin producto y no pinta nada; con un producto sin historial, la vista que la pantalla trae por defecto —Histórico de Distribuciones— sale vacía.",
+      "como": "En la aplicación, Reabastecimiento › Distribuir → abrir un producto y pulsar «Ver más detalles»: la pantalla se abre en otra pestaña y el valor es el `key_product` de la dirección.",
+      "forma": "clave"
+    },
+    "tienda-del-producto-con-historial": {
+      "que": "La llave interna de la tienda desde la que se mira ese producto. El Detalle de Producto es de un producto **en un punto de venta**: sin ella la cabecera no dice de qué bodega habla y los reportes no se filtran.",
+      "como": "De la misma dirección que el marcador anterior: el `key_warehouse`.",
+      "forma": "clave"
     }
   },
   "objetivos": [
@@ -257,6 +267,17 @@
       "page": "administracion/productos-de-referencia.md",
       "espera": ".MuiDataGrid-row",
       "nota": "1a.7. Las referencias configuradas. Va en una tercera instancia: es la única de las tres de captura que tiene alguna, en las otras dos la pantalla sale vacía."
+    },
+    {
+      "page": "vista-general/panel-de-inicio.md",
+      "espera": "#ebooks-card",
+      "nota": "1a.8. La pantalla de entrada con sus tarjetas de Celes Academy. El `espera` es una de las tarjetas porque es lo que solo existe cuando la pantalla acabó de montar. Va en otra instancia: en la principal el indicador ENABLE_DASHBOARD_IFRAMES está encendido y la pantalla es un tablero embebido de otro origen, que ni el saneamiento puede tocar ni representa el comportamiento base."
+    },
+    {
+      "page": "vista-general/detalle-de-producto.md",
+      "espera": ".MuiDataGrid-row",
+      "busqueda": "?key_product={{producto-con-historial}}&key_warehouse={{tienda-del-producto-con-historial}}",
+      "nota": "1a.8. Es una pantalla de detalle: sin producto en la dirección no muestra nada, y las dos llaves son dato de cliente, así que van por marcador. El `espera` es una fila de la tabla de la vista por defecto (Histórico de Distribuciones), que es la que ve quien entra."
     }
   ]
 }
