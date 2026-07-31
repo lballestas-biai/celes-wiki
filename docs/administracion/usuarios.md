@@ -94,3 +94,4 @@ práctica de auditar accesos o de pasarle la lista a alguien que no entra a Cele
 - [Roles y Permisos](roles-y-permisos.md)
 - [Permiso de datos](permiso-de-datos.md)
 - [Roles y permisos](../primeros-pasos/roles-y-permisos.md)
+- [Por qué tu instancia puede diferir](../conceptos/por-que-tu-instancia-difiere.md)

@@ -117,3 +117,4 @@ campaña en *Creada* puede tener exhibiciones ya aprobadas.
 - [Trade Marketing](trade-marketing.md)
 - [Surtido](index.md)
 - [Distribuir](../reabastecimiento/distribuir.md)
+- [Sugerido de compra vs. de distribución](../conceptos/sugerido-compra-vs-distribucion.md)

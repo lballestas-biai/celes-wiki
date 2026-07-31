@@ -80,3 +80,4 @@ esencial es el correo y el proveedor: es esa asociación la que define qué podr
 - [Permiso de datos](permiso-de-datos.md)
 - [Comprar](../reabastecimiento/comprar.md)
 - [Administración](index.md)
+- [Por qué tu instancia puede diferir](../conceptos/por-que-tu-instancia-difiere.md)
