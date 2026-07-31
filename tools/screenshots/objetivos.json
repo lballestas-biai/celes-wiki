@@ -18,6 +18,14 @@
     "valor por defecto deja la tabla vacía —el Historial de Órdenes de Compra abre con la",
     "última semana, y en un tenant que compra por temporada esa semana no tiene ninguna.",
     "",
+    "`busqueda` admite marcadores `{{nombre}}`, que capture.mjs sustituye por un valor del",
+    "archivo local `~/.config/celes/.wiki-parametros.json` —el mismo trato que el salt—. Es",
+    "para las pantallas de detalle, que sin un identificador en la dirección se pintan",
+    "vacías: ese identificador es dato de cliente y este repositorio es público. Todo",
+    "marcador se declara abajo en `parametros`, con qué es, de dónde se saca y qué forma",
+    "tiene; sin eso la captura no la puede repetir nadie más. Si el valor falta, esa",
+    "pantalla no produce PNG y la corrida dice qué falta y dónde ponerlo.",
+    "",
     "`recorte` es opcional: el selector de la región que se fotografía. Por defecto es",
     "`main`, que deja fuera la barra lateral —vacía de contenido y distinta según los",
     "permisos de quien mire—. Una pantalla que quiera salir con el menú puede pedir `body`.",
@@ -31,6 +39,18 @@
   },
   "reposo_ms": 2500,
   "recorte_por_defecto": "main",
+  "parametros": {
+    "_": [
+      "Lo que un marcador `{{...}}` de `busqueda` significa. Aquí está la declaración; el",
+      "valor vive fuera del repositorio (ver arriba). `forma` la comprueba capture.mjs:",
+      "un valor mal copiado falla ahí y no en una captura vacía."
+    ],
+    "campana-de-trade-marketing": {
+      "que": "El identificador de una campaña de trade marketing que ya tenga exhibiciones. La pantalla de Promociones de Exhibición no lista nada sin él: es el contexto de la campaña que se está mirando.",
+      "como": "En la aplicación, Surtido › Trade Marketing → «Ver detalles» en una campaña con exhibiciones. El identificador es el `campaignId` de la dirección a la que lleva.",
+      "forma": "uuid"
+    }
+  },
   "objetivos": [
     {
       "page": "reabastecimiento/comprar.md",
@@ -132,6 +152,12 @@
       "page": "surtido/trade-marketing.md",
       "espera": ".MuiDataGrid-row",
       "nota": "1a.5. La lista de campañas de trade marketing. Sirve también de captura del índice de Surtido, que no tiene pantalla propia."
+    },
+    {
+      "page": "surtido/promociones-de-exhibicion.md",
+      "espera": ".MuiDataGrid-row",
+      "busqueda": "?campaignName=Campa%C3%B1a%20de%20Ejemplo&campaignId={{campana-de-trade-marketing}}&page=0",
+      "nota": "1a.5. El interior de una campaña. `campaignName` es el único parámetro obligatorio de la pantalla y solo se pinta en la cabecera —no elige nada—, así que va como nombre inventado, con la misma forma que los de catalogo.json: es más seguro no traerlo que traerlo y confiar en que una regla lo cambie. El que sí manda es `campaignId`, y ese es el marcador."
     }
   ]
 }

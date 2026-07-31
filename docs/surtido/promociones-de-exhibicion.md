@@ -11,7 +11,7 @@ summary: >
   exhibiciones, se aprueban o rechazan una a una, y se cambia el estado de la campaña.
 keywords: [exhibición, stock adicional, bodega, aprobar exhibición, campaña de trade marketing]
 tenant_variance: low
-status: draft
+status: verified
 verified_at: 2026-07-31
 sources:
   - repo: celes-platform
@@ -29,15 +29,12 @@ sources:
   - repo: celes-platform
     path: apps/web-client/public/locales/es/planning.json
     ref: fdb9c1358
+  - repo: celes-platform
+    path: apps/api-core/src/inventory/application/demand/trade_mark_promo_services.py
+    ref: fdb9c1358
 ---
 
 # Promociones de Exhibición
-
-!!! warning "Falta la captura de esta pantalla"
-
-    Todo lo que dice esta página está verificado contra el producto. Lo que falta es la
-    imagen: esta pantalla solo muestra algo cuando se abre desde una campaña concreta, y el
-    pipeline de capturas navega por dirección fija. Mientras tanto se queda en borrador.
 
 ## Qué es y para qué sirve { #que-es }
 
@@ -48,6 +45,10 @@ tal al día cual*. La campaña es el paquete; esto es lo que hay dentro.
 No está en el menú lateral: se llega desde
 [Trade Marketing](trade-marketing.md), con **Ver detalles** en la fila de una campaña, o
 automáticamente justo después de crear una.
+
+![El interior de una campaña: el nombre y su estado en la cabecera, una exhibición por fila
+con producto, bodega, periodo y stock adicional, y el interruptor de promociones
+vigentes.](../assets/screenshots/surtido/promociones-de-exhibicion.png)
 
 ## Qué puedes hacer aquí { #que-puedes-hacer }
 
@@ -80,7 +81,8 @@ las exhibiciones que rigen hoy.
 ## Los estados de una exhibición { #estados }
 
 Se pintan como una etiqueta de color, igual que los de la campaña, y son los suyos propios:
-una campaña aprobada puede tener exhibiciones sin aprobar.
+en la captura de arriba la campaña está en *Creada* y su exhibición también, pero una
+campaña en *Creada* puede tener exhibiciones ya aprobadas.
 
 | Estado | Qué significa |
 |---|---|
@@ -88,6 +90,13 @@ una campaña aprobada puede tener exhibiciones sin aprobar.
 | **Aprobado** | Cuenta para el reabastecimiento durante su rango de fechas |
 | **Rechazado** | Se revisó y se decidió no aplicarla |
 | **Archivado** | Se retiró; queda el rastro |
+| **Finalizada por Cliente** | La campaña se dio por terminada antes de su fecha de fin y se llevó por delante a la exhibición |
+
+!!! info "Cambiar el estado de la campaña arrastra a sus exhibiciones"
+
+    Aprobar, rechazar o finalizar la campaña le pone ese mismo estado a **todas las
+    exhibiciones que estén en *Creada* o *Aprobado***. Las rechazadas y las archivadas no se
+    tocan, y por eso una campaña aprobada puede seguir teniendo exhibiciones sin aprobar.
 
 ## Qué necesita para funcionar { #requisitos }
 
