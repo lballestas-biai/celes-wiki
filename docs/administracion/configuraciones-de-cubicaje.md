@@ -111,3 +111,4 @@ adecuado para una regla estacional.
 - [Creación de Orden de Compra](../reabastecimiento/creacion-de-orden-de-compra.md)
 - [Parámetros Generales](parametros-generales.md)
 - [Configuración General](configuracion-general.md)
+- [Reglas de negocio y plugins](../conceptos/reglas-de-negocio-y-plugins.md)

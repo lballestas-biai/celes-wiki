@@ -102,3 +102,4 @@ resolución** comprometidos, y si cada uno se mide contra el horario laboral o e
 - [Soporte](../recursos/soporte.md)
 - [Historial de Jobs](historial-de-jobs.md)
 - [Administración](index.md)
+- [El ciclo diario de datos](../conceptos/ciclo-diario-de-datos.md)

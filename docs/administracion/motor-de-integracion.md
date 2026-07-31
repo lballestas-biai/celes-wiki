@@ -81,3 +81,4 @@ falta, declarar relaciones entre tablas del origen y guardar.
 - [Carga de Datos](carga-de-datos.md)
 - [Requisitos de datos](../primeros-pasos/requisitos-de-datos.md)
 - [Configuración General](configuracion-general.md)
+- [El ciclo diario de datos](../conceptos/ciclo-diario-de-datos.md)

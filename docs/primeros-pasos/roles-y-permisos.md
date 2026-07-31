@@ -118,3 +118,9 @@ Antes de escalarlo, tres preguntas en este orden:
    de una a otra cambia todo el menú.
 
 Las tres las resuelve el administrador de tu empresa desde Control de Acceso.
+
+## Conceptos relacionados { #conceptos }
+
+- [Por qué tu instancia puede diferir](../conceptos/por-que-tu-instancia-difiere.md) — los
+  permisos son solo uno de los motivos por los que tu aplicación no es igual a la de otro.
+- [Conceptos](../conceptos/index.md)

@@ -106,3 +106,5 @@ cerrar en cualquier momento.
 - [Bienvenida](../primeros-pasos/index.md)
 - [Roles y permisos](../primeros-pasos/roles-y-permisos.md)
 - [Detalle de Producto](detalle-de-producto.md)
+- [El ciclo diario de datos](../conceptos/ciclo-diario-de-datos.md)
+- [Cómo se construyen los reportes](../conceptos/como-se-construyen-los-reportes.md)

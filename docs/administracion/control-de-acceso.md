@@ -76,3 +76,4 @@ el paso.
 - [Permiso de datos](permiso-de-datos.md)
 - [Administración](index.md)
 - [Roles y permisos](../primeros-pasos/roles-y-permisos.md)
+- [Por qué tu instancia puede diferir](../conceptos/por-que-tu-instancia-difiere.md)

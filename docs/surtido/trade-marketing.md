@@ -157,3 +157,4 @@ campaña esté en *Creada*; finalizar, solo si está aprobada.
 - [Distribuir](../reabastecimiento/distribuir.md)
 - [Campañas](../promociones/campanas.md)
 - [Configuración de Pipeline](../reabastecimiento/configuracion-de-pipeline.md)
+- [Sugerido de compra vs. de distribución](../conceptos/sugerido-compra-vs-distribucion.md)
