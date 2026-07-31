@@ -115,13 +115,28 @@ async function capturar(objetivo) {
   const busqueda = resolverBusqueda(objetivo)
   if (busqueda.faltan.length) return { objetivo, destino, estado: 'sin-parametro', faltan: busqueda.faltan }
 
+  // Una pantalla cuya ruta canónica redirige a una de sus sub-pantallas pierde por el
+  // camino la cadena de consulta —el redirector rearma la suya—, así que a la ruta del
+  // inventario no hay forma de llegarle con estado. `subruta` va derecho a la
+  // sub-pantalla, y para que esto no se convierta en «visito la ruta que quiera»,
+  // solo se admite una de las `sections` que el inventario ya le reconoce a la página.
+  const ruta = objetivo.subruta ?? pagina.route
+  if (objetivo.subruta && !(pagina.sections ?? []).some((seccion) => seccion.path === objetivo.subruta)) {
+    return {
+      objetivo,
+      destino,
+      estado: 'error',
+      motivo: `«${objetivo.subruta}» no es una sección de «${objetivo.page}» en el inventario`,
+    }
+  }
+
   const page = await contexto.newPage()
   try {
     await page.setViewportSize({ width: objetivos.viewport.ancho, height: objetivos.viewport.alto })
     // `busqueda` ajusta el estado que la pantalla lee de la URL —un rango de fechas, un
     // agrupador, la campaña que se está mirando—. La ruta la sigue mandando el inventario:
     // esto no puede llevar a otra pantalla, solo pedirle a la misma que muestre algo.
-    await page.goto(base + pagina.route + busqueda.texto, {
+    await page.goto(base + ruta + busqueda.texto, {
       waitUntil: 'domcontentloaded',
       timeout: 60_000,
     })
@@ -167,7 +182,7 @@ async function capturar(objetivo) {
     const absoluto = path.join(ROOT, 'docs/assets/screenshots', destino)
     mkdirSync(path.dirname(absoluto), { recursive: true })
     writeFileSync(absoluto, png)
-    anotarEnManifiesto({ destino, page: objetivo.page, ruta: pagina.route, png, ancho, alto })
+    anotarEnManifiesto({ destino, page: objetivo.page, ruta, png, ancho, alto })
 
     return { objetivo, destino, estado: 'escrita', cuenta, bytes: png.length, ancho, alto, original }
   } catch (error) {
