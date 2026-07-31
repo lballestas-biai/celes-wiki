@@ -213,6 +213,59 @@ capturas entre sí; perderlo no compromete nada, solo hace que las próximas use
 nombres. `manifest.json` anota su `salt_id` —un hash corto— para poder saber si dos
 capturas son comparables sin publicar el salt.
 
+## Las pantallas de detalle, y los parámetros que no viajan en el repositorio
+
+Hay pantallas que **solo muestran algo si la dirección trae un identificador**: Promociones
+de Exhibición es el interior de *una* campaña, y sin `campaignId` se pinta con cero filas.
+Lo mismo va a pasar con el detalle de una promoción o el de un producto.
+
+Ese identificador es dato de cliente —el propio saneamiento lo trata como tal: la columna
+*ID Global* sale reemplazada—, así que no puede estar en `objetivos.json`. Y capturar la
+pantalla sin él tampoco vale: eso no es el producto, es una dirección incompleta.
+
+La salida es la misma que la del salt: **el marcador en el repositorio, el valor fuera**.
+
+```jsonc
+// tools/screenshots/objetivos.json
+"busqueda": "?campaignName=Campa%C3%B1a%20de%20Ejemplo&campaignId={{campana-de-trade-marketing}}&page=0"
+```
+
+```jsonc
+// ~/.config/celes/.wiki-parametros.json   (chmod 600, fuera del repositorio)
+{
+  "campana-de-trade-marketing": "00000000-0000-0000-0000-000000000000"
+}
+```
+
+Las reglas:
+
+- **Todo marcador se declara** en `parametros` de `objetivos.json`, con `que` (qué
+  identifica), `como` (de dónde se saca en la aplicación) y `forma`. Sin eso la captura no
+  la puede repetir nadie más, que es justo lo que el archivo local se lleva por delante.
+- **`forma` se comprueba** (`uuid` hoy): un valor mal copiado falla ahí, con su nombre, y no
+  en una captura vacía que nadie mira.
+- **Si el valor falta, esa pantalla no produce PNG.** La corrida sigue con las demás y al
+  final dice qué marcador falta, qué es, de dónde sale y en qué archivo ponerlo. No hay
+  captura silenciosa de una pantalla vacía.
+- Para una corrida suelta vale el entorno: `WIKI_PARAM_CAMPANA_DE_TRADE_MARKETING=…`. El
+  archivo se puede mover con `WIKI_PARAMETROS`.
+- El valor se codifica al pegarlo: un marcador vale por **un valor**, no por un pedazo de
+  dirección.
+- **Nada de esto entra al repositorio**: ni el valor, ni la dirección con el valor puesto.
+  El manifiesto anota la ruta de la pantalla, nunca su cadena de consulta.
+
+Perder este archivo **sí** cuesta, al revés que el salt: sin él esas pantallas no se pueden
+volver a capturar. Reconstruirlo es abrir la aplicación y seguir el `como` de cada marcador.
+
+### Un parámetro que no es un identificador se pone en claro
+
+`campaignName` es obligatorio en esa pantalla, pero **solo se pinta en la cabecera**: no
+elige campaña ni filtra nada. Va en `objetivos.json` como un nombre inventado, con la forma
+de los de `catalogo.json`. Es más seguro no traer el nombre real que traerlo y confiar en que
+una regla de región lo reemplace: si esa regla deja de casar, el fallo es un nombre de
+cliente publicado, y es de los que la guarda no siempre caza (un nombre en minúsculas no
+despierta a `mayusculas`). Lo que sí manda —el `campaignId`— es lo que va por el marcador.
+
 ## Lo que este pipeline **no** resuelve
 
 - **La cuenta de captura es de administrador**, y va a seguir siéndolo: #2811 se cerró por

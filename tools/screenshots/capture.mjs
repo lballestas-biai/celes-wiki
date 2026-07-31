@@ -23,7 +23,8 @@
  *
  * Requisitos: un Chromium de depuración con la sesión puesta
  * (`~/support/diag-harness/chrome-debug.sh start` + `auto-login.mjs <tenant> prd`) y el
- * Playwright de ese mismo harness. Ver README.md de esta carpeta.
+ * Playwright de ese mismo harness. Las pantallas de detalle piden además el archivo local
+ * de parámetros (`resolverParametros`). Ver README.md de esta carpeta.
  */
 
 import { createHash, randomBytes } from 'node:crypto'
@@ -58,6 +59,14 @@ const AMBIENTES = {
   dev: 'https://dev.app.celes.ai',
 }
 
+/**
+ * Las formas que puede declarar un parámetro de dirección (`resolverBusqueda`), para que un
+ * valor mal copiado falle aquí —con el nombre del marcador— y no en una pantalla vacía.
+ */
+const FORMAS = {
+  uuid: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu,
+}
+
 const ambiente = valor('--ambiente', 'prd')
 const base = AMBIENTES[ambiente]
 if (!base) fallar(`ambiente inválido: ${ambiente} (prd | qas | dev)`)
@@ -69,6 +78,7 @@ const reglas = leerJson('tools/screenshots/reglas.json')
 const catalogo = leerJson('tools/screenshots/catalogo.json')
 
 const salt = resolverSalt()
+const parametros = resolverParametros()
 const filtro = valor('--solo', null)
 const seleccion = objetivos.objetivos.filter((objetivo) => !filtro || objetivo.page.includes(filtro))
 if (!seleccion.length) fallar(`ningún objetivo coincide con «${filtro}»`)
@@ -102,13 +112,16 @@ async function capturar(objetivo) {
   if (!pagina.route) return { objetivo, estado: 'error', motivo: `«${objetivo.page}» no es una pantalla: no tiene ruta` }
 
   const destino = objetivo.page.replace(/\.md$/u, '.png')
+  const busqueda = resolverBusqueda(objetivo)
+  if (busqueda.faltan.length) return { objetivo, destino, estado: 'sin-parametro', faltan: busqueda.faltan }
+
   const page = await contexto.newPage()
   try {
     await page.setViewportSize({ width: objetivos.viewport.ancho, height: objetivos.viewport.alto })
     // `busqueda` ajusta el estado que la pantalla lee de la URL —un rango de fechas, un
-    // agrupador—. La ruta la sigue mandando el inventario: esto no puede llevar a otra
-    // pantalla, solo pedirle a la misma que muestre algo.
-    await page.goto(base + pagina.route + (objetivo.busqueda ?? ''), {
+    // agrupador, la campaña que se está mirando—. La ruta la sigue mandando el inventario:
+    // esto no puede llevar a otra pantalla, solo pedirle a la misma que muestre algo.
+    await page.goto(base + pagina.route + busqueda.texto, {
       waitUntil: 'domcontentloaded',
       timeout: 60_000,
     })
@@ -279,6 +292,73 @@ function idDelSalt() {
 }
 
 /**
+ * Los parámetros de dirección que **no pueden viajar en el repositorio**, por lo mismo que
+ * el salt: son identificadores de cliente. Viven en un JSON local de `marcador: valor`, y
+ * `objetivos.json` solo escribe el marcador.
+ *
+ * Hace falta para las pantallas de detalle —una campaña, una promoción, un producto—, que
+ * sin identificador en la dirección se pintan vacías. Capturarlas así no documenta el
+ * producto, documenta una dirección incompleta.
+ *
+ * Perderlo **sí** importa, al revés que el salt: sin él esas pantallas no se pueden volver
+ * a capturar. Por eso cada marcador se declara en `objetivos.json` con qué es, de dónde se
+ * saca y qué forma tiene: quien tenga acceso a la aplicación puede reconstruirlo.
+ */
+function resolverParametros() {
+  const archivo = process.env.WIKI_PARAMETROS || path.join(os.homedir(), '.config/celes/.wiki-parametros.json')
+  if (!existsSync(archivo)) return { archivo, valores: {} }
+  try {
+    const valores = JSON.parse(readFileSync(archivo, 'utf8'))
+    if (valores === null || typeof valores !== 'object' || Array.isArray(valores)) {
+      fallar(`${archivo} tiene que ser un objeto JSON de «marcador»: «valor»`)
+    }
+    return { archivo, valores }
+  } catch (error) {
+    if (error instanceof SyntaxError) fallar(`${archivo} no es JSON válido: ${error.message}`)
+    throw error
+  }
+}
+
+/**
+ * La cadena de consulta del objetivo, con sus marcadores `{{...}}` sustituidos.
+ *
+ * Un marcador tiene que estar declarado en `objetivos.json` —eso es cosa del repositorio, y
+ * si falta es un error de programación: se aborta la corrida entera—. Que su **valor** falte
+ * es cosa de la máquina que captura, y entonces solo cae esa pantalla: el resto de la
+ * corrida sigue y se informa al final qué falta y dónde ponerlo.
+ *
+ * El valor se codifica antes de pegarlo: un marcador vale por un valor, no por un pedazo de
+ * dirección.
+ */
+function resolverBusqueda(objetivo) {
+  const declarados = objetivos.parametros ?? {}
+  const faltan = []
+  const texto = (objetivo.busqueda ?? '').replace(/\{\{([a-z0-9-]+)\}\}/gu, (_, nombre) => {
+    const declarado = declarados[nombre]
+    if (!declarado) fallar(`«${objetivo.page}» usa el marcador {{${nombre}}}, que no está declarado en objetivos.json`)
+    const valor = valorDelParametro(nombre)
+    if (!valor) {
+      faltan.push({ nombre, ...declarado })
+      return ''
+    }
+    const forma = FORMAS[declarado.forma]
+    if (forma && !forma.test(valor)) {
+      faltan.push({ nombre, ...declarado, motivo: `el valor que hay no tiene forma de ${declarado.forma}` })
+      return ''
+    }
+    return encodeURIComponent(valor)
+  })
+  return { texto, faltan }
+}
+
+/** El valor de un marcador: primero el entorno, después el archivo local. Como el salt. */
+function valorDelParametro(nombre) {
+  const variable = `WIKI_PARAM_${nombre.toUpperCase().replace(/-/gu, '_')}`
+  const candidatos = [process.env[variable], parametros.valores[nombre]]
+  return candidatos.find((candidato) => typeof candidato === 'string' && candidato.trim())?.trim()
+}
+
+/**
  * De quién es la sesión del navegador, para poder borrarla de la pantalla y comprobar que
  * no quedó. Sale del registro que `auto-login.mjs` escribe en IndexedDB, así que no hay
  * que pasar el nombre a mano ni acertar con el tenant.
@@ -362,7 +442,7 @@ async function cargarPlaywright() {
 // --- salida ----------------------------------------------------------------
 
 function informar() {
-  const etiqueta = { escrita: '✓', 'limpia-sin-escribir': '·', sucia: '✗', error: '!' }
+  const etiqueta = { escrita: '✓', 'limpia-sin-escribir': '·', sucia: '✗', 'sin-parametro': '?', error: '!' }
   console.log('')
   for (const resultado of resultados) {
     const nombre = resultado.destino ?? resultado.objetivo.page
@@ -373,6 +453,13 @@ function informar() {
       )
     } else if (resultado.estado === 'limpia-sin-escribir') {
       console.log(`${etiqueta['limpia-sin-escribir']} ${nombre} — limpia (no se escribió: --sin-escribir)`)
+    } else if (resultado.estado === 'sin-parametro') {
+      console.log(`${etiqueta['sin-parametro']} ${nombre} — falta el valor de ${resultado.faltan.length} parámetro(s) de dirección:`)
+      for (const falta of resultado.faltan) {
+        console.log(`    {{${falta.nombre}}} (${falta.forma})${falta.motivo ? ` — ${falta.motivo}` : ''}`)
+        console.log(`      ${falta.que}`)
+        console.log(`      de dónde sale: ${falta.como}`)
+      }
     } else if (resultado.estado === 'sucia') {
       console.log(`${etiqueta.sucia} ${nombre} — la guarda encontró ${resultado.hallazgos.length} cosa(s) sin sanear:`)
       for (const grupo of agrupar(resultado.hallazgos)) {
@@ -388,6 +475,7 @@ function informar() {
   const sucias = resultados.filter((r) => r.estado === 'sucia').length
   const errores = resultados.filter((r) => r.estado === 'error').length
   const escritas = resultados.filter((r) => r.estado === 'escrita').length
+  const sinParametro = resultados.filter((r) => r.estado === 'sin-parametro')
   console.log('')
   if (escritas) {
     console.log(
@@ -401,7 +489,21 @@ function informar() {
         '  declarar la región que falta en tools/screenshots/reglas.json y volver a correr.',
     )
   }
-  process.exit(sucias || errores ? 1 : 0)
+  if (sinParametro.length) {
+    const nombres = [...new Set(sinParametro.flatMap((r) => r.faltan.map((f) => f.nombre)))]
+    console.log(
+      `${sinParametro.length} pantalla(s) no se capturaron por falta de un parámetro de dirección.\n` +
+        '  Son identificadores de cliente: no pueden estar en el repositorio, así que se leen de\n' +
+        `  ${parametros.archivo}, un JSON de «marcador»: «valor»:\n\n` +
+        `    {\n${nombres.map((nombre) => `      "${nombre}": "..."`).join(',\n')}\n    }\n\n` +
+        '  Qué es cada uno y de dónde sale está arriba, y declarado en `parametros` de\n' +
+        '  tools/screenshots/objetivos.json. Para una corrida suelta vale también el entorno:\n' +
+        `  ${nombres.map((nombre) => `WIKI_PARAM_${nombre.toUpperCase().replace(/-/gu, '_')}`).join(' ')}.\n` +
+        '  Sin el valor no se captura: una pantalla de detalle sin identificador sale vacía, y\n' +
+        '  eso no documenta el producto sino una dirección incompleta.',
+    )
+  }
+  process.exit(sucias || errores || sinParametro.length ? 1 : 0)
 }
 
 function agrupar(hallazgos) {
