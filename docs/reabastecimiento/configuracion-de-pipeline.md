@@ -3,7 +3,7 @@ title: Configuración de Pipeline
 module: Reabastecimiento
 route: /work-area/automation/pipeline-configuration
 aliases: [/administration/operation/pipeline-configuration]
-permission: work-area.automation
+permission: work-area.automation.pipeline-configuration
 audience: [Implementadores, Administradores]
 summary: >
   Un pipeline es la secuencia de pasos con la que Celes calcula un módulo. Esta pantalla
@@ -12,7 +12,7 @@ summary: >
 keywords: [pipeline, flujo, pasos, cálculo, configuración, implementación]
 tenant_variance: high
 status: verified
-verified_at: 2026-07-30
+verified_at: 2026-07-31
 sources:
   - repo: celes-platform
     path: apps/web-client/src/pages/Administration/AdministrationOperation/AdministrationPipelineConfigurationListPage/AdministrationPipelineConfigurationListPage.tsx
@@ -23,6 +23,9 @@ sources:
   - repo: celes-platform
     path: apps/web-client/public/locales/es/administration.json
     ref: d20adaaea
+  - repo: celes-platform
+    path: apps/web-client/src/utils/routeMigrations.ts
+    ref: fdb9c1358
 ---
 
 # Configuración de Pipeline
@@ -64,8 +67,8 @@ autoría.](../assets/screenshots/reabastecimiento/configuracion-de-pipeline.png)
 
 ## Qué necesita para funcionar { #requisitos }
 
-- **El permiso `work-area.automation`** (o el anterior de Administración) en escritura.
-  Solo con lectura se ven los flujos y no se editan.
+- **El permiso `work-area.automation.pipeline-configuration`** (o el anterior de
+  Administración) en escritura. Solo con lectura se ven los flujos y no se editan.
 - **Saber qué hace cada paso.** El lienzo no valida el negocio: valida que el flujo esté
   bien formado. Un flujo válido puede producir sugeridos que no tienen sentido.
 - **Una corrida posterior.** Los cambios se ven en los números a partir del siguiente

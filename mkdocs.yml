@@ -169,7 +169,6 @@ nav:
   - Promociones:
       - promociones/index.md
       - Campañas: promociones/campanas.md
-      - Calendario de Promociones: promociones/calendario-de-promociones.md
   - Surtido:
       - surtido/index.md
       - Trade Marketing: surtido/trade-marketing.md

@@ -12,17 +12,20 @@ summary: >
 keywords: [pronóstico, forecast, demanda, escenario, promoción, evento]
 tenant_variance: low
 status: verified
-verified_at: 2026-07-30
+verified_at: 2026-07-31
 sources:
   - repo: celes-platform
     path: apps/web-client/src/routes/_layout.planning.tsx
     ref: fd8a12056
   - repo: celes-platform
     path: apps/web-client/src/components/Layout/NavMenu/navigationItems.ts
-    ref: fd8a12056
+    ref: fdb9c1358
   - repo: celes-platform
     path: apps/web-client/src/utils/routeMigrations.ts
-    ref: fd8a12056
+    ref: fdb9c1358
+  - repo: celes-platform
+    path: apps/web-client/src/providers/AuthProvider/helpers.ts
+    ref: fdb9c1358
   - repo: celes-platform
     path: apps/web-client/public/locales/es/routes.json
     ref: fd8a12056
@@ -65,11 +68,16 @@ Las pantallas del módulo se reparten en dos oficios: **mirar** el pronóstico y
 | **Calendario de Compras** | Todavía no está disponible | [Calendario de Compras](calendario-de-compras.md) |
 
 El menú de Pronóstico puede mostrarte además entradas que **no pertenecen a este módulo**:
-Campañas Promocionales, Calendario de Promociones, Colaboradores externos y Campañas de
-Marketing Comercial son direcciones anteriores de pantallas que hoy viven en
+Campañas Promocionales, Colaboradores externos y Campañas de Marketing Comercial son
+direcciones anteriores de pantallas que hoy viven en
 [Promociones](../promociones/index.md), [Surtido](../surtido/index.md) y
 [Administración](../administracion/index.md). Llevan a la misma pantalla; cuál de las dos
 direcciones ves depende de qué permiso tengas concedido.
+
+Hasta el 2026-07-30 había además una entrada **Calendario de Promociones**. Esa pantalla
+dejó de existir por separado: el calendario se abre ahora desde
+[Campañas](../promociones/campanas.md#calendario). Si tu usuario tenía ese permiso como
+pantalla de entrada, la aplicación te deja en Campañas.
 
 !!! tip "Al entrar te deja en Resumen"
 

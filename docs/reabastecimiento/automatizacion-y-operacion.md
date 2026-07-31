@@ -3,7 +3,7 @@ title: Automatización & Operación
 module: Reabastecimiento
 route: /work-area/automation
 aliases: [/administration/operation]
-permission: work-area.automation
+permission: work-area.automation.automatic-replenishment
 audience: [Clientes, Usuarios, Administradores]
 summary: >
   Automatización & Operación es donde se programa que las órdenes se generen y se envíen
@@ -12,17 +12,17 @@ summary: >
 keywords: [automatización, operación, programación, ejecución automática, pestañas]
 tenant_variance: high
 status: verified
-verified_at: 2026-07-30
+verified_at: 2026-07-31
 sources:
   - repo: celes-platform
     path: apps/web-client/src/pages/Administration/AdministrationOperation/AdministrationOperationPage.tsx
-    ref: d20adaaea
+    ref: fdb9c1358
   - repo: celes-platform
     path: apps/web-client/src/routes/_layout.work-area.automation.index.tsx
     ref: d20adaaea
   - repo: celes-platform
     path: apps/web-client/src/utils/routeMigrations.ts
-    ref: d20adaaea
+    ref: fdb9c1358
 ---
 
 # Automatización & Operación
@@ -58,11 +58,17 @@ Al entrar por el menú, la aplicación abre la primera pestaña a la que tengas 
     misma pantalla y los mismos datos; si compartes un enlace con alguien y a esa persona
     le abre otra dirección, es esto.
 
+    Y se decide **pestaña por pestaña**: cada una resuelve su dirección con su propio
+    permiso, así que un usuario a medio migrar puede ver unas pestañas en una dirección y
+    otras en la otra.
+
 ## Qué necesita para funcionar { #requisitos }
 
-- **El permiso `work-area.automation`**, o el anterior de Administración
-  (`administration.operation.*`) para la pestaña correspondiente. Sin ninguno de los dos,
-  la sección no aparece en el menú.
+- **Un permiso de alguna de las cuatro pestañas.** Cada una tiene el suyo
+  (`work-area.automation.automatic-replenishment`, `.automatic-procurement`,
+  `.pipeline-configuration`, `.dispatches`), o el anterior de Administración
+  (`administration.operation.*`). Sin ninguno, la sección no aparece en el menú; con uno
+  solo, entras y ves solo esa pestaña.
 - **El permiso de escritura** para crear, editar, activar o pausar una configuración: con
   solo lectura se ven las programaciones y no se tocan.
 - **Que el flujo manual ya funcione.** Automatizar no arregla un sugerido que está mal:

@@ -122,6 +122,16 @@
       "page": "pronostico/calendario-de-eventos.md",
       "espera": ".grid-cols-7",
       "nota": "1a.4. El calendario mensual. Se espera la rejilla de la semana porque mientras carga se pinta un cargador en su lugar."
+    },
+    {
+      "page": "promociones/campanas.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.5. La lista de campañas promocionales con su estado. Sirve también de captura del índice del módulo, que no tiene pantalla propia."
+    },
+    {
+      "page": "surtido/trade-marketing.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.5. La lista de campañas de trade marketing. Sirve también de captura del índice de Surtido, que no tiene pantalla propia."
     }
   ]
 }

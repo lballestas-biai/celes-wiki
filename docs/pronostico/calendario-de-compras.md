@@ -44,8 +44,8 @@ día—, la pantalla que lo hace es
 [Calendario de Órdenes de Compra](../reabastecimiento/calendario-de-oc.md), en
 Reabastecimiento. Son pantallas distintas y esa sí está en producción.
 
-Si lo que buscas es el calendario de promociones o el de eventos, están en
-[Calendario de Promociones](../promociones/calendario-de-promociones.md) y en
+Si lo que buscas es el calendario de promociones, se abre desde
+[Campañas](../promociones/campanas.md#calendario); el de eventos es
 [Calendario de Eventos](calendario-de-eventos.md).
 
 ## Conceptos relacionados { #conceptos }

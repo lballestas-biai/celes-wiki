@@ -6,16 +6,16 @@ Qué pantallas existen en la aplicación, cómo se llaman, quién las ve y qué 
 la wiki les corresponde. Se deriva del código de `celes-app/celes-platform`, no del
 mock ni de la memoria de nadie.
 
-**Ref:** `981f61942` (2026-07-29) · **Rutas:** 153 · **Páginas:** 81 (65 de pantalla, 16 transversales)
+**Ref:** `fdb9c1358` (2026-07-31) · **Rutas:** 153 · **Páginas:** 80 (64 de pantalla, 16 transversales)
 
 | Destino | Rutas |
 |---|---|
-| Página propia | 65 |
-| Alias de otra pantalla | 23 |
+| Página propia | 64 |
+| Alias de otra pantalla | 22 |
 | Sección dentro de otra página | 9 |
 | Detalle o formulario (ruta con parámetro) | 41 |
 | Excluida (no es pantalla de producto) | 3 |
-| Obsoleta (etiqueta sin pantalla) | 12 |
+| Obsoleta (etiqueta sin pantalla) | 14 |
 
 ## Pantallas con página propia
 
@@ -35,11 +35,11 @@ que los segmentos de uno sean prefijo de los del otro, en cualquier dirección.
 | `/work-area/replenishment/order` | Solicitud de Distribución | Replenishment request | `work-area.replenishment` | no | `docs/reabastecimiento/solicitud-de-distribucion.md` | — |
 | `/work-area/replenishment/order-history` | Historial de Órdenes de Distribución | Replenishment requests sent | `work-area.replenishment` | no | `docs/reabastecimiento/historial-de-ordenes-de-distribucion.md` | — |
 | `/work-area/replenishment-suggestions` | Solicitudes de Tiendas | Store Requests | `work-area.replenishment-suggestions` | sí | `docs/reabastecimiento/solicitudes-de-tiendas.md` | — |
-| `/work-area/automation` | Automatización & Operación | Automation & Operation | `work-area.automation` — o el anterior `administration.operation.automatic-replenishment` / `administration.operation.automatic-procurement` / `administration.operation.pipeline-configuration` / `administration.operation.dispatches` | sí | `docs/reabastecimiento/automatizacion-y-operacion.md` | `/administration/operation` |
-| `/work-area/automation/automatic-replenishment` | Distribución Automática | Automatic Replenishment | `work-area.automation` — o el anterior `administration.operation.automatic-replenishment` | no | `docs/reabastecimiento/distribucion-automatica.md` | `/administration/operation/automatic-replenishment` |
-| `/work-area/automation/automatic-procurement` | Compra Automática | Automatic Purchase Order | `work-area.automation` — o el anterior `administration.operation.automatic-procurement` | no | `docs/reabastecimiento/compra-automatica.md` | `/administration/operation/automatic-procurement` |
-| `/work-area/automation/pipeline-configuration` | Configuración de Pipeline | Pipeline Configuration | `work-area.automation` — o el anterior `administration.operation.pipeline-configuration` | no | `docs/reabastecimiento/configuracion-de-pipeline.md` | `/administration/operation/pipeline-configuration` |
-| `/work-area/automation/dispatches` | Trazabilidad de entregas | Delivery traceability | `work-area.automation` — o el anterior `administration.operation.dispatches` | no | `docs/reabastecimiento/trazabilidad-de-entregas.md` | `/administration/operation/dispatches` |
+| `/work-area/automation` | Automatización & Operación | Automation & Operation | `work-area.automation.automatic-replenishment` o `work-area.automation.automatic-procurement` o `work-area.automation.pipeline-configuration` o `work-area.automation.dispatches` — o el anterior `administration.operation.automatic-replenishment` / `administration.operation.automatic-procurement` / `administration.operation.pipeline-configuration` / `administration.operation.dispatches` | sí | `docs/reabastecimiento/automatizacion-y-operacion.md` | `/administration/operation` |
+| `/work-area/automation/automatic-replenishment` | Distribución Automática | Automatic Replenishment | `work-area.automation.automatic-replenishment` — o el anterior `administration.operation.automatic-replenishment` | no | `docs/reabastecimiento/distribucion-automatica.md` | `/administration/operation/automatic-replenishment` |
+| `/work-area/automation/automatic-procurement` | Compra Automática | Automatic Purchase Order | `work-area.automation.automatic-procurement` — o el anterior `administration.operation.automatic-procurement` | no | `docs/reabastecimiento/compra-automatica.md` | `/administration/operation/automatic-procurement` |
+| `/work-area/automation/pipeline-configuration` | Configuración de Pipeline | Pipeline Configuration | `work-area.automation.pipeline-configuration` — o el anterior `administration.operation.pipeline-configuration` | no | `docs/reabastecimiento/configuracion-de-pipeline.md` | `/administration/operation/pipeline-configuration` |
+| `/work-area/automation/dispatches` | Trazabilidad de entregas | Delivery traceability | `work-area.automation.dispatches` — o el anterior `administration.operation.dispatches` | no | `docs/reabastecimiento/trazabilidad-de-entregas.md` | `/administration/operation/dispatches` |
 | `/planning` | Pronóstico | Forecast | cualquiera de `planning.*` | sí | `docs/pronostico/index.md` | — |
 | `/planning/forecast-summary` | Resumen | Summary | `planning.forecast-summary` — o el anterior `reports-and-analytics.forecast` | sí | `docs/pronostico/resumen.md` | `/reports-and-analytics/forecast` |
 | `/planning/forecast-alerts` | Alertas de Forecast | Forecast Alerts | `planning.forecast-alerts` — o el anterior `reports-and-analytics.forecast-analysis` | sí | `docs/pronostico/alertas-de-forecast.md` | `/reports-and-analytics/forecast-analysis` |
@@ -49,7 +49,6 @@ que los segmentos de uno sean prefijo de los del otro, en cualquier dirección.
 | `/planning/procurement-calendar` | Calendario de Compras | Procurement Calendar | `planning.procurement-calendar` | sí | `docs/pronostico/calendario-de-compras.md` | — |
 | `/promotions` | Promociones | Promotions | cualquiera de `promotions.*` | sí | `docs/promociones/index.md` | — |
 | `/promotions/campaigns` | Campañas | Campaigns | `promotions.campaigns` — o el anterior `planning.promotional-campaigns` | sí | `docs/promociones/campanas.md` | `/planning/promotional-campaigns` |
-| `/promotions/calendar` | Calendario de Promociones | Promotional Calendar | `promotions.calendar` — o el anterior `planning.promotional-calendar` | sí | `docs/promociones/calendario-de-promociones.md` | `/planning/promotional-calendar` |
 | `/assortment` | Surtido | Assortment | cualquiera de `assortment.*` | sí | `docs/surtido/index.md` | — |
 | `/assortment/trade-marketing` | Trade Marketing | Trade Marketing | `assortment.trade-marketing` — o el anterior `planning.trade-marketing-campaigns` | sí | `docs/surtido/trade-marketing.md` | `/planning/trade-marketing-campaigns` |
 | `/assortment/trade-marketing/exhibitions-promotions` | Promociones de Exhibición | Exhibition Promotions | `assortment.trade-marketing` — o el anterior `planning.trade-marketing-campaigns` | no | `docs/surtido/promociones-de-exhibicion.md` | `/planning/trade-marketing-campaigns/exhibitions-promotions` |
@@ -134,7 +133,6 @@ evidencia en el código que las sostiene.
 | `/administration/operation/dispatches` | `/work-area/automation/dispatches` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
 | `/administration/operation/pipeline-configuration` | `/work-area/automation/pipeline-configuration` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
 | `/planning/external-collaborators` | `/administration/external-collaborators` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
-| `/planning/promotional-calendar` | `/promotions/calendar` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
 | `/planning/promotional-campaigns` | `/promotions/campaigns` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
 | `/planning/trade-marketing-campaigns` | `/assortment/trade-marketing` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
 | `/planning/trade-marketing-campaigns/exhibitions-promotions` | `/assortment/trade-marketing/exhibitions-promotions` | ROUTE_MIGRATIONS | URL anterior de la pantalla; el usuario ve una u otra según qué permiso tenga concedido. |
@@ -173,6 +171,8 @@ wiki: son pantallas que no existen.
 |---|---|---|
 | `/administration/configuration/column-groups` | Grupos de columnas | «Grupos de columnas» no existe en el router; la pantalla viva de columnas es /administration/configuration/config-columns. |
 | `/administration/configuration/column-groups/$columnGroupId` | Detalle de grupo de columnas | Etiqueta en routes.json sin ruta en el router: la pantalla no existe. |
+| `/planning/promotional-calendar` | Calendario de Promociones | URL anterior del Calendario de Promociones. Se retiró en el mismo commit que la canónica: ver /promotions/calendar. |
+| `/promotions/calendar` | Calendario de Promociones | El Calendario de Promociones dejó de ser una pantalla el 2026-07-30 (celes-platform 60da4b891): es un diálogo que se abre desde Campañas. La etiqueta sigue viva en routes.json porque titula ese diálogo. Se documenta como sección de docs/promociones/campanas.md. |
 | `/settings/lang` | Settings (language) | Las seis rutas /settings/* que el issue mandaba resolver no existen en el router y sus etiquetas están sin traducir. Son restos de una versión anterior: se excluyen enteras. |
 | `/settings/parameters` | Settings - Parameters | Ver /settings/lang. |
 | `/settings/parameters/exhibitions` | Settings - Parameters - Exhibitions | Ver /settings/lang. |

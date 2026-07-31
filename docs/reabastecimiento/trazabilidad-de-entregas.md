@@ -3,7 +3,7 @@ title: Trazabilidad de entregas
 module: Reabastecimiento
 route: /work-area/automation/dispatches
 aliases: [/administration/operation/dispatches]
-permission: work-area.automation
+permission: work-area.automation.dispatches
 audience: [Clientes, Usuarios, Administradores]
 summary: >
   El historial de los archivos que Celes le envía a cada destino y cómo terminó cada envío:
@@ -12,7 +12,7 @@ summary: >
 keywords: [trazabilidad, entregas, envíos, archivo, reintento, reenvío, canal]
 tenant_variance: high
 status: verified
-verified_at: 2026-07-30
+verified_at: 2026-07-31
 sources:
   - repo: celes-platform
     path: apps/web-client/src/pages/Administration/AdministrationOperation/AdministrationDispatchesPage/AdministrationDispatchesPage.tsx
@@ -23,6 +23,9 @@ sources:
   - repo: celes-platform
     path: apps/web-client/public/locales/es/administration.json
     ref: d20adaaea
+  - repo: celes-platform
+    path: apps/web-client/src/utils/routeMigrations.ts
+    ref: fdb9c1358
 ---
 
 # Trazabilidad de entregas
@@ -84,8 +87,8 @@ veces.
 
 ## Qué necesita para funcionar { #requisitos }
 
-- **El permiso `work-area.automation`** (o el anterior de Administración) en lectura para
-  ver, en escritura para reintentar o reenviar.
+- **El permiso `work-area.automation.dispatches`** (o el anterior de Administración) en
+  lectura para ver, en escritura para reintentar o reenviar.
 - **Un canal de salida configurado** para tu empresa. Sin canal no hay envíos que rastrear
   y la pantalla aparece vacía.
 - **Órdenes enviadas dentro del rango de fechas** seleccionado.

@@ -2,24 +2,24 @@
   "_": "Generado por tools/snapshot-app-routes.mjs. No editar a mano: regenerar y revisar el diff.",
   "source": {
     "repo": "celes-app/celes-platform",
-    "ref": "981f61942",
-    "ref_full": "981f619429de9ca1eb89e91175f2b6684159e042",
-    "ref_date": "2026-07-29",
+    "ref": "fdb9c1358",
+    "ref_full": "fdb9c1358dcdfbf26c58d9426f2a975a6cc23f22",
+    "ref_date": "2026-07-31",
     "files": {
-      "apps/web-client/src/routeTree.gen.ts": "96031001bb6880cf",
+      "apps/web-client/src/routeTree.gen.ts": "3df758b5e1ae9ba9",
       "apps/web-client/public/locales/es/routes.json": "368731fea178e4a7",
       "apps/web-client/public/locales/en/routes.json": "24db126b469dea3b",
-      "apps/web-client/src/components/Layout/NavMenu/navigationItems.ts": "65d5c58f291d1585",
+      "apps/web-client/src/components/Layout/NavMenu/navigationItems.ts": "16b7682b899ca173",
       "apps/web-client/src/providers/AuthProvider/checkModuleAccess.ts": "89809e9be543196c",
-      "apps/web-client/src/providers/AuthProvider/helpers.ts": "abbdf33e7635a878",
-      "apps/web-client/src/utils/routeMigrations.ts": "362d30858a049bf2"
+      "apps/web-client/src/providers/AuthProvider/helpers.ts": "1fe4fe33270294eb",
+      "apps/web-client/src/utils/routeMigrations.ts": "5acaa83e7d2fe6a8"
     }
   },
   "totals": {
     "routes": 153,
-    "in_router": 141,
-    "labelled_only": 12,
-    "in_nav": 46,
+    "in_router": 139,
+    "labelled_only": 14,
+    "in_nav": 44,
     "dynamic_or_form": 42
   },
   "migrations": [
@@ -76,19 +76,6 @@
       "unmigrated_nested": []
     },
     {
-      "alias": "/planning/promotional-calendar",
-      "canonical": "/promotions/calendar",
-      "permissions": [
-        {
-          "new": "promotions.calendar",
-          "legacy": [
-            "planning.promotional-calendar"
-          ]
-        }
-      ],
-      "unmigrated_nested": []
-    },
-    {
       "alias": "/planning/trade-marketing-campaigns",
       "canonical": "/assortment/trade-marketing",
       "permissions": [
@@ -106,11 +93,26 @@
       "canonical": "/work-area/automation",
       "permissions": [
         {
-          "new": "work-area.automation",
+          "new": "work-area.automation.automatic-replenishment",
           "legacy": [
-            "administration.operation.automatic-replenishment",
-            "administration.operation.automatic-procurement",
-            "administration.operation.pipeline-configuration",
+            "administration.operation.automatic-replenishment"
+          ]
+        },
+        {
+          "new": "work-area.automation.automatic-procurement",
+          "legacy": [
+            "administration.operation.automatic-procurement"
+          ]
+        },
+        {
+          "new": "work-area.automation.pipeline-configuration",
+          "legacy": [
+            "administration.operation.pipeline-configuration"
+          ]
+        },
+        {
+          "new": "work-area.automation.dispatches",
+          "legacy": [
             "administration.operation.dispatches"
           ]
         }
@@ -1354,8 +1356,12 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
-        "alternatives": [],
+        "code": "work-area.automation.automatic-replenishment",
+        "alternatives": [
+          "work-area.automation.automatic-procurement",
+          "work-area.automation.pipeline-configuration",
+          "work-area.automation.dispatches"
+        ],
         "legacy": [
           "administration.operation.automatic-replenishment",
           "administration.operation.automatic-procurement",
@@ -1381,7 +1387,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-procurement",
         "legacy": [
           "administration.operation.automatic-procurement"
         ],
@@ -1404,7 +1410,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-procurement",
         "legacy": [
           "administration.operation.automatic-procurement"
         ],
@@ -1427,7 +1433,7 @@
       "form": true,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-procurement",
         "legacy": [
           "administration.operation.automatic-procurement"
         ],
@@ -1450,7 +1456,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-replenishment",
         "legacy": [
           "administration.operation.automatic-replenishment"
         ],
@@ -1473,7 +1479,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-replenishment",
         "legacy": [
           "administration.operation.automatic-replenishment"
         ],
@@ -1496,7 +1502,7 @@
       "form": true,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-replenishment",
         "legacy": [
           "administration.operation.automatic-replenishment"
         ],
@@ -1519,7 +1525,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.dispatches",
         "legacy": [
           "administration.operation.dispatches"
         ],
@@ -1542,7 +1548,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.pipeline-configuration",
         "legacy": [
           "administration.operation.pipeline-configuration"
         ],
@@ -1565,7 +1571,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.pipeline-configuration",
         "legacy": [
           "administration.operation.pipeline-configuration"
         ],
@@ -1588,7 +1594,7 @@
       "form": true,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.pipeline-configuration",
         "legacy": [
           "administration.operation.pipeline-configuration"
         ],
@@ -1958,27 +1964,17 @@
       "path": "/planning/promotional-calendar",
       "label_es": "Calendario de Promociones",
       "label_en": "Promotional Calendar",
-      "in_router": true,
+      "in_router": false,
       "in_routes_json": true,
-      "in_nav": true,
-      "nav_parents": [
-        "/planning"
-      ],
+      "in_nav": false,
+      "nav_parents": null,
       "dynamic": false,
       "form": false,
       "permission": {
-        "kind": "migrated",
-        "code": "promotions.calendar",
-        "alternatives": [],
-        "legacy": [
-          "planning.promotional-calendar"
-        ],
-        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+        "kind": "exact",
+        "code": "planning.promotional-calendar"
       },
-      "migration": {
-        "role": "alias",
-        "counterpart": "/promotions/calendar"
-      }
+      "migration": null
     },
     {
       "path": "/planning/promotional-campaigns",
@@ -2216,27 +2212,17 @@
       "path": "/promotions/calendar",
       "label_es": "Calendario de Promociones",
       "label_en": "Promotional Calendar",
-      "in_router": true,
+      "in_router": false,
       "in_routes_json": true,
-      "in_nav": true,
-      "nav_parents": [
-        "/promotions"
-      ],
+      "in_nav": false,
+      "nav_parents": null,
       "dynamic": false,
       "form": false,
       "permission": {
-        "kind": "migrated",
-        "code": "promotions.calendar",
-        "alternatives": [],
-        "legacy": [
-          "planning.promotional-calendar"
-        ],
-        "note": "pantalla en migración: vale el permiso nuevo o el viejo"
+        "kind": "exact",
+        "code": "promotions.calendar"
       },
-      "migration": {
-        "role": "canonical",
-        "counterpart": "/planning/promotional-calendar"
-      }
+      "migration": null
     },
     {
       "path": "/promotions/campaigns",
@@ -2753,8 +2739,12 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
-        "alternatives": [],
+        "code": "work-area.automation.automatic-replenishment",
+        "alternatives": [
+          "work-area.automation.automatic-procurement",
+          "work-area.automation.pipeline-configuration",
+          "work-area.automation.dispatches"
+        ],
         "legacy": [
           "administration.operation.automatic-replenishment",
           "administration.operation.automatic-procurement",
@@ -2780,7 +2770,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-procurement",
         "legacy": [
           "administration.operation.automatic-procurement"
         ],
@@ -2803,7 +2793,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-procurement",
         "legacy": [
           "administration.operation.automatic-procurement"
         ],
@@ -2826,7 +2816,7 @@
       "form": true,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-procurement",
         "legacy": [
           "administration.operation.automatic-procurement"
         ],
@@ -2849,7 +2839,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-replenishment",
         "legacy": [
           "administration.operation.automatic-replenishment"
         ],
@@ -2872,7 +2862,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-replenishment",
         "legacy": [
           "administration.operation.automatic-replenishment"
         ],
@@ -2895,7 +2885,7 @@
       "form": true,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.automatic-replenishment",
         "legacy": [
           "administration.operation.automatic-replenishment"
         ],
@@ -2918,7 +2908,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.dispatches",
         "legacy": [
           "administration.operation.dispatches"
         ],
@@ -2941,7 +2931,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.pipeline-configuration",
         "legacy": [
           "administration.operation.pipeline-configuration"
         ],
@@ -2964,7 +2954,7 @@
       "form": false,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.pipeline-configuration",
         "legacy": [
           "administration.operation.pipeline-configuration"
         ],
@@ -2987,7 +2977,7 @@
       "form": true,
       "permission": {
         "kind": "migrated",
-        "code": "work-area.automation",
+        "code": "work-area.automation.pipeline-configuration",
         "legacy": [
           "administration.operation.pipeline-configuration"
         ],
