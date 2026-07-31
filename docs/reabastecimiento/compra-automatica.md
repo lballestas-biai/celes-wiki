@@ -3,7 +3,7 @@ title: Compra Automática
 module: Reabastecimiento
 route: /work-area/automation/automatic-procurement
 aliases: [/administration/operation/automatic-procurement]
-permission: work-area.automation
+permission: work-area.automation.automatic-procurement
 audience: [Clientes, Usuarios, Administradores]
 summary: >
   Aquí se programan las órdenes de compra que salen solas: qué productos, cada cuánto y a
@@ -12,7 +12,7 @@ summary: >
 keywords: [compra automática, programación, recurrencia, orden de compra, automatización]
 tenant_variance: high
 status: verified
-verified_at: 2026-07-30
+verified_at: 2026-07-31
 sources:
   - repo: celes-platform
     path: apps/web-client/src/pages/Administration/AdministrationOperation/AdministrationAutomaticProcurementListPage/AdministrationAutomaticProcurementListPage.tsx
@@ -26,6 +26,9 @@ sources:
   - repo: celes-platform
     path: apps/api-core/src/configs/application/jobs/execute_procurement_order_job.py
     ref: d20adaaea
+  - repo: celes-platform
+    path: apps/web-client/src/utils/routeMigrations.ts
+    ref: fdb9c1358
 ---
 
 # Compra Automática
@@ -78,7 +81,8 @@ cada intento fallido, y si se agotan los reintentos la configuración queda **pa
 
 ## Qué necesita para funcionar { #requisitos }
 
-- **El permiso `work-area.automation`** (o el anterior de Administración) en escritura.
+- **El permiso `work-area.automation.automatic-procurement`** (o el anterior de
+  Administración) en escritura.
 - **Filtros que acoten el alcance**, normalmente por proveedor o por centro.
 - **Una hora posterior al corte diario de datos**, porque esta pantalla no espera a que el
   procesamiento termine (ver abajo).

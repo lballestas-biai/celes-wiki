@@ -66,6 +66,8 @@
     "/work-area/procurement/calendar": "Tercer candidato del trío de calendarios de compra que planteaba el issue: no existe. Los calendarios reales son /work-area/procurement-calendar y /planning/procurement-calendar, que son pantallas distintas.",
     "/work-area/replenishment/suggestions": "«Distribución Sugerida» no existe; la pantalla viva de solicitudes es /work-area/replenishment-suggestions («Solicitudes de Tiendas»).",
     "/administration/configuration/column-groups": "«Grupos de columnas» no existe en el router; la pantalla viva de columnas es /administration/configuration/config-columns.",
+    "/promotions/calendar": "El Calendario de Promociones dejó de ser una pantalla el 2026-07-30 (celes-platform 60da4b891): es un diálogo que se abre desde Campañas. La etiqueta sigue viva en routes.json porque titula ese diálogo. Se documenta como sección de docs/promociones/campanas.md.",
+    "/planning/promotional-calendar": "URL anterior del Calendario de Promociones. Se retiró en el mismo commit que la canónica: ver /promotions/calendar.",
     "/settings/lang": "Las seis rutas /settings/* que el issue mandaba resolver no existen en el router y sus etiquetas están sin traducir. Son restos de una versión anterior: se excluyen enteras.",
     "/settings/parameters": "Ver /settings/lang.",
     "/settings/parameters/general": "Ver /settings/lang.",
@@ -144,7 +146,6 @@
 
     "/promotions": { "block": "promociones", "page": "promociones/index.md", "title": "Promociones" },
     "/promotions/campaigns": { "block": "promociones", "page": "promociones/campanas.md", "title": "Campañas" },
-    "/promotions/calendar": { "block": "promociones", "page": "promociones/calendario-de-promociones.md", "title": "Calendario de Promociones" },
 
     "/assortment": { "block": "surtido", "page": "surtido/index.md", "title": "Surtido" },
     "/assortment/trade-marketing": { "block": "surtido", "page": "surtido/trade-marketing.md", "title": "Trade Marketing" },

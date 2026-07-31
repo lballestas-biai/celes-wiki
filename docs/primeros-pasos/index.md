@@ -65,7 +65,7 @@ Después del inicio de sesión pasan dos cosas:
 | [Inicio](../vista-general/panel-de-inicio.md) | El panel de entrada, con el estado general de la operación |
 | [Reabastecimiento](../reabastecimiento/index.md) | Comprar, Distribuir, Solicitudes de Tiendas, Calendario de OC y la automatización de compra y distribución |
 | [Pronóstico](../pronostico/index.md) | El pronóstico de demanda y lo que lo corrige: Resumen, Alertas de Forecast, Escenarios, Calendario de Eventos, Demanda y Promociones |
-| [Promociones](../promociones/index.md) | Campañas y Calendario de Promociones |
+| [Promociones](../promociones/index.md) | Las campañas promocionales y su calendario |
 | [Surtido](../surtido/index.md) | Trade Marketing y Promociones de Exhibición |
 | [Activación](../activacion/index.md) | Lo que cambia cómo Celes calcula: Reglas de Negocio, Productos de Agrupación y Sustitutos |
 | [Reportes](../reportes/index.md) | Histórico, Desempeño Comercial, Adherencia, Distribuciones Estimadas y Balanceo de Inventario |
