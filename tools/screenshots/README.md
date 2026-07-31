@@ -156,6 +156,23 @@ vista mirando —un eje de porcentajes que decía 914 %, un botón «Generar Ord
 «Dato De Ejemplo», dos centros distintos con el mismo nombre ficticio—. Ninguna de esas tres
 es una fuga; las tres eran capturas que documentaban una aplicación que no existe.
 
+### Cuando la ruta canónica redirige a una sub-pantalla
+
+Adherencia no es una pantalla: es tres, y su dirección redirige a la primera. Ese redirector
+**arma la cadena de consulta de nuevo**, así que el `busqueda` del objetivo se pierde por el
+camino y la captura sale con el rango de fechas por defecto —que en esa pantalla cae sobre
+días futuros, sin órdenes todavía, y por tanto sin gráfica—.
+
+Para eso está `subruta`: se va derecho a la sub-pantalla, y ahí sí manda la cadena de
+consulta. Es la única forma de que una captura no visite la ruta del inventario, y por eso
+está acotada: **solo se admite una de las `sections` que el inventario ya le reconoce a esa
+página**. Cualquier otra ruta falla con su nombre. Elegir cuál se captura no es libre
+tampoco: lo honesto es **la sub-pantalla a la que la aplicación lleva por defecto**, porque
+es la que ve quien entra por el menú. Llegar de frente a otra puede dejar controles en un
+estado que un usuario no ve nunca —el selector de Adherencia arranca en *Órdenes de Compra*
+aunque la dirección sea la de distribución—, y eso es otra vez una captura de una aplicación
+que no existe.
+
 ## La revisión humana ya no es obligatoria
 
 Lo fue hasta el 2026-07-30. La quitó una decisión de Luis Ballestas, registrada en la

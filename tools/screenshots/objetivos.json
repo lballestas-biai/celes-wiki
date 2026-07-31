@@ -26,6 +26,13 @@
     "tiene; sin eso la captura no la puede repetir nadie más. Si el valor falta, esa",
     "pantalla no produce PNG y la corrida dice qué falta y dónde ponerlo.",
     "",
+    "`subruta` es opcional, y es la única forma de que la captura no visite la ruta del",
+    "inventario: la sub-pantalla concreta a la que se va. Existe porque una ruta que",
+    "redirige a una de sus sub-pantallas se lleva por delante la cadena de consulta —el",
+    "redirector rearma la suya—, así que a Adherencia no hay manera de llegarle con un",
+    "rango de fechas por la ruta canónica. Solo se admite una de las `sections` que el",
+    "inventario ya le reconoce a esa página; cualquier otra ruta es un error, no un atajo.",
+    "",
     "`recorte` es opcional: el selector de la región que se fotografía. Por defecto es",
     "`main`, que deja fuera la barra lateral —vacía de contenido y distinta según los",
     "permisos de quien mire—. Una pantalla que quiera salir con el menú puede pedir `body`.",
@@ -158,6 +165,28 @@
       "espera": ".MuiDataGrid-row",
       "busqueda": "?campaignName=Campa%C3%B1a%20de%20Ejemplo&campaignId={{campana-de-trade-marketing}}&page=0",
       "nota": "1a.5. El interior de una campaña. `campaignName` es el único parámetro obligatorio de la pantalla y solo se pinta en la cabecera —no elige nada—, así que va como nombre inventado, con la misma forma que los de catalogo.json: es más seguro no traerlo que traerlo y confiar en que una regla lo cambie. El que sí manda es `campaignId`, y ese es el marcador."
+    },
+    {
+      "page": "reportes/desempeno-comercial.md",
+      "espera": ".MuiChartsSurface-root",
+      "nota": "1a.6. El tablero comercial: las tarjetas de variación y la serie de ventas en el tiempo."
+    },
+    {
+      "page": "reportes/adherencia.md",
+      "espera": ".MuiChartsSurface-root",
+      "subruta": "/reports-and-analytics/adherence/procurement",
+      "busqueda": "?dm=2026-06-01_2026-07-25",
+      "nota": "1a.6. Adherencia a Compras es a donde redirige la ruta canónica, y por eso es la sub-pantalla que se captura. Va por `subruta` porque ese redirector descarta la cadena de consulta, y sin rango de fechas la pantalla abre sobre días futuros —sin órdenes emitidas todavía— y sale con «No hay datos disponibles» y sin gráfica."
+    },
+    {
+      "page": "reportes/distribuciones-estimadas.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.6. La proyección de distribución: la curva por día y la tabla cruzada de fechas contra tienda."
+    },
+    {
+      "page": "reportes/balanceo-de-inventario.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.6. La lista de producto y bodega con excedente, con su barra de indicadores."
     }
   ]
 }
