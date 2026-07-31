@@ -6,7 +6,7 @@ Qué pantallas existen en la aplicación, cómo se llaman, quién las ve y qué 
 la wiki les corresponde. Se deriva del código de `celes-app/celes-platform`, no del
 mock ni de la memoria de nadie.
 
-**Ref:** `fdb9c1358` (2026-07-31) · **Rutas:** 153 · **Páginas:** 80 (64 de pantalla, 16 transversales)
+**Ref:** `c98f195c5` (2026-07-31) · **Rutas:** 153 · **Páginas:** 80 (64 de pantalla, 16 transversales)
 
 | Destino | Rutas |
 |---|---|

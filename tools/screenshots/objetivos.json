@@ -187,6 +187,76 @@
       "page": "reportes/balanceo-de-inventario.md",
       "espera": ".MuiDataGrid-row",
       "nota": "1a.6. La lista de producto y bodega con excedente, con su barra de indicadores."
+    },
+    {
+      "page": "administracion/usuarios.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. La lista de usuarios de la instancia, que es a donde lleva «Administración» por defecto. La reusan la portada del bloque y Control de Acceso, porque las dos redirigen aquí."
+    },
+    {
+      "page": "administracion/roles-y-permisos.md",
+      "espera": "table tbody tr",
+      "nota": "1a.7. Los roles con su árbol de permisos; la tabla es la matriz de permiso por acción."
+    },
+    {
+      "page": "administracion/permiso-de-datos.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. Los conjuntos de filtros que recortan qué datos ve cada usuario o aplicación."
+    },
+    {
+      "page": "administracion/parametros-generales.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. Los parámetros de la cadena de suministro por combinación. La reusa Configuración General, que redirige aquí."
+    },
+    {
+      "page": "administracion/configuracion-de-parametros.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. El catálogo de parámetros y los criterios por los que se puede diferenciar cada uno."
+    },
+    {
+      "page": "administracion/variables-de-entorno.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. Las dos secciones de la pantalla: variables y secretos. La de secretos sale vacía y eso es lo normal."
+    },
+    {
+      "page": "administracion/filtros.md",
+      "espera": ".MuiAccordion-root",
+      "nota": "1a.7. Los filtros por aplicación, agrupados en secciones desplegables."
+    },
+    {
+      "page": "administracion/homologacion.md",
+      "espera": "[data-field-id]",
+      "nota": "1a.7. El lienzo de homologación: campos del cliente a la izquierda, modelo canónico a la derecha. `[data-field-id]` solo existe cuando el modelo canónico ya cargó. La reusan Datos Maestros —que redirige aquí— y Motor de Integración, que monta este mismo componente en otra dirección."
+    },
+    {
+      "page": "administracion/calidad-de-datos.md",
+      "espera": ".MuiCard-root",
+      "nota": "1a.7. El panel general de calidad de datos, con la tasa de aprobación y el desglose por dimensión."
+    },
+    {
+      "page": "administracion/historial-de-jobs.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. Las ejecuciones de los procesos de la instancia, con su estado."
+    },
+    {
+      "page": "administracion/colaboradores-externos.md",
+      "espera": ".MuiDataGrid-columnHeader",
+      "nota": "1a.7. Sale **vacía a propósito**: ninguna de las tres instancias de captura tiene colaboradores invitados, y la lista vacía con su botón de invitar es exactamente lo que ve quien entra por primera vez. Por eso el `espera` es el encabezado y no una fila."
+    },
+    {
+      "page": "administracion/configuraciones-de-cubicaje.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. Las restricciones de cubicaje por proveedor y centro. Se capturó en otra instancia: en la principal la pantalla no tiene ninguna configuración cargada y salía vacía."
+    },
+    {
+      "page": "administracion/dashboard-ans.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. El panel de cumplimiento de los acuerdos de nivel de servicio. Va en otra instancia porque la principal no tiene el permiso `administration.sla-dashboard`."
+    },
+    {
+      "page": "administracion/productos-de-referencia.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.7. Las referencias configuradas. Va en una tercera instancia: es la única de las tres de captura que tiene alguna, en las otras dos la pantalla sale vacía."
     }
   ]
 }

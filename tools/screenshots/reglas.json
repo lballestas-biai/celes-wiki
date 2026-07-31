@@ -124,12 +124,18 @@
       "cuatro anomalías del forecast —Hockey Stick, Death Spiral, Missed Seasonal Lift y Missed",
       "Seasonal Drop— son un conjunto fijo con su explicación en los locales. Sin esta entrada",
       "la columna salía como «Dato De Ejemplo» y la captura contradecía a la página que explica",
-      "qué significa cada bandera. Es el mismo error que «Canal» y «Origen» en 1a.3."
+      "qué significa cada bandera. Es el mismo error que «Canal» y «Origen» en 1a.3.",
+      "",
+      "«Modo de cubicaje» (`cubing_mode`) es vocabulario **cerrado** —Pallet o Caja— y en 1a.7 salía",
+      "como «Dato De Ejemplo», contradiciendo a la página que explica qué significa cada modo. Es el",
+      "mismo error que «Canal» y «Origen» en 1a.3 y «Flags Activas» en 1a.4, y otra vez lo cazó",
+      "mirar el PNG y no la guarda: un vocabulario reemplazado no es una fuga, así que la guarda no",
+      "tiene por qué protestar. De ahí que `modo`/`mode` entren en el patrón."
     ],
     "orden": [
       {
         "especie": "vocabulario",
-        "patron": "(^|[\\s_])(status|engine|type|state)([\\s_]|$)|(^|\\s)(channel|origin)([\\s_]|$)|(^|\\s)(canal|origen)(\\s|$)|estado|motor|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query|flags?)([\\s_]|$)|bandera|regla|par[aá]metro|consulta"
+        "patron": "(^|[\\s_])(status|engine|type|state|mode)([\\s_]|$)|(^|\\s)(channel|origin)([\\s_]|$)|(^|\\s)(canal|origen)(\\s|$)|estado|motor|modo|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query|flags?)([\\s_]|$)|bandera|regla|par[aá]metro|consulta"
       },
       {
         "especie": "usuario",
@@ -295,7 +301,29 @@
       "valor se conserva a propósito —«ACTIVO» en «Estado del Producto» reemplazado por un",
       "nombre ficticio documentaría una aplicación que no existe— y la guarda tiene que",
       "dejar de exigirlo. Fuera de esas celdas, la misma palabra sigue abortando la captura.",
-      "Un nombre de tienda, de centro o de proveedor no entra en ninguna de las dos."
+      "Un nombre de tienda, de centro o de proveedor no entra en ninguna de las dos.",
+      "",
+      "1a.7 añadió `STRING`, `BOOL`, `INT64` y `SLUG` a `siglas_permitidas`. Las tres primeras",
+      "son nombres del sistema de tipos que Columnas y Homologación muestran junto a cada",
+      "campo, y `SLUG` es el encabezado literal de una columna de Consultas: son palabras que",
+      "el lector ve idénticas en cualquier instancia y ningún cliente se llama así. Van en la",
+      "lista global —y no en `vocabulario_permitido`— porque en Homologación no aparecen dentro",
+      "de una celda de tabla, sino como texto suelto bajo el nombre del campo.",
+      "",
+      "Lo que **no** se añadió, y conviene que se sepa: el catálogo de Columnas trae en su",
+      "columna «Field» identificadores de texto libre, y en una instancia uno de ellos llevaba",
+      "embebido el nombre de otro cliente. La guarda lo cazó por `nombre-de-cliente` y abortó.",
+      "No se silenció: la captura se tomó en otra instancia. Un identificador libre puede",
+      "contener cualquier cosa, así que no es vocabulario cerrado — es el mismo caso que",
+      "«Resultado» en 1a.3.",
+      "",
+      "`TORTON` y `53FT` entraron en `vocabulario_permitido` —no en la lista global— por",
+      "Configuraciones de Cubicaje: son clases de unidad de transporte, y la columna que las",
+      "muestra («Tipo de transporte») la resuelve la especie `vocabulario`. No identifican",
+      "tienda, proveedor ni producto, y no llevan magnitud. Se admiten **esos dos literales y",
+      "nada más**: la columna es texto que configura el cliente, así que cualquier otro valor",
+      "sigue abortando la captura, que es lo que se quiere. Si aparecen muchos más, la salida",
+      "no es alargar la lista: es darle a esa columna una especie que la reemplace."
     ],
     "mayusculas": {
       "largo_minimo": 4,
@@ -306,7 +334,9 @@
         "INACTIVA",
         "MANUAL",
         "AUTOMATICO",
-        "AUTOMÁTICO"
+        "AUTOMÁTICO",
+        "TORTON",
+        "53FT"
       ],
       "siglas_permitidas": [
         "CEDI",
@@ -362,7 +392,12 @@
         "PZA",
         "CAJA",
         "CTRL",
-        "ENTER"
+        "ENTER",
+        "STRING",
+        "BOOL",
+        "INT64",
+        "SLUG",
+        "FLOAT64"
       ]
     },
     "imagenes": {

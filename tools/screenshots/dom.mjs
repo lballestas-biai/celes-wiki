@@ -372,14 +372,37 @@ function pistaDe(elemento, region) {
   return (tarjeta?.textContent ?? '').replace(/\s+/gu, ' ').trim().slice(0, 120)
 }
 
-/** El encabezado de la columna de una celda: por campo, y si no, por posición. */
+/**
+ * El encabezado de la columna de una celda: por campo, y si no, por posición.
+ *
+ * Los dos primeros caminos son de la rejilla de datos. El tercero es para una tabla HTML
+ * corriente —`<table>` con `<th>`—, que no tiene `data-field` ni `data-colindex`: ahí el
+ * encabezado se busca por la posición de la celda en su fila. Sin él, `especieDeRegion` se
+ * quedaba sin encabezado y terminaba adivinando la especie a partir de **la clase CSS de la
+ * celda**, que no significa nada: en Roles y Permisos (1a.7) los nombres de los roles salían
+ * reemplazados por nombres de producto del catálogo. No era una fuga —era una captura que
+ * documentaba una aplicación que no existe, con roles llamados «Galleta Integral 200G»—.
+ */
 function encabezadoDe(celda, campo) {
   const indice = celda.getAttribute?.('data-colindex')
   const cabecera =
     (campo && document.querySelector(`.MuiDataGrid-columnHeader[data-field="${CSS.escape(campo)}"]`)) ||
     (indice && document.querySelector(`.MuiDataGrid-columnHeader[data-colindex="${indice}"]`)) ||
     null
-  return cabecera?.textContent ?? ''
+  if (cabecera) return cabecera.textContent ?? ''
+  return encabezadoDeTablaHtml(celda)
+}
+
+/** El `<th>` que le toca a un `<td>` por su posición en la fila. */
+function encabezadoDeTablaHtml(celda) {
+  if (celda.tagName !== 'TD') return ''
+  const fila = celda.parentElement
+  const tabla = celda.closest?.('table')
+  if (!fila || !tabla) return ''
+  const posicion = [...fila.children].indexOf(celda)
+  if (posicion < 0) return ''
+  const encabezados = tabla.querySelectorAll('thead th')
+  return encabezados[posicion]?.textContent ?? ''
 }
 
 /**
