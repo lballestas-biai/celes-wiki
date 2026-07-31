@@ -2,8 +2,8 @@
   "_": "Generado por tools/build-inventory.mjs a partir de tools/data/app-routes.json y tools/decisions.json. No editar a mano.",
   "source": {
     "repo": "celes-app/celes-platform",
-    "ref": "fdb9c1358",
-    "ref_full": "fdb9c1358dcdfbf26c58d9426f2a975a6cc23f22",
+    "ref": "c98f195c5",
+    "ref_full": "c98f195c5028b84a4b78cad4caf120dce41097fb",
     "ref_date": "2026-07-31",
     "files": {
       "apps/web-client/src/routeTree.gen.ts": "3df758b5e1ae9ba9",
