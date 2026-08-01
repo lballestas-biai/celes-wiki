@@ -64,7 +64,8 @@ pueden llamarse igual.
 
 **Entrar al centro de ayuda y a Celes Academy.** Las tarjetas listan libros electrónicos y videos
 cortos de producto, y cada elemento se abre en una pestaña nueva. **Ver todo** lleva al catálogo
-completo.
+completo de videos. Qué hay detrás de cada tarjeta, y cuál funciona hoy, está en
+[Academy](../recursos/academy.md).
 
 **Preguntarle a CELI.** La tarjeta *Aprende nuevos términos del Retailer* termina en un campo de
 búsqueda: lo que escribas ahí y envíes con <kbd>Enter</kbd> se le pasa al asistente, que se abre con
@@ -87,8 +88,10 @@ cerrar en cualquier momento.
     - **Algunas instancias sustituyen el contenido de esta pantalla por un tablero propio**
       —indicadores del negocio en lugar del material de formación—. Es una configuración por
       empresa: si tu Inicio no se parece al de la captura, es por esto.
-    - **El botón «Visita nuestro Centro de Ayuda» todavía no lleva a ninguna parte.** El resto
-      de los enlaces de las tarjetas sí funcionan.
+    - **El botón «Visita nuestro Centro de Ayuda» todavía no lleva a ninguna parte**, y los tres
+      enlaces de la tarjeta de libros electrónicos apuntan hoy a una página que no existe
+      (comprobado el 1 de agosto de 2026). Los videos sí abren. Ver
+      [Academy](../recursos/academy.md).
 
 ## Qué necesita para funcionar { #requisitos }
 

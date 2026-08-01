@@ -278,6 +278,11 @@
       "espera": ".MuiDataGrid-row",
       "busqueda": "?key_product={{producto-con-historial}}&key_warehouse={{tienda-del-producto-con-historial}}",
       "nota": "1a.8. Es una pantalla de detalle: sin producto en la dirección no muestra nada, y las dos llaves son dato de cliente, así que van por marcador. El `espera` es una fila de la tabla de la vista por defecto (Histórico de Distribuciones), que es la que ve quien entra."
+    },
+    {
+      "page": "recursos/soporte.md",
+      "espera": ".MuiDataGrid-overlayWrapperInner p",
+      "nota": "1a.10. Es la única pantalla que se captura **vacía a propósito**. Una conversación de soporte es texto libre de un cliente —asunto, último mensaje, nombre de quien la atiende— y eso no lo sabe sanear ninguna regla de región: se reemplaza lo que tiene forma de dato, no lo que alguien escribió. La vista por defecto es «Mis tickets», así que una cuenta sin tickets muestra la pantalla entera —barra, filtros, columnas— sin una sola conversación. Por eso el `espera` es el rótulo del vacío y no una fila: si la cuenta de captura llegara a tener tickets, esta captura falla en vez de publicarlos."
     }
   ]
 }
