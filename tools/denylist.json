@@ -60,8 +60,8 @@
       "id": "url-interna",
       "que": "dirección interna",
       "ambito": "todo",
-      "regex": "\\.run\\.app\\b|console\\.cloud\\.google\\.com|\\.googleapis\\.com|\\blocalhost(?::\\d+)?\\b|\\b127\\.0\\.0\\.1\\b|\\bgs://|github\\.com/celes-app/",
-      "porque": "Una dirección interna no le sirve a un cliente y sí a quien busca superficie de ataque."
+      "regex": "\\.run\\.app\\b|console\\.cloud\\.google\\.com|\\.googleapis\\.com|\\blocalhost(?::\\d+)?\\b|\\b127\\.0\\.0\\.1\\b|\\bgs://|github\\.com/celes-app/(?!celes-wiki(?![\\w-]))",
+      "porque": "Una dirección interna no le sirve a un cliente y sí a quien busca superficie de ataque. `celes-app/` se exceptúa a sí misma solo para `celes-wiki`: los otros 135 repositorios de la organización son privados y enlazarlos manda al cliente a un 404 que además revela que existen."
     },
     {
       "id": "infraestructura",
