@@ -263,6 +263,7 @@ requirements.txt      # versiones pinneadas
 | `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable, una captura que no salió del pipeline, y un índice que deja páginas fuera o cita anclas rotas |
 | `content-checks.yml` | `secrets` | Que entre una credencial al historial (gitleaks) |
 
-Las cuatro son *status checks* obligatorios de `main`. `secrets` usa
-`gitleaks-action`, gratuito en repositorios públicos de una cuenta personal: si este
-repositorio pasa a una organización, pedirá `GITLEAKS_LICENSE`.
+Las cuatro son *status checks* obligatorios de `main`. `secrets` descarga el **binario**
+de gitleaks (MIT, versión pinneada y con el tarball verificado) y barre el historial
+completo. No usa `gitleaks-action`: la envoltura es gratuita solo en repositorios
+públicos de una cuenta personal y en una organización exige `GITLEAKS_LICENSE`.
