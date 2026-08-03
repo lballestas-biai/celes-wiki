@@ -33,8 +33,18 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.txt
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: Instalar dependencias
         run: pip install -r requirements.txt
+
+      # Deja docs/wiki-index.json, docs/llms.txt y docs/llms-full.txt, que MkDocs copia
+      # a la raíz del sitio. Van aquí y no en el repositorio: son una copia derivada del
+      # contenido, y una copia commiteada solo puede coincidir con su fuente o mentir.
+      - name: Índice para el agente
+        run: node tools/build-agent-index.mjs
 
       - name: Construir el sitio
         # --strict: un enlace roto o una página fuera del nav falla el build.

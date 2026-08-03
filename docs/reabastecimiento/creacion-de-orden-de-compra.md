@@ -50,7 +50,7 @@ de Compra».](../assets/screenshots/reabastecimiento/creacion-de-orden-de-compra
 Cinco cosas, en el orden en que suelen hacerse: ajustar las cantidades, entender de dónde
 sale un sugerido, aplicar una restricción a todo el pedido, guardar el avance y enviar.
 
-### Ajustar cantidades
+### Ajustar cantidades { #ajustar-cantidades }
 
 Escribe sobre la celda **Cantidad**. Puedes seleccionar filas con la casilla de la
 izquierda y trabajar solo sobre esas; el pie de la tabla muestra cuántas llevas
@@ -67,7 +67,7 @@ Si el resultado trae familias de productos —sintéticos o sustitutos—, el in
 **Agrupador** las junta bajo su producto padre. Las filas de familia son informativas: no
 se seleccionan ni se editan.
 
-### Entender un sugerido
+### Entender un sugerido { #entender-un-sugerido }
 
 La acción **Quiero saber más** de cada fila abre la ficha **Detalles del Producto**, con el
 histórico del producto en ese destino y el **Detalle de Recomendación de Compra**: la
@@ -75,7 +75,7 @@ explicación, etapa por etapa, de cómo se llegó a esa cifra —la demanda a cu
 inventario inicial, las entradas esperadas, los múltiplos aplicados— y con qué parámetros.
 Desde ahí también se puede corregir la cantidad sin cerrar la ficha.
 
-### Aplicar una restricción o un plugin
+### Aplicar una restricción o un plugin { #restricciones-y-plugins }
 
 El selector de **plugins** aplica una operación sobre todo lo que está filtrado. Cada uno
 depende de un permiso propio, así que verás solo los que tengas concedidos:
@@ -90,12 +90,12 @@ depende de un permiso propio, así que verás solo los que tengas concedidos:
 Debajo de la barra de herramientas, el bloque de **Restricciones** muestra las que ya
 aplican a esta orden por parámetros —mínimos de pedido, múltiplos de compra, peso mínimo—.
 
-### Guardar sin enviar
+### Guardar sin enviar { #guardar-sin-enviar }
 
 El botón **Guardar solo modificados** conserva el avance sin mandar nada; su menú ofrece
 además **Guardar todo**. Es lo que permite dejar una orden a medias y retomarla.
 
-### Enviar
+### Enviar { #enviar }
 
 **Enviar Orden de Compra** pide confirmación mostrando cuántos productos y cuántas unidades
 van, la fecha de la orden y la **fecha y hora de entrega esperada**. Al confirmar, la orden
@@ -106,7 +106,7 @@ Si algunos productos ya se enviaron hoy, la aplicación avisa antes de duplicar 
 elegir entre **enviar solo los nuevos** o **forzar el envío de todos** —esto último, solo
 con permiso para hacerlo—.
 
-### Cargar un Excel
+### Cargar un Excel { #cargar-un-excel }
 
 Cuando tu usuario tiene el permiso `work-area.procurement.order.upload`, aparece **Cargar
 archivo Excel**, que crea las líneas de la orden desde un archivo en vez de a mano.
