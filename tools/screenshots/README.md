@@ -70,6 +70,7 @@ hacer y no se entera. Por eso la pregunta de la guarda no es «¿hice lo que dij
 | Regla | Qué caza |
 |---|---|
 | `region-sin-sanear` | Un texto dentro de una celda o un eje que nadie tocó |
+| `control-sin-sanear` | El valor de un `input` que nadie tocó. Ese valor se pinta y **no está en ningún nodo de texto**, así que hasta 1a.3 bis ni el saneamiento ni la guarda lo veían: el selector de bodega de Solicitudes de Tiendas salió con el código real al lado de la barra ya saneada |
 | `numero-sin-sanear` | Un número con separadores, moneda o magnitud, esté donde esté |
 | `mayusculas` | Una palabra en mayúsculas sostenidas que no es sigla conocida — así vienen los maestros del cliente, y es la regla que más atrapa |
 | `identidad` | El nombre, el correo o la instancia de la cuenta que está capturando |
