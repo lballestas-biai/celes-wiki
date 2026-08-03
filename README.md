@@ -1,7 +1,7 @@
 # celes-wiki
 
 Documentación de producto de Celes. Sitio publicado:
-**<https://lballestas-biai.github.io/celes-wiki/>**
+**<https://celes-app.github.io/celes-wiki/>**
 
 Stack: [MkDocs Material](https://squidfunk.github.io/mkdocs-material/). El contenido
 vive en Markdown bajo `docs/`; el `nav` de `mkdocs.yml` es explícito.
@@ -203,9 +203,9 @@ artefactos en la raíz del sitio:
 
 | Artefacto | Qué es |
 |---|---|
-| [`wiki-index.json`](https://lballestas-biai.github.io/celes-wiki/wiki-index.json) | El catálogo. Una entrada por página: título, dirección de la pantalla, permiso, resumen, palabras clave, estado, fecha de verificación, **las anclas de sus secciones** y a qué otras páginas enlaza |
-| [`llms.txt`](https://lballestas-biai.github.io/celes-wiki/llms.txt) | El mapa corto, en el formato de [llmstxt.org](https://llmstxt.org): un enlace y una frase por página, agrupados por bloque |
-| [`llms-full.txt`](https://lballestas-biai.github.io/celes-wiki/llms-full.txt) | El texto completo de todas las páginas en un solo archivo, en el orden del menú |
+| [`wiki-index.json`](https://celes-app.github.io/celes-wiki/wiki-index.json) | El catálogo. Una entrada por página: título, dirección de la pantalla, permiso, resumen, palabras clave, estado, fecha de verificación, **las anclas de sus secciones** y a qué otras páginas enlaza |
+| [`llms.txt`](https://celes-app.github.io/celes-wiki/llms.txt) | El mapa corto, en el formato de [llmstxt.org](https://llmstxt.org): un enlace y una frase por página, agrupados por bloque |
+| [`llms-full.txt`](https://celes-app.github.io/celes-wiki/llms-full.txt) | El texto completo de todas las páginas en un solo archivo, en el orden del menú |
 
 ```bash
 node tools/build-agent-index.mjs   # los genera en docs/; MkDocs los copia al sitio

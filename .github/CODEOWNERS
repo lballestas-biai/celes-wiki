@@ -1,6 +1,11 @@
-# Esta wiki es pública y cliente-facing: todo cambio pasa por review.
-# Al incorporarse más revisores (o un equipo), sumarlos aquí — la regla de
-# protección de `main` exige la aprobación de los code owners.
+# Esta wiki es pública y cliente-facing: todo cambio pasa por PR.
+#
+# La protección de `main` **no** exige aprobación de code owners todavía
+# (`required_approving_review_count: 0`, `require_code_owner_reviews: false`).
+# No es un olvido: con un único code owner, exigirla cierra la rama para siempre
+# —nadie puede aprobar su propio PR, y `enforce_admins: true` no deja saltarla—.
+# Mudar el repositorio a la organización no crea el segundo revisor: hay que
+# nombrarlo aquí primero, y entonces sí activar las dos opciones (#2837).
 
 *                       @lballestas-biai
 

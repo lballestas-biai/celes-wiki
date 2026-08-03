@@ -1,11 +1,11 @@
 site_name: Celes Wiki
 site_description: Documentación de producto de Celes, derivada de la realidad verificable.
-site_url: https://lballestas-biai.github.io/celes-wiki/
+site_url: https://celes-app.github.io/celes-wiki/
 site_author: Celes
 copyright: © Celes
 
-repo_url: https://github.com/lballestas-biai/celes-wiki
-repo_name: lballestas-biai/celes-wiki
+repo_url: https://github.com/celes-app/celes-wiki
+repo_name: celes-app/celes-wiki
 edit_uri: edit/main/docs/
 
 docs_dir: docs
@@ -84,7 +84,7 @@ extra:
   # Sin analítica de terceros: la wiki es pública y no rastrea a los clientes.
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/lballestas-biai/celes-wiki
+      link: https://github.com/celes-app/celes-wiki
       name: Repositorio de la wiki
 
 plugins:
