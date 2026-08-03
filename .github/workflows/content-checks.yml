@@ -57,19 +57,38 @@ jobs:
         if: ${{ !cancelled() }}
         run: node tools/screenshots/check-screenshots.mjs
 
+  # `secrets` es el nombre del contexto que exige la protección de `main`: si se
+  # renombra el job, la rama queda esperando un check que ya no existe.
   secrets:
     name: secrets
     runs-on: ubuntu-latest
+    env:
+      # El binario de gitleaks es MIT y no pide licencia. La envoltura
+      # `gitleaks/gitleaks-action@v2` sí: es gratuita solo en repositorios públicos de
+      # una cuenta personal y en una organización exige `GITLEAKS_LICENSE`, que el plan
+      # Team no trae. Invocamos el binario para que el check dependa de los hallazgos y
+      # no de dónde vive el repositorio.
+      GITLEAKS_VERSION: "8.30.1"
     steps:
       - uses: actions/checkout@v4
         with:
           # gitleaks compara commits: necesita el historial, no solo la punta.
           fetch-depth: 0
 
-      # gitleaks-action es gratuito en repositorios públicos de una cuenta personal.
-      # Si este repositorio pasa alguna vez a una organización, exige `GITLEAKS_LICENSE`
-      # y este paso empieza a fallar por licencia, no por hallazgos.
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+      - name: Instalar gitleaks
+        run: |
+          set -euo pipefail
+          base="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+          curl -sSfL -O "${base}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -sSfL -O "${base}/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          # La versión está pinneada y el tarball se verifica: un binario que se descarga
+          # en cada corrida y no se comprueba es justo la clase de cosa que este job busca.
+          sha256sum --ignore-missing -c "gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          tar -xzf "gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" gitleaks
+          sudo install gitleaks /usr/local/bin/gitleaks
+          rm -f gitleaks gitleaks_${GITLEAKS_VERSION}_*
+
+      # Sobre el historial completo, no sobre el diff del PR: un secreto no se borra con
+      # el commit siguiente. `--redact` para no publicar el hallazgo en el log de CI.
+      - name: Buscar secretos
+        run: gitleaks git . --redact --no-banner --exit-code 1
