@@ -147,12 +147,18 @@
       "como «Dato De Ejemplo», contradiciendo a la página que explica qué significa cada modo. Es el",
       "mismo error que «Canal» y «Origen» en 1a.3 y «Flags Activas» en 1a.4, y otra vez lo cazó",
       "mirar el PNG y no la guarda: un vocabulario reemplazado no es una fuga, así que la guarda no",
-      "tiene por qué protestar. De ahí que `modo`/`mode` entren en el patrón."
+      "tiene por qué protestar. De ahí que `modo`/`mode` entren en el patrón.",
+      "",
+      "«Vigencia» (`validity`, 1a.13) es la quinta reincidencia del mismo error, y la más clara: la",
+      "columna **no viene del cliente** —la aplicación la deduce de las dos fechas de la fila— y su",
+      "valor es uno de tres: Vigente, Programada o Vencida. Salía como «Dato De Ejemplo» al lado de",
+      "las fechas de las que se deduce, así que la captura contradecía a su propia fila y a la página",
+      "que explica los tres estados."
     ],
     "orden": [
       {
         "especie": "vocabulario",
-        "patron": "(^|[\\s_])(status|engine|type|state|mode)([\\s_]|$)|(^|\\s)(channel|origin)([\\s_]|$)|(^|\\s)(canal|origen)(\\s|$)|estado|motor|modo|tipo|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query|flags?)([\\s_]|$)|bandera|regla|par[aá]metro|consulta"
+        "patron": "(^|[\\s_])(status|engine|type|state|mode|validity)([\\s_]|$)|(^|\\s)(channel|origin)([\\s_]|$)|(^|\\s)(canal|origen)(\\s|$)|estado|motor|modo|tipo|vigencia|acci[oó]n|periodicidad|frecuencia|prioridad|(^|[\\s_])(ruleset|rule|plugin|param|field|query|flags?)([\\s_]|$)|bandera|regla|par[aá]metro|consulta"
       },
       {
         "especie": "usuario",
