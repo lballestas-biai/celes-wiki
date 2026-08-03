@@ -280,6 +280,11 @@
       "nota": "1a.8. Es una pantalla de detalle: sin producto en la dirección no muestra nada, y las dos llaves son dato de cliente, así que van por marcador. El `espera` es una fila de la tabla de la vista por defecto (Histórico de Distribuciones), que es la que ve quien entra."
     },
     {
+      "page": "reabastecimiento/solicitudes-de-tiendas.md",
+      "espera": ".MuiDataGrid-row",
+      "nota": "1a.3, desbloqueada en #2817. Va en una cuarta instancia: es la única de las que el agente alcanza que tiene la pantalla configurada —en las otras la tabla responde «No hay columnas» para cualquier bodega—. La bodega la elige la propia aplicación al entrar, así que no hace falta `busqueda`."
+    },
+    {
       "page": "activacion/productos-de-agrupacion.md",
       "espera": ".MuiDataGrid-columnHeader",
       "nota": "1a.13. Sale **vacía a propósito**: ninguna de las tres instancias de captura tiene agrupaciones configuradas (comprobado por API en las tres), y la lista vacía con sus botones de importar y agregar es exactamente lo que ve quien entra por primera vez. Por eso el `espera` es el encabezado y no una fila."

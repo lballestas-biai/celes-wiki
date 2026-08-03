@@ -81,6 +81,37 @@
       ]
     },
     {
+      "sel": "p.text-caption-1 > span:not([class])",
+      "que": "el valor de la barra de bodega de Solicitudes de Tiendas",
+      "pista": "b",
+      "__": [
+        "Esa barra pone las dos parejas en una sola línea —«Código de Bodega: BOB01 |",
+        "Nombre de Bodega: …»— con la etiqueta en un `<b>` y el valor en un `<span>` sin",
+        "clase. El separador «|» sí tiene clase, y por eso el selector la excluye: si",
+        "entrara, el saneamiento lo reemplazaría por un valor de ejemplo y la barra",
+        "quedaría diciendo cualquier cosa.",
+        "",
+        "Aquí es donde hizo falta que `etiquetaDe` prefiera la etiqueta **anterior** al",
+        "valor: con la primera coincidencia del padre, el nombre de la bodega se leía como",
+        "«Código de Bodega» y salía crudo."
+      ]
+    },
+    {
+      "sel": "input[placeholder='Escoger Bodega']",
+      "que": "el selector de bodega de Solicitudes de Tiendas",
+      "especie": "codigo",
+      "__": [
+        "El valor de un control no está en ningún nodo de texto, así que va por la rama de",
+        "controles de `sanear`, no por regiones: aquí `sel` solo sirve para declararle la",
+        "especie a mano.",
+        "",
+        "Y hace falta declararla: el control se llama «Escoger Bodega» pero lo que enseña es",
+        "el **código**. Por su etiqueta salía como nombre de centro mientras la barra de al",
+        "lado —el mismo dato— salía como código, y la captura mostraba la misma bodega con",
+        "dos identidades distintas."
+      ]
+    },
+    {
       "sel": ".MuiChartsAxis-tickLabel, .MuiChartsAxis-label",
       "que": "ejes de las gráficas"
     },
@@ -166,7 +197,7 @@
       },
       {
         "especie": "codigo",
-        "patron": "(^|[\\s_])(code|codigo|id|sku|ean|barcode)([\\s_]|$)|c[oó]digo"
+        "patron": "(^|[\\s_])(code|codigo|id|sku|ean|barcode)([\\s_]|$)|c[oó]digo|^um\\s|(^|[\\s_])(uom)([\\s_]|$)|unidad de medida"
       },
       {
         "especie": "cedi",
@@ -182,7 +213,7 @@
       },
       {
         "especie": "categoria",
-        "patron": "categor|department|departamento|linea|l[ií]nea|subclase|clase|jerarqu"
+        "patron": "categor|cuadrante|department|departamento|linea|l[ií]nea|subclase|clase|jerarqu"
       },
       {
         "especie": "marca",

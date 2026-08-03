@@ -11,8 +11,8 @@ summary: >
   entra al proceso de distribución; no despacha nada por sí sola.
 keywords: [solicitudes de tiendas, pedido de tienda, bodega, solicitud, distribución]
 tenant_variance: high
-status: draft
-verified_at: 2026-07-30
+status: verified
+verified_at: 2026-08-03
 sources:
   - repo: celes-platform
     path: apps/web-client/src/pages/WorkArea/WorkAreaReplenishmentSuggestionsPage/WorkAreaReplenishmentSuggestionsPage.tsx
@@ -30,13 +30,6 @@ sources:
 
 # Solicitudes de Tiendas
 
-!!! warning "Falta la captura"
-
-    El texto de esta página está verificado contra el código, pero todavía no lleva
-    captura: la instancia con la que se toman las capturas no tiene esta pantalla
-    configurada, y publicar una imagen de una pantalla sin columnas documentaría un
-    problema de configuración en vez del producto. Por eso queda como **borrador**.
-
 ## Qué es y para qué sirve { #que-es }
 
 En [Distribuir](distribuir.md) es el centro quien decide qué mandar. Aquí es al revés: es
@@ -50,6 +43,9 @@ cuenta al armar el reparto. La orden sigue saliendo desde
 
 Es la pantalla que usan las cadenas donde el punto de venta conoce algo que el modelo no
 ve: un evento local, una exhibición, un cliente grande que avisó.
+
+![La lista de productos de una bodega, con la columna Cantidad editable y el botón de cargar
+un archivo Excel.](../assets/screenshots/reabastecimiento/solicitudes-de-tiendas.png)
 
 ## Qué puedes hacer aquí { #que-puedes-hacer }
 

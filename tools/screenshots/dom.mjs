@@ -149,9 +149,61 @@ export function reemplazarIdentidad(pares, raiz = document.body) {
   return cambios
 }
 
+/**
+ * El valor de un control de formulario, que no vive en ningún nodo de texto.
+ *
+ * Un `<input>` pinta su `value` sin crear texto en el DOM, así que ni el saneamiento ni la
+ * guarda lo veían: en Solicitudes de Tiendas el selector de bodega salió con el código real
+ * mientras la barra de al lado ya estaba saneada — dos códigos distintos para la misma
+ * bodega en la misma captura, y encima uno de ellos del cliente.
+ *
+ * Lo que alguien eligió o escribió en un control **es dato del cliente por definición**, así
+ * que aquí no se pregunta si está dentro de una región: se trata como si lo estuviera. La
+ * especie sale de lo que la aplicación dice que es ese control —su `placeholder`, su
+ * `aria-label` o su `name`—, que es la misma pista que ve el usuario.
+ */
+const CONTROLES = 'input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea'
+const valorNuestro = new WeakMap()
+
+function* controlesConValor(raiz) {
+  const nodos = raiz.matches?.(CONTROLES) ? [raiz] : []
+  for (const nodo of raiz.querySelectorAll?.(CONTROLES) ?? []) nodos.push(nodo)
+  for (const nodo of nodos) if ((nodo.value ?? '').trim()) yield nodo
+}
+
+const pistaDeControl = (control) =>
+  [control.getAttribute('placeholder'), control.getAttribute('aria-label'), control.getAttribute('name')]
+    .filter(Boolean)
+    .join(' ')
+
 /** Sanea todo el árbol y marca lo que toca. Es idempotente: se puede volver a llamar. */
 export function sanear(saneador, reglas, raiz = document.body) {
   const cuenta = { numero: 0, texto: 0, fecha: 0 }
+  for (const control of controlesConValor(raiz)) {
+    if (valorNuestro.get(control) === control.value) continue
+    const pista = pistaDeControl(control)
+    // Una región puede declarar la especie de un control a mano. Hace falta cuando lo que el
+    // control **muestra** no es lo que su etiqueta dice: el selector de bodega se llama
+    // «Escoger Bodega» y enseña el código, así que por la etiqueta salía con un nombre de
+    // centro mientras la barra de al lado —el mismo dato— salía con un código. El mapa de
+    // reparto va por (especie, valor real): con especies distintas, el mismo valor sale con
+    // dos identidades y la captura muestra una pantalla que no existe.
+    const declarada = reglas.regiones.find((region) => region.especie && control.matches?.(region.sel))
+    const resultado = saneador.sanear(control.value, {
+      enRegion: true,
+      especie: declarada?.especie ?? saneador.especieDe(pista),
+      pista,
+    })
+    if (!resultado || resultado.texto === control.value) {
+      valorNuestro.set(control, control.value)
+      continue
+    }
+    control.value = resultado.texto
+    control.setAttribute('value', resultado.texto)
+    valorNuestro.set(control, resultado.texto)
+    marcar(control, resultado.tipo)
+    cuenta[resultado.tipo === 'numero' || resultado.tipo === 'numero-embebido' ? 'numero' : resultado.tipo === 'fecha' ? 'fecha' : 'texto'] += 1
+  }
   for (const nodo of nodosDeTexto(raiz)) {
     const elemento = nodo.parentElement
     if (!elemento) continue
@@ -246,6 +298,17 @@ export function auditar(saneador, reglas, { identidad = [] } = {}) {
         reporte('mayusculas', palabra, ruta(elemento))
       }
     }
+  }
+
+  // Los controles de formulario, por lo mismo que en `sanear`: su `value` se pinta y no está
+  // en ningún nodo de texto, así que sin esto la guarda no puede verlo. Un control sin marca
+  // con algo escrito dentro es exactamente el caso que dejó publicado un código de bodega.
+  for (const control of controlesConValor(document.body)) {
+    if (!esVisible(control)) continue
+    const texto = control.value
+    visibles.push(texto)
+    const marcas = (control.getAttribute(MARCA) ?? '').split(' ').filter(Boolean)
+    if (!marcas.length && /[\p{L}\p{N}]/u.test(texto)) reporte('control-sin-sanear', texto, ruta(control))
   }
 
   // Un eje que no se pudo escalar sin que la gráfica mintiera. No es una fuga —sus números
@@ -351,15 +414,31 @@ function especieDeRegion(region, saneador, reglas) {
  * esa barra devolvía la etiqueta de la primera pareja para todas las demás, y el nombre de
  * la tienda salía reemplazado por un nombre de producto — el mismo defecto que 1a.7
  * encontró en las tablas HTML.
+ *
+ * Cuando la etiqueta está en el padre y hay más de una, gana **la última que quede antes**
+ * de la región: Solicitudes de Tiendas pone las dos parejas en la misma línea
+ * (`<b>Código de Bodega:</b><span>…</span><b>Nombre de Bodega:</b><span>…</span>`), y con
+ * la primera coincidencia el nombre de la bodega se saneaba como si fuera un código —o sea,
+ * no se saneaba— y la guarda abortaba.
  */
 function etiquetaDe(region, reglas) {
   for (const declaracion of reglas.regiones) {
     if (!declaracion.pista || !region.matches?.(declaracion.sel)) continue
     const etiqueta =
-      region.querySelector?.(declaracion.pista) || region.parentElement?.querySelector(declaracion.pista)
+      region.querySelector?.(declaracion.pista) || etiquetaPreviaEnElPadre(region, declaracion.pista)
     if (etiqueta && etiqueta !== region) return etiqueta.textContent.trim()
   }
   return ''
+}
+
+/** La coincidencia de `pista` más cercana **antes** de la región; si no hay ninguna antes, la primera. */
+function etiquetaPreviaEnElPadre(region, pista) {
+  const candidatas = [...(region.parentElement?.querySelectorAll(pista) ?? [])]
+  if (candidatas.length <= 1) return candidatas[0]
+  const previas = candidatas.filter(
+    (nodo) => nodo.compareDocumentPosition(region) & Node.DOCUMENT_POSITION_FOLLOWING,
+  )
+  return previas.at(-1) ?? candidatas[0]
 }
 
 /**
