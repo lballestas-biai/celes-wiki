@@ -38,8 +38,9 @@ node tools/check-denylist.mjs --list  # qué busca y por qué
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 
-.venv/bin/mkdocs serve          # http://127.0.0.1:8000
-.venv/bin/mkdocs build --strict # lo mismo que corre CI
+node tools/build-agent-index.mjs # los artefactos para el agente (ver más abajo)
+.venv/bin/mkdocs serve           # http://127.0.0.1:8000
+.venv/bin/mkdocs build --strict  # lo mismo que corre CI
 ```
 
 `strict: true` está activo: un enlace roto o una página fuera del `nav` **falla el
@@ -194,6 +195,43 @@ protesta y por qué el original nunca entra al repositorio— está en
 [`tools/screenshots/README.md`](tools/screenshots/README.md). Es el único paso de la wiki
 que no es Node puro: usa el Playwright y la sesión del navegador de diagnóstico.
 
+## El índice para el agente
+
+La wiki se escribe para que la lea una persona, pero la Etapa 2 de la épica es un chat
+que responde citando **página y sección**. Para eso cada construcción publica tres
+artefactos en la raíz del sitio:
+
+| Artefacto | Qué es |
+|---|---|
+| [`wiki-index.json`](https://lballestas-biai.github.io/celes-wiki/wiki-index.json) | El catálogo. Una entrada por página: título, dirección de la pantalla, permiso, resumen, palabras clave, estado, fecha de verificación, **las anclas de sus secciones** y a qué otras páginas enlaza |
+| [`llms.txt`](https://lballestas-biai.github.io/celes-wiki/llms.txt) | El mapa corto, en el formato de [llmstxt.org](https://llmstxt.org): un enlace y una frase por página, agrupados por bloque |
+| [`llms-full.txt`](https://lballestas-biai.github.io/celes-wiki/llms-full.txt) | El texto completo de todas las páginas en un solo archivo, en el orden del menú |
+
+```bash
+node tools/build-agent-index.mjs   # los genera en docs/; MkDocs los copia al sitio
+node tools/agent-index.test.mjs    # cobertura del nav y citas sin romper
+```
+
+Tres decisiones que conviene no deshacer sin querer:
+
+- **Las anclas se escriben, no se deducen.** Todo encabezado del contenido lleva su id en
+  el Markdown: `## Qué es y para qué sirve { #que-es }`. Si el id se dedujera del título,
+  reescribir una palabra del encabezado rompería toda cita ya publicada. Escrito, el
+  título se puede reordenar y reescribir sin tocar el enlace. Un encabezado sin ancla
+  **falla el PR** — lo comprueban `validate-frontmatter` y la propia construcción.
+- **Los artefactos no se commitean.** Están en `.gitignore` y se generan en cada build.
+  Son una copia derivada de `docs/`, y una copia commiteada solo puede coincidir con su
+  fuente o mentir. Lo versionado es lo que sostiene la cita: el ancla en el Markdown.
+- **El índice no publica `sources:`.** El agente no necesita rutas del código para
+  responder, y un archivo público legible por máquina con el mapa de archivos del
+  monorepo es más exposición de la que la épica aceptó. La rutina de refresco lee el
+  frontmatter de `docs/`, que es donde vive.
+
+La construcción **falla, no avisa**, si una página del `nav` no existe, si un `.md` de
+`docs/` no está en el `nav`, si un encabezado no lleva ancla, si un ancla está repetida o
+si una cita interna apunta a una página o a un ancla que no existen. Un índice incompleto
+es peor que ninguno: el agente no sabe que le falta algo.
+
 ## Estructura
 
 ```
@@ -202,10 +240,14 @@ CONTRIBUTING.md       # el contrato de contenido, en prosa
 docs/                 # el contenido
   assets/stylesheets/ # tokens de marca y porte del layout del mock
   assets/screenshots/ # las capturas saneadas, una por pantalla
+  wiki-index.json     # generados en cada build, no versionados
+  llms.txt            #   (ver «El índice para el agente»)
+  llms-full.txt       #
 overrides/            # extensiones del theme (ver «El tema»)
 tools/                # inventario, auditoría y guardas (Node puro, sin dependencias)
   content-contract.json  # qué frontmatter exige cada tipo de página
   denylist.json          # qué no puede aparecer en una wiki pública
+  build-agent-index.mjs  # los artefactos que consume el agente de la Etapa 2
   data/               # la foto commiteada del código de la aplicación
   lib/                # lo que comparten las guardas (frontmatter, nombres de cliente)
   screenshots/        # el pipeline de capturas (ver su README)
@@ -218,7 +260,7 @@ requirements.txt      # versiones pinneadas
 |---|---|---|
 | `deploy.yml` | `build` | Publicar un enlace roto, una página fuera del `nav` o una fecha inventada |
 | `nav-audit.yml` | `nav-audit` | Que una pantalla de la aplicación se quede sin página |
-| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable, y una captura que no salió del pipeline |
+| `content-checks.yml` | `content-checks` | Una página que incumple el contrato o que dice algo no publicable, una captura que no salió del pipeline, y un índice que deja páginas fuera o cita anclas rotas |
 | `content-checks.yml` | `secrets` | Que entre una credencial al historial (gitleaks) |
 
 Las cuatro son *status checks* obligatorios de `main`. `secrets` usa

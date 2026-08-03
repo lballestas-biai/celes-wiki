@@ -35,6 +35,16 @@ jobs:
       - name: Contrato de contenido
         run: node tools/validate-frontmatter.mjs
 
+      # Antes del denylist a propósito: los artefactos del índice no están commiteados,
+      # y lo que se publica se revisa. Generarlos aquí los mete en el barrido.
+      - name: Índice para el agente
+        if: ${{ !cancelled() }}
+        run: node tools/build-agent-index.mjs
+
+      - name: Pruebas del índice
+        if: ${{ !cancelled() }}
+        run: node tools/agent-index.test.mjs
+
       - name: Contenido no publicable
         if: ${{ !cancelled() }}
         run: node tools/check-denylist.mjs

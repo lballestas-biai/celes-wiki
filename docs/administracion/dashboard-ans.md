@@ -47,7 +47,7 @@ prioridad.](../assets/screenshots/administracion/dashboard-ans.png)
 La pantalla tiene dos pestañas: **Dashboard** y **Configuración**. La dirección de la pantalla
 lleva al **Dashboard**.
 
-### Dashboard
+### Dashboard { #dashboard }
 
 **Ver los indicadores del periodo.** Seis cifras resumen el estado: **Total de tickets**,
 **Cumplimiento de respuesta**, **Cumplimiento de resolución**, **Tickets vencidos**, **Tiempo
@@ -65,7 +65,7 @@ el mes en curso.
 resolución **cumplidas** o **vencidas**. Un incumplimiento en Crítico no se lee igual que el mismo
 número en Baja.
 
-### Configuración
+### Configuración { #configuracion }
 
 **Definir el horario de atención.** Se declara la **zona horaria** y, día por día —de lunes a
 domingo—, si está **activo** y su hora de **inicio** y **fin**. Esto es lo que convierte «cuatro

@@ -257,7 +257,36 @@ function validate(file, source) {
     report('inventario', file, 'no está en tools/inventory.json.', 1)
   }
 
-  // 7. Lo que además exige `status: verified` -------------------------------
+  // 7. Las anclas del cuerpo -------------------------------------------------
+
+  // Vale también para un borrador: el ancla es lo que hace que una cita publicada
+  // sobreviva a que alguien reordene o reescriba los encabezados.
+  const anchors = new Map()
+  for (const heading of readHeadings(body)) {
+    if (!contract.anclas.niveles.includes(heading.level)) continue
+    const where = bodyLine + heading.line
+
+    if (!heading.id) {
+      report(
+        'anclas',
+        file,
+        `el encabezado «${heading.title}» no lleva ancla: escribirlo ` +
+          `\`${'#'.repeat(heading.level)} ${heading.title} { #un-ancla }\`.`,
+        where,
+      )
+      continue
+    }
+    if (!new RegExp(contract.anclas.formato).test(heading.id)) {
+      report('anclas', file, `el ancla \`#${heading.id}\` no es minúsculas-con-guiones.`, where)
+    }
+    if (anchors.has(heading.id)) {
+      report('anclas', file, `el ancla \`#${heading.id}\` ya está en la línea ${anchors.get(heading.id)}.`, where)
+    } else {
+      anchors.set(heading.id, where)
+    }
+  }
+
+  // 8. Lo que además exige `status: verified` -------------------------------
 
   if (data.status !== 'verified') return
   const rules = contract.verified
@@ -391,6 +420,33 @@ function isRealDate(text) {
 function countSentences(text) {
   const matches = text.match(/[.!?]+(?=\s+[¡¿"«(A-ZÁÉÍÓÚÑ0-9]|\s*$)/g)
   return matches ? matches.length : 1
+}
+
+/**
+ * Los encabezados del cuerpo, con su ancla si la llevan. Salta los bloques de código:
+ * un `# comentario` dentro de un ``` no es un encabezado.
+ */
+function readHeadings(body) {
+  const headings = []
+  let fenced = false
+
+  body.split('\n').forEach((line, index) => {
+    if (/^\s*(```|~~~)/.test(line)) fenced = !fenced
+    if (fenced) return
+
+    const heading = line.match(/^(#{1,6})\s+(.*?)\s*$/)
+    if (!heading) return
+
+    const explicit = heading[2].match(/^(.*?)\s*\{\s*#([^}\s]+)\s*\}$/)
+    headings.push({
+      level: heading[1].length,
+      title: explicit ? explicit[1].trim() : heading[2],
+      id: explicit ? explicit[2] : null,
+      line: index,
+    })
+  })
+
+  return headings
 }
 
 /** Secciones `## Título { #ancla }` con el texto que cuelga de cada una. */

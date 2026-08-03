@@ -51,7 +51,7 @@ Lo mismo que en la orden de compra —ajustar, entender, restringir, guardar y e
 dos cosas propias del reparto: el bloqueo de lo que ya se despachó y el plugin de vaciado
 del centro.
 
-### Ajustar cantidades
+### Ajustar cantidades { #ajustar-cantidades }
 
 Se edita sobre la celda **Cantidad**, con las mismas ayudas que en la orden de compra:
 selección por filas, totales al pie, el filtro rápido *solo productos con sugerencias* y el
@@ -61,7 +61,7 @@ la página. En algunas empresas ese interruptor viene activado de entrada.
 Si el resultado trae familias de sintéticos o sustitutos, el interruptor **Agrupador** las
 junta bajo su producto padre; las filas de familia son informativas.
 
-### Lo que ya se envió queda bloqueado
+### Lo que ya se envió queda bloqueado { #lo-ya-enviado }
 
 Una línea que ya se despachó hoy aparece con un **candado** y no se puede editar. Es la
 protección contra el doble despacho.
@@ -73,7 +73,7 @@ enviados**. El desbloqueo dura lo que dure la sesión en la pantalla.
 Si aun así se manda algo repetido, la aplicación avisa antes: puedes **enviar solo los
 nuevos** o **forzar el envío de todos**.
 
-### Entender un sugerido
+### Entender un sugerido { #entender-un-sugerido }
 
 **Quiero saber más** abre la ficha **Detalles del Producto** con el **Detalle de
 Recomendación de Distribución**: la explicación por etapas de cómo salió la cifra —la
@@ -81,7 +81,7 @@ demanda a cubrir, el inventario inicial de la tienda, las entradas esperadas, el
 por escasez cuando el centro no alcanza, la asignación entre centros— y los parámetros
 usados.
 
-### Aplicar una restricción o un plugin
+### Aplicar una restricción o un plugin { #restricciones-y-plugins }
 
 El selector de **plugins** trae los que tengas permitidos:
 
@@ -96,7 +96,7 @@ El selector de **plugins** trae los que tengas permitidos:
 **Vaciar CEDI** existe solo en distribución, y aplica a **todos** los centros incluidos en
 los filtros activos: conviene revisar el alcance antes de confirmar.
 
-### Guardar, enviar y cargar un Excel
+### Guardar, enviar y cargar un Excel { #guardar-enviar-excel }
 
 - **Guardar solo modificados** —y **Guardar todo** en su menú— conserva el avance sin
   despachar nada.

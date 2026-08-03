@@ -42,6 +42,12 @@
     "keywords_maximo": 12
   },
 
+  "anclas": {
+    "_": "Todo encabezado del cuerpo lleva su ancla escrita: `## Título { #ancla }`. Vale para borradores: la cita del agente de la Etapa 2 es página + sección, y un id deducido del título se rompe en cuanto alguien reescribe el título. El id va en el Markdown, versionado, y sobrevive a reordenar y a reescribir. Lo publica tools/build-agent-index.mjs.",
+    "niveles": [2, 3, 4, 5, 6],
+    "formato": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+  },
+
   "verified": {
     "_": "Lo que además exige `status: verified` — es la «definición de página completa» de la épica, comprobable por máquina. Los puntos que no lo son (que el texto sea correcto, que la captura esté saneada) los cubre la revisión humana del PR.",
     "tenant_variance_decidido": true,

@@ -44,7 +44,7 @@ sustituyen el contenido de Inicio por un tablero propio.
 
 ## Qué encontrarás { #que-encontraras }
 
-### Videos de producto
+### Videos de producto { #videos }
 
 Tutoriales cortos —de uno o dos minutos— sobre tareas concretas: aplicar filtros, enviar una
 orden de compra. Inicio muestra los últimos con su duración, y **Ver todo** abre el catálogo
@@ -53,13 +53,13 @@ sin necesidad de cuenta.
 
 Es el recurso más rentable de los cuatro cuando lo que quieres es ver *cómo se hace* algo.
 
-### Libros electrónicos
+### Libros electrónicos { #libros }
 
 Guías más largas sobre el oficio, no sobre la herramienta: eficiencia operativa en retail,
 estrategias de pronóstico de compra, el efecto del pronóstico en el flujo de caja. Se abren en
 el sitio público de Celes desde la tarjeta **Descargar nuestros E-Books**.
 
-### Vocabulario de retail
+### Vocabulario de retail { #vocabulario }
 
 La tarjeta **Aprende nuevos términos del Retailer** explica un par de términos del oficio —el
 **GMROI** y el **AOV**— y termina en un campo de búsqueda que le pasa tu pregunta al asistente.
@@ -67,13 +67,13 @@ La tarjeta **Aprende nuevos términos del Retailer** explica un par de términos
 Su versión completa y mantenida es el [Glosario](glosario.md) de esta wiki, que además enlaza
 cada término con la pantalla donde se usa.
 
-### El asistente
+### El asistente { #asistente }
 
 **CELI** responde preguntas sobre la herramienta dentro de la aplicación y, si el caso no se
 resuelve hablando, abre un ticket de [Soporte](soporte.md) por ti. Solo está en las instancias
 que lo tienen habilitado.
 
-### El recorrido guiado
+### El recorrido guiado { #recorrido-guiado }
 
 La primera vez que entras, Inicio ofrece un recorrido de cuatro pasos que señala las tarjetas y
 el asistente. Se puede cerrar en cualquier momento y no vuelve a aparecer.

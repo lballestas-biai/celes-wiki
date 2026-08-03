@@ -9,6 +9,15 @@ tools/screenshots/.cache/
 site/
 .cache/
 
+# Los artefactos que la wiki publica para el agente. Se generan en cada construcción a
+# partir de docs/ (`node tools/build-agent-index.mjs`) y MkDocs los copia a la raíz del
+# sitio. No se commitean: son una copia derivada del contenido, y una copia commiteada
+# solo puede coincidir con su fuente o mentir. Lo versionado es lo que sostiene la cita
+# del agente —las anclas escritas en cada encabezado del Markdown—, no la copia.
+docs/wiki-index.json
+docs/llms.txt
+docs/llms-full.txt
+
 # Entorno local
 .venv/
 venv/

@@ -5,20 +5,22 @@ promesa es que **lo que dice es verificable**: cada página declara contra qué 
 verificó y cuándo. Eso obliga a un contrato, y el contrato lo comprueba una máquina en
 cada *pull request*.
 
-Todo lo que hay aquí se resume en tres preguntas:
+Todo lo que hay aquí se resume en cuatro preguntas:
 
 | | Lo responde | Lo comprueba |
 |---|---|---|
 | ¿Qué páginas deben existir? | El inventario de pantallas de la aplicación | `tools/nav-audit.mjs` |
 | ¿Qué debe decir cada página de sí misma? | El contrato de contenido | `tools/validate-frontmatter.mjs` |
 | ¿Qué no puede decir ninguna? | La lista de no publicables | `tools/check-denylist.mjs` |
+| ¿Puede un agente citarla sin romper el enlace? | El índice y las anclas | `tools/agent-index.test.mjs` |
 
-Antes de abrir el PR, los tres a la vez:
+Antes de abrir el PR, los cuatro a la vez:
 
 ```bash
 node tools/nav-audit.mjs
 node tools/validate-frontmatter.mjs
 node tools/check-denylist.mjs
+node tools/agent-index.test.mjs
 ```
 
 Son Node puro, sin `npm install`. En CI corren igual y **el PR no se puede mergear si
@@ -97,6 +99,31 @@ comprueba el validador; las dos últimas, quien revisa el PR.
 
 Mientras falte cualquiera de ellas, la página se queda en `draft`. Un borrador es
 honesto; una página `verified` que no cumple, no.
+
+## Las anclas
+
+**Todo encabezado del cuerpo lleva su ancla escrita**, no solo las tres obligatorias:
+
+```markdown
+## Qué puedes hacer aquí { #que-puedes-hacer }
+### Ajustar cantidades { #ajustar-cantidades }
+```
+
+El id va en minúsculas con guiones y no se repite dentro de la página. Vale también para
+un borrador, y lo comprueba `validate-frontmatter`.
+
+La razón es la Etapa 2: el chat responde citando **página y sección**, y esa cita se
+publica. Si el id se dedujera del título —que es lo que hace MkDocs por su cuenta—,
+cambiar una palabra del encabezado rompería todos los enlaces ya dados. Escrito en el
+Markdown, el encabezado se puede reordenar y reescribir sin tocar el enlace.
+
+De ahí salen `wiki-index.json`, `llms.txt` y `llms-full.txt`, que se generan en cada
+publicación; el README los explica en «El índice para el agente». Enlazar a la sección de
+otra página se hace como siempre, y si el ancla no existe **el PR falla**:
+
+```markdown
+[en qué se diferencian](../conceptos/sugerido-compra-vs-distribucion.md#diferencias)
+```
 
 ## Lo que no se publica
 
